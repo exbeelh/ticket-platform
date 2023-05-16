@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -39,8 +40,10 @@ public partial class Event
 
     public int CreatedBy { get; set; }
 
+    [JsonIgnore]
     public virtual Organizer Organizer { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual SubCategory SubCategory { get; set; } = null!;
 
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();

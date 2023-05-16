@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -27,13 +28,18 @@ public partial class Order
 
     public int? PaymentId { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Atendee> Atendees { get; set; } = new List<Atendee>();
 
+    [JsonIgnore]
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
+    [JsonIgnore]
     public virtual OrderStatus OrderStatus { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual Payment? Payment { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
 }

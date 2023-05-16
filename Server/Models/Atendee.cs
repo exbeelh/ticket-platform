@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -21,5 +22,6 @@ public partial class Atendee
 
     public string? Code { get; set; }
 
+    [JsonIgnore]
     public virtual Order Order { get; set; } = null!;
 }

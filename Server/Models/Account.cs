@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -19,7 +20,9 @@ public partial class Account
 
     public string? CountryId { get; set; }
 
+    [JsonIgnore]
     public virtual Country? Country { get; set; }
 
+    [JsonIgnore]
     public virtual User User { get; set; } = null!;
 }
