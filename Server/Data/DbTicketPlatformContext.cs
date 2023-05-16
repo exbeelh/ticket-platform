@@ -11,11 +11,6 @@ public partial class DbTicketPlatformContext : DbContext
     {
     }
 
-    public DbTicketPlatformContext(DbContextOptions<DbTicketPlatformContext> options)
-        : base(options)
-    {
-    }
-
     public virtual DbSet<Account> Accounts { get; set; }
 
     public virtual DbSet<Atendee> Atendees { get; set; }

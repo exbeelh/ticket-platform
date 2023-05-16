@@ -58,12 +58,12 @@ namespace Server.Base
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> PostAsync([FromBody] TEntity employee)
+        public virtual async Task<IActionResult> PostAsync([FromBody] TEntity entity)
         {
             try
             {
-                await _repository.InsertAsync(employee);
-                return CreatedAtAction(nameof(GetAsync), new { id = GetAsync() }, employee);
+                await _repository.InsertAsync(entity);
+                return CreatedAtAction(nameof(GetAsync), new { id = GetAsync() }, entity);
             }
             catch
             {
