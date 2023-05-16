@@ -31,7 +31,7 @@ public partial class Order
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
-    public virtual OrderStatuss OrderStatus { get; set; } = null!;
+    public virtual OrderStatus OrderStatus { get; set; } = null!;
 
     public virtual Payment? Payment { get; set; }
 

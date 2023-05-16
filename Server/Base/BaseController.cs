@@ -8,7 +8,7 @@ namespace Server.Base
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class BaseController<TIRepository, TEntity, TKey> : ControllerBase
         where TEntity : class
         where TIRepository : IGeneralRepository<TEntity, TKey>

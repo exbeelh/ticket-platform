@@ -7,7 +7,7 @@ namespace Server.Data;
 
 public partial class DbTicketPlatformContext : DbContext
 {
-    public DbTicketPlatformContext()
+    public DbTicketPlatformContext(DbContextOptions<DbTicketPlatformContext> options) : base(options)
     {
     }
 
@@ -25,7 +25,7 @@ public partial class DbTicketPlatformContext : DbContext
 
     public virtual DbSet<OrderItem> OrderItems { get; set; }
 
-    public virtual DbSet<OrderStatuss> OrderStatusses { get; set; }
+    public virtual DbSet<OrderStatus> OrderStatusses { get; set; }
 
     public virtual DbSet<Organizer> Organizers { get; set; }
 
@@ -253,7 +253,7 @@ public partial class DbTicketPlatformContext : DbContext
                 .HasConstraintName("FK__Order_Ite__order__5165187F");
         });
 
-        modelBuilder.Entity<OrderStatuss>(entity =>
+        modelBuilder.Entity<OrderStatus>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83FB5A96815");
 
