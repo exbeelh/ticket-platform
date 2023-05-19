@@ -1,0 +1,192 @@
+@{
+    ViewData["Title"] = "User List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-wrapper d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
+    <div class="breadcrumb-wrapper--inner d-flex flex-column-reverse">
+        <h1>User List</h1>
+        <ol class="breadcrumb style-1">
+            <li class="breadcrumb-item"><a class="" asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">User List</li>
+        </ol>
+    </div>
+</div>
+
+<!-- User List -->
+<div class="card">
+    <div class="card-body">
+        <table id="user_list_datatable" class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="dsh-tooltip text-center" title="Thumbnail" data-bs-placement="top"><i class="bi bi-images"></i></th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Join Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td class="text-center"> <img class="rounded-circle" src="http://via.placeholder.com/30" alt="user"> </td>
+                    <td> <a href="#" class="btn-link">Margot Bobbie</a> </td>
+                    <td>+123 456 789</td>
+                    <td>margotbobbie@example.com</td>
+                    <td>
+                        <div class="dsh-user-address">
+                            <h6>New York</h6>
+                            <p class="small">350 S. Hill St. Brentwood, NY 11717 </p>
+                        </div>
+                    </td>
+                    <td>2019/12/18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-center"> <img class="rounded-circle" src="http://via.placeholder.com/30" alt="user"> </td>
+                    <td> <a href="#" class="btn-link">Megan Box</a> </td>
+                    <td>+123 456 789</td>
+                    <td>meganbox@example.com</td>
+                    <td>
+                        <div class="dsh-user-address">
+                            <h6>New York</h6>
+                            <p class="small">53 Pumpkin Hill Road Brooklyn, NY 11233</p>
+                        </div>
+                    </td>
+                    <td>2019/12/18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-center"> <img class="rounded-circle" src="http://via.placeholder.com/30" alt="user"> </td>
+                    <td> <a href="#" class="btn-link">Sylvester Stalion</a> </td>
+                    <td>+123 456 789</td>
+                    <td>sylvesterstalion@example.com</td>
+                    <td>
+                        <div class="dsh-user-address">
+                            <h6>New York</h6>
+                            <p class="small">15 Madison Avenue Bronx, NY 10456 </p>
+                        </div>
+                    </td>
+                    <td>2019/12/18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-center"> <img class="rounded-circle" src="http://via.placeholder.com/30" alt="user"> </td>
+                    <td> <a href="#" class="btn-link">Raymond Move</a> </td>
+                    <td>+123 456 789</td>
+                    <td>raymondmove@example.com</td>
+                    <td>
+                        <div class="dsh-user-address">
+                            <h6>New York</h6>
+                            <p class="small">4 Logan Drive New York, NY 10003 </p>
+                        </div>
+                    </td>
+                    <td>2019/12/18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="text-center"> <img class="rounded-circle" src="http://via.placeholder.com/30" alt="user"> </td>
+                    <td> <a href="#" class="btn-link">Emily Marrow</a> </td>
+                    <td>+123 456 789</td>
+                    <td>emilymarrow@example.com</td>
+                    <td>
+                        <div class="dsh-user-address">
+                            <h6>New York</h6>
+                            <p class="small">8517 Gainsway St. Brooklyn, NY 11224</p>
+                        </div>
+                    </td>
+                    <td>2019/12/18</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/admin/vendor/js/datatables.min.js"></script>
+    <script>
+        var table = $('#user_list_datatable').DataTable({
+            responsive: true,
+            order: [
+                [1, 'desc']
+            ],
+            dom: "<'row'<'col-sm-6 text-start'f><'col-sm-6 text-end'B>>\n\t\t\t<'row'<'col-sm-12'tr>>\n\t\\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
+            buttons: {
+                buttons: [{
+                        extend: 'print',
+                        className: 'btn-primary',
+                        init: function(api, node, config) {
+                            $(node).removeClass('btn-secondary')
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        className: 'btn-primary',
+                        init: function(api, node, config) {
+                            $(node).removeClass('btn-secondary')
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        className: 'btn-primary',
+                        init: function(api, node, config) {
+                            $(node).removeClass('btn-secondary')
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        className: 'btn-primary',
+                        init: function(api, node, config) {
+                            $(node).removeClass('btn-secondary')
+                        }
+                    }
+                ]
+            },
+            headerCallback: function(thead, data, start, end, display) {
+                thead.getElementsByTagName("th")[0].innerHTML = '<div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input dsh-check-group" id="checkAll1"><label class="form-check-label" for="checkAll1"></label></div>'
+            },
+            columnDefs: [{
+                    targets: [0],
+                    width: "20",
+                    className: "text-end",
+                    render: function(data, type, full, meta) {
+                        return '<div class="form-check custom-checkbox"><input type="checkbox" class="form-check-input dsh-check" id="checkItem' + meta.row + '"><label class="form-check-label" for="checkItem' + meta.row + '"></label></div>'
+                    }
+                },
+                {
+                    targets: [1],
+                    width: "30px",
+                },
+                {
+                    targets: [7],
+                    width: "30px",
+                    render: function(data, type, row) {
+                        return '<div class="dropleft d-inline-block"><a href="#" class="btn btn-icon btn-sm" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-three-dots"></i></a>' +
+                            '<div class="dropdown-menu"> <a class="dropdown-item" href="#">View</a> <a class="dropdown-item" href="#">Edit</a>' +
+                            '<a class="dropdown-item" href="#">Delete</a> </div> </div>';
+                    }
+                },
+            ]
+        });
+
+        table.on("change", ".dsh-check-group", function() {
+            var checkbox = $(this).closest("table").find("td:first-child .dsh-check"),
+                isChecked = $(this).is(":checked");
+            $(checkbox).each(function() {
+                isChecked ? ($(this).prop("checked", true), $(this).closest("tr").addClass("active")) : ($(this).prop("checked", false), $(this).closest("tr").removeClass("active"))
+            });
+        }).on("change", ".dsh-check", function() {
+            $(this).parents("tr").toggleClass("active")
+        });
+    </script>
+}

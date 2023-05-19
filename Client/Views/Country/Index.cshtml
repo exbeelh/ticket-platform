@@ -1,0 +1,90 @@
+@{
+    ViewData["Title"] = "Countries";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-wrapper d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
+    <div class="breadcrumb-wrapper--inner d-flex flex-column-reverse">
+        <h1>Countries</h1>
+        <ol class="breadcrumb style-1">
+            <li class="breadcrumb-item"><a class="" asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">Countries</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="dsh-section-title d-flex align-items-center justify-content-between flex-wrap flex-md-nowrap">
+            <div>
+                <h5 class="card-title">Countries</h5>
+                <h6 class="card-subtitle">This is a list of all countries in the system.</h6>
+            </div>
+            <div>
+                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#countryModal"><i class="bi bi-plus-lg"></i> Add Country</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="country_datatable" class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Music</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="countryModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="countryModalTitle">Add Country</h5>
+                <button type="button" class="dsh-close close-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <form class="needs-validation was-validated" novalidate="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Country Name</label>
+                        <input id="name" type="text" class="form-control" name="name" placeholder="Country Name" required="">
+                        <div class="invalid-feedback">
+                            Country Name is required field
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn" value="add">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/country.js"></script>
+	<script src="~/admin/vendor/js/datatables.min.js"></script>
+    <script>
+        $('#country_datatable').DataTable();
+    </script>
+}
