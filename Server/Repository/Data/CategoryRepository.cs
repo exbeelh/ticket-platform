@@ -4,9 +4,9 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class CategoryRepository : GeneralRepository<Category, int, DbTicketPlatformContext>, ICategoryRepository
+    public class CategoryRepository : GeneralRepository<Category, int, MyContext>, ICategoryRepository
     {
-        public CategoryRepository(DbTicketPlatformContext context) : base(context)
+        public CategoryRepository(MyContext context) : base(context)
         {
         }
     }

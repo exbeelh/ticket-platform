@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -10,6 +9,5 @@ public partial class Role
 
     public string? Name { get; set; }
 
-    [JsonIgnore]
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    public virtual ICollection<AccountRole> AccountRoles { get; set; } = new List<AccountRole>();
 }

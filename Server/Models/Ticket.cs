@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -20,9 +19,7 @@ public partial class Ticket
 
     public int UserId { get; set; }
 
-    [JsonIgnore]
     public virtual Event Event { get; set; } = null!;
 
-    [JsonIgnore]
     public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
 }

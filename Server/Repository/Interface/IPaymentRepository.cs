@@ -2,7 +2,7 @@
 
 namespace Server.Repository.Interface
 {
-    public interface IPaymentRepository: IGeneralRepository<Payment, int>
+    public interface IPaymentRepository : IGeneralRepository<Payment, int>
     {
     }
 }

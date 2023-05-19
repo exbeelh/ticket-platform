@@ -4,9 +4,9 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class TicketOrderRepository : GeneralRepository<TicketOrder, int, DbTicketPlatformContext>, ITicketOrderRepository
+    public class TicketOrderRepository : GeneralRepository<TicketOrder, int, MyContext>, ITicketOrderRepository
     {
-        public TicketOrderRepository(DbTicketPlatformContext context) : base(context)
+        public TicketOrderRepository(MyContext context) : base(context)
         {
         }
     }

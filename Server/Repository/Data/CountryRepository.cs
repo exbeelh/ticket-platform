@@ -4,9 +4,9 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class CountryRepository : GeneralRepository<Country, string, DbTicketPlatformContext>, ICountryRepository
+    public class CountryRepository : GeneralRepository<Country, string, MyContext>, ICountryRepository
     {
-        public CountryRepository(DbTicketPlatformContext context) : base(context)
+        public CountryRepository(MyContext context) : base(context)
         {
         }
     }

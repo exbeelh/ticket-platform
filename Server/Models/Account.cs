@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -10,19 +9,9 @@ public partial class Account
 
     public int UserId { get; set; }
 
-    public string? Address { get; set; }
+    public string Password { get; set; } = null!;
 
-    public string City { get; set; } = null!;
+    public virtual ICollection<AccountRole> AccountRoles { get; set; } = new List<AccountRole>();
 
-    public string? PostalCode { get; set; }
-
-    public string? State { get; set; }
-
-    public string? CountryId { get; set; }
-
-    [JsonIgnore]
-    public virtual Country? Country { get; set; }
-
-    [JsonIgnore]
     public virtual User User { get; set; } = null!;
 }

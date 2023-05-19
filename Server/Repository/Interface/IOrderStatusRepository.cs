@@ -2,7 +2,7 @@
 
 namespace Server.Repository.Interface
 {
-    public interface IOrderStatusRepository: IGeneralRepository<OrderStatus, int>
+    public interface IOrderStatusRepository : IGeneralRepository<OrderStatuss, int>
     {
     }
 }

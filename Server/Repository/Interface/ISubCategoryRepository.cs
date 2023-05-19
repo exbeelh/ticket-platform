@@ -2,7 +2,7 @@
 
 namespace Server.Repository.Interface
 {
-    public interface ISubCategoryRepository: IGeneralRepository<SubCategory,int>
+    public interface ISubCategoryRepository : IGeneralRepository<SubCategory, int>
     {
     }
 }

@@ -4,9 +4,9 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class RoleRepository : GeneralRepository<Role, int, DbTicketPlatformContext>, IRoleRepository
+    public class RoleRepository : GeneralRepository<Role, int, MyContext>, IRoleRepository
     {
-        public RoleRepository(DbTicketPlatformContext context) : base(context)
+        public RoleRepository(MyContext context) : base(context)
         {
         }
     }

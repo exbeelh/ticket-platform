@@ -2,7 +2,7 @@
 
 namespace Server.Repository.Interface
 {
-    public interface ICountryRepository: IGeneralRepository<Country, string>
+    public interface ICountryRepository : IGeneralRepository<Country, string>
     {
     }
 }

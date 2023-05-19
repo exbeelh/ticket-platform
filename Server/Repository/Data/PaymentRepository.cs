@@ -4,9 +4,9 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class PaymentRepository : GeneralRepository<Payment, int, DbTicketPlatformContext>, IPaymentRepository
+    public class PaymentRepository : GeneralRepository<Payment, int, MyContext>, IPaymentRepository
     {
-        public PaymentRepository(DbTicketPlatformContext context) : base(context)
+        public PaymentRepository(MyContext context) : base(context)
         {
         }
     }

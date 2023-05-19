@@ -8,9 +8,9 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TicketOrdersController : BaseController<ITicketOrderRepository, TicketOrder, int>
+    public class AttendeesController : BaseController<IAttendeeRepository, Attendee, int>
     {
-        public TicketOrdersController(ITicketOrderRepository repository) : base(repository)
+        public AttendeesController(IAttendeeRepository repository) : base(repository)
         {
         }
     }

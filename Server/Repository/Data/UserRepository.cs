@@ -4,9 +4,9 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class UserRepository : GeneralRepository<User, int, DbTicketPlatformContext>, IUserRepository
+    public class UserRepository : GeneralRepository<User, int, MyContext>, IUserRepository
     {
-        public UserRepository(DbTicketPlatformContext context) : base(context)
+        public UserRepository(MyContext context) : base(context)
         {
         }
     }

@@ -33,7 +33,7 @@ namespace Server.Base
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> GetAsync(TKey id)
+        public virtual async Task<IActionResult> GetByIdAsync(TKey id)
         {
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
@@ -60,20 +60,18 @@ namespace Server.Base
         [HttpPost]
         public virtual async Task<IActionResult> PostAsync([FromBody] TEntity entity)
         {
-            try
+            var result = await _repository.InsertAsync(entity);
+            if (result is 0)
             {
-                await _repository.InsertAsync(entity);
-                return CreatedAtAction(nameof(GetAsync), new { id = GetAsync() }, entity);
-            }
-            catch
-            {
-                return BadRequest(new
+                return Conflict(new
                 {
-                    code = StatusCodes.Status400BadRequest,
-                    status = HttpStatusCode.BadRequest.ToString(),
-                    message = "Input Error"
+                    code = StatusCodes.Status409Conflict,
+                    status = HttpStatusCode.Conflict.ToString(),
+                    message = "Data Fail to Insert!"
                 });
             }
+            return CreatedAtAction(nameof(GetAsync), new { id = GetAsync() }, entity);
+            
         }
 
         [HttpPut("{id}")]

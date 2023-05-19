@@ -5,15 +5,22 @@ using Server.Models;
 
 namespace Server.Data;
 
-public partial class DbTicketPlatformContext : DbContext
+public partial class MyContext : DbContext
 {
-    public DbTicketPlatformContext(DbContextOptions<DbTicketPlatformContext> options) : base(options)
+    public MyContext()
+    {
+    }
+
+    public MyContext(DbContextOptions<MyContext> options)
+        : base(options)
     {
     }
 
     public virtual DbSet<Account> Accounts { get; set; }
 
-    public virtual DbSet<Atendee> Atendees { get; set; }
+    public virtual DbSet<AccountRole> AccountRoles { get; set; }
+
+    public virtual DbSet<Attendee> Attendees { get; set; }
 
     public virtual DbSet<Category> Categories { get; set; }
 
@@ -25,7 +32,7 @@ public partial class DbTicketPlatformContext : DbContext
 
     public virtual DbSet<OrderItem> OrderItems { get; set; }
 
-    public virtual DbSet<OrderStatus> OrderStatusses { get; set; }
+    public virtual DbSet<OrderStatuss> OrderStatusses { get; set; }
 
     public virtual DbSet<Organizer> Organizers { get; set; }
 
@@ -41,51 +48,49 @@ public partial class DbTicketPlatformContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83F01F09F81");
+            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83F6A5456B7");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Address)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("address");
-            entity.Property(e => e.City)
+            entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("city");
-            entity.Property(e => e.CountryId)
-                .HasMaxLength(3)
-                .IsUnicode(false)
-                .HasColumnName("country_id");
-            entity.Property(e => e.PostalCode)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("postal_code");
-            entity.Property(e => e.State)
-                .HasMaxLength(25)
-                .IsUnicode(false)
-                .HasColumnName("state");
+                .HasColumnName("password");
             entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.Country).WithMany(p => p.Accounts)
-                .HasForeignKey(d => d.CountryId)
-                .HasConstraintName("FK__Accounts__countr__628FA481");
 
             entity.HasOne(d => d.User).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Accounts__user_i__6383C8BA");
+                .HasConstraintName("FK__Accounts__user_i__5AEE82B9");
         });
 
-        modelBuilder.Entity<Atendee>(entity =>
+        modelBuilder.Entity<AccountRole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Atendees__3213E83F03AF6FFA");
+            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83F1FDE4B2A");
+
+            entity.ToTable("Account_Roles");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.AccountId).HasColumnName("account_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.AccountRoles)
+                .HasForeignKey(d => d.AccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Account_R__role___5DCAEF64");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.AccountRoles)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Account_R__role___5EBF139D");
+        });
+
+        modelBuilder.Entity<Attendee>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Atendees__3213E83F208B2477");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Code)
@@ -108,15 +113,15 @@ public partial class DbTicketPlatformContext : DbContext
             entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.TicketId).HasColumnName("ticket_id");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.Atendees)
+            entity.HasOne(d => d.Order).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Atendees__code__5441852A");
+                .HasConstraintName("FK__Atendees__code__693CA210");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F7BC29681");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F606BEF1F");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -131,7 +136,7 @@ public partial class DbTicketPlatformContext : DbContext
 
         modelBuilder.Entity<Country>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F9EE58251");
+            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F2D7E1C1D");
 
             entity.Property(e => e.Id)
                 .HasMaxLength(3)
@@ -145,7 +150,7 @@ public partial class DbTicketPlatformContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F94B81FB5");
+            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F4B915949");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
@@ -188,17 +193,17 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.Organizer).WithMany(p => p.Events)
                 .HasForeignKey(d => d.OrganizerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Events__organize__6A30C649");
+                .HasConstraintName("FK__Events__organize__6FE99F9F");
 
             entity.HasOne(d => d.SubCategory).WithMany(p => p.Events)
                 .HasForeignKey(d => d.SubCategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Events__created___693CA210");
+                .HasConstraintName("FK__Events__created___6EF57B66");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83FFAD17756");
+            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F9509A525");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Amount)
@@ -224,16 +229,20 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.OrderStatus).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.OrderStatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__payment___4D94879B");
+                .HasConstraintName("FK__Orders__payment___619B8048");
 
             entity.HasOne(d => d.Payment).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.PaymentId)
-                .HasConstraintName("FK__Orders__payment___4E88ABD4");
+                .HasConstraintName("FK__Orders__payment___628FA481");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Orders__user_id__6383C8BA");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83FF66B0CC1");
+            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F030DCFFB");
 
             entity.ToTable("Order_Items");
 
@@ -250,12 +259,12 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Order_Ite__order__5165187F");
+                .HasConstraintName("FK__Order_Ite__order__66603565");
         });
 
-        modelBuilder.Entity<OrderStatus>(entity =>
+        modelBuilder.Entity<OrderStatuss>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83FB5A96815");
+            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83F293EFF28");
 
             entity.ToTable("Order_Statusses");
 
@@ -268,7 +277,7 @@ public partial class DbTicketPlatformContext : DbContext
 
         modelBuilder.Entity<Organizer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83F96FFA215");
+            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83FA7EA4DF4");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
@@ -301,12 +310,12 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.Organizers)
                 .HasForeignKey(d => d.CreatedBy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Organizer__creat__66603565");
+                .HasConstraintName("FK__Organizer__creat__6C190EBB");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83FBEE4F766");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F7807F49E");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CheckAt)
@@ -326,7 +335,7 @@ public partial class DbTicketPlatformContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F905D682B");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83FCCD7D6BA");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -337,7 +346,7 @@ public partial class DbTicketPlatformContext : DbContext
 
         modelBuilder.Entity<SubCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Sub_Cate__3213E83FD8AC3B7C");
+            entity.HasKey(e => e.Id).HasName("PK__Sub_Cate__3213E83F988A08A2");
 
             entity.ToTable("Sub_Categories");
 
@@ -355,12 +364,12 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.Category).WithMany(p => p.SubCategories)
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Sub_Categ__categ__59063A47");
+                .HasConstraintName("FK__Sub_Categ__categ__4F7CD00D");
         });
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F3645E167");
+            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83FA19C5AC7");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EventId).HasColumnName("event_id");
@@ -375,14 +384,14 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.Event).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.EventId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Tickets__event_i__6D0D32F4");
+                .HasConstraintName("FK__Tickets__event_i__72C60C4A");
         });
 
         modelBuilder.Entity<TicketOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FD6E0E4F7");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83F94CC2E48");
 
-            entity.ToTable("Ticket_Order");
+            entity.ToTable("Ticket_Orders");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.OrderId).HasColumnName("order_id");
@@ -391,19 +400,35 @@ public partial class DbTicketPlatformContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ticket_Or__order__70DDC3D8");
+                .HasConstraintName("FK__Ticket_Or__order__76969D2E");
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.TicketId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ticket_Or__order__6FE99F9F");
+                .HasConstraintName("FK__Ticket_Or__order__75A278F5");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F9A19108C");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F42638FC7");
+
+            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B514927DAB0DA4").IsUnique();
+
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E6164EE7A2E0D").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Address)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("address");
+            entity.Property(e => e.City)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("city");
+            entity.Property(e => e.CountryId)
+                .HasMaxLength(3)
+                .IsUnicode(false)
+                .HasColumnName("country_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -417,10 +442,6 @@ public partial class DbTicketPlatformContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("lastname﻿");
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("password");
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(15)
                 .IsUnicode(false)
@@ -429,22 +450,22 @@ public partial class DbTicketPlatformContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("picture");
-            entity.Property(e => e.RefreshToken)
-                .HasMaxLength(255)
+            entity.Property(e => e.PostalCode)
+                .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("refresh_token");
-            entity.Property(e => e.RefreshTokenExpireTime)
-                .HasColumnType("datetime")
-                .HasColumnName("refresh_token_expire_time");
-            entity.Property(e => e.RoleId).HasColumnName("role_id");
+                .HasColumnName("postal_code");
+            entity.Property(e => e.State)
+                .HasMaxLength(25)
+                .IsUnicode(false)
+                .HasColumnName("state");
             entity.Property(e => e.Website)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("website");
 
-            entity.HasOne(d => d.Role).WithMany(p => p.Users)
-                .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__Users__role_id__5DCAEF64");
+            entity.HasOne(d => d.Country).WithMany(p => p.Users)
+                .HasForeignKey(d => d.CountryId)
+                .HasConstraintName("FK__Users__country_i__5812160E");
         });
 
         OnModelCreatingPartial(modelBuilder);

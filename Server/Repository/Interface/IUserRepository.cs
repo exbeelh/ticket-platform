@@ -2,7 +2,7 @@
 
 namespace Server.Repository.Interface
 {
-    public interface IUserRepository: IGeneralRepository<User, int>
+    public interface IUserRepository : IGeneralRepository<User, int>
     {
     }
 }

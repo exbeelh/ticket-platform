@@ -4,7 +4,7 @@ using Server.Data;
 namespace Server.Repository;
 public class GeneralRepository<TEntity, TKey, TContext> : IGeneralRepository<TEntity, TKey>
     where TEntity : class
-    where TContext : DbTicketPlatformContext
+    where TContext : MyContext
 {
     protected TContext _context;
 
