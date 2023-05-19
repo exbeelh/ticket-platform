@@ -18,4 +18,34 @@ public class EventController : Controller
 	{
 		return View();
 	}
+
+    public IActionResult Detail()
+    {
+        return View();
+    }
+
+    public IActionResult Manage()
+    {
+        return View();
+    }
+
+    public IActionResult Dashboard()
+    {
+        return View();
+    }
+
+    public IActionResult Order()
+    {
+        return View();
+    }
+
+    public IActionResult OrderTicket()
+    {
+        return View();
+    }
+
+    public IActionResult Revenue()
+    {
+        return View();
+    }
 }

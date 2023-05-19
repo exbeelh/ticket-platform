@@ -1,0 +1,83 @@
+@{
+    ViewData["Title"] = "Revenue Earned";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Nama Event</h1>
+                <span class="d-inline-block text-white">Location : Rajkot, Gujarat, India</span>
+                <span class="d-inline-block text-white">Thu, June 8, 2023, 08:00 PM To Fri, June 9, 2023, 11:30 AM</span>
+                <div>
+                    <a class="btn btn-light mt-4 btn-sm" href="#"><i class="far fa-edit"></i> Edit </a>
+                    <a class="btn btn-light mt-4 btn-sm" asp-area="" asp-controller="Event" asp-action="Detail"><i class="far fa-eye"></i>View </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Revenue Earned -->
+<section class="space-ptb bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="sidebar">
+                    <partial name="~/Views/Shared/_Partials/_SidebarEvent.cshtml" />
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="sidebar mb-0">
+                    <div class="widget mb-0">
+                        <div class="widget-title">
+                            <h6>Revenue Earned: </h6>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th> Ticket Type</th>
+                                            <th> Order ID</th>
+                                            <th> Quantity</th>
+                                            <th> Ticket Price</th>
+                                            <th> Total</th>
+                                            <th> Commission</th>
+                                            <th> Final Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Ticket1</td>
+                                            <td>#766K71INR0</td>
+                                            <td>1</td>
+                                            <td>$10.00</td>
+                                            <td>$10.00</td>
+                                            <td>$1.00</td>
+                                            <td>$11.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ticket1</td>
+                                            <td>#766K71INR0</td>
+                                            <td>1</td>
+                                            <td>$10.00</td>
+                                            <td>$10.00</td>
+                                            <td>$1.00</td>
+                                            <td>$11.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

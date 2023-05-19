@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Payment Ticket";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Order Payment</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Payment</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Order Payment -->
+<section class="space-ptb bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="alert alert-info text-center">
+                    <h3 class="timer text-primary">07:10</h3>
+                    <p>
+                        Please complete registration within 10:00 minutes. <br>
+                        After 10:00 minutes, the reservation we're holding will be released to others.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <div class="listing-detail-page">
+                    <div class="listing-detail-box mb-3">
+                        <img class="img-fluid w-100" src="~/dist/images/gallery/01.jpg" alt="">
+                    </div>
+                    <div class="listing-detail-box mb-3">
+                        <div class="detail-title">
+                            <h5>Payment Detail</h5>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-lg-12">
+                                <div class="input-group file-upload">
+                                    <input type="file" class="form-control" id="customFile">
+                                    <label class="input-group-text" for="customFile">Upload Image </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <a asp-area="" asp-controller="Order" asp-action="Cancel" class="btn btn-light">Cancel</a>
+                                <a asp-area="" asp-controller="Order" asp-action="Success" class="btn btn-primary">Send Payment</a>
+                                <!-- <button type="submit" class="btn btn-primary">Send Payment</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar mb-0">
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h6> <i class="fas fa-eye"></i> Instruction Detail </h6>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="list-unstyled mt-4 d-block">
+                                <li class="mb-2">1. All major debit and credit cards accepted.</li>
+                                <li class="mb-2">2. We don't store any of your card information.</li>
+                                <li class="mb-2">3. We handles the card information and transaction with highest level of security.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

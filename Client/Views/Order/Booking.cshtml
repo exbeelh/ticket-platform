@@ -1,0 +1,204 @@
+@{
+    ViewData["Title"] = "Booking Ticket";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Order Booking</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Booking</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking -->
+<section class="space-ptb bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="alert alert-info text-center">
+                    <h3 class="timer text-primary">07:10</h3>
+                    <p>
+                        Please complete registration within 10:00 minutes. <br>
+                        After 10:00 minutes, the reservation we're holding will be released to others.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <div class="listing-detail-page">
+                    <div class="listing-detail-box mb-3">
+                        <img class="img-fluid w-100" src="~/dist/images/gallery/01.jpg" alt="">
+                    </div>
+                    <div class="listing-detail-box mb-3">
+                        <div class="detail-title">
+                            <h5>Order Summary</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th> Ticket Type</th>
+                                                <th> Price</th>
+                                                <th> Fee</th>
+                                                <th> Quantity</th>
+                                                <th> Sub Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ticket1</td>
+                                                <td>$ 11.00</td>
+                                                <td>$ 0.10</td>
+                                                <td>2</td>
+                                                <td>$ 22.20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ticket1</td>
+                                                <td>$ 11.00</td>
+                                                <td>$ 0.10</td>
+                                                <td>2</td>
+                                                <td>$ 22.20</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="4">Order Total</td>
+                                                <td>$ 44.40</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listing-detail-box mb-3">
+                        <div class="detail-title">
+                            <h5>Registration Information</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2 d-flex"><strong class="text-dark d-inline-block w-25 me-2">Firstname:</strong> <span class="ms-auto"> AAA </span></li>
+                                    <li class="mb-2 d-flex"><strong class="text-dark d-inline-block w-25 me-2">Lastname:</strong> <span class="ms-auto"> BBB </span></li>
+                                    <li class="mb-2 d-flex"><strong class="text-dark d-inline-block w-25 me-2">Username:</strong> <span class="ms-auto"> aaabbb </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listing-detail-box mb-3">
+                        <div class="detail-title">
+                            <h5>Tickets Information</h5>
+                        </div>
+                        <div class="row border-bottom pb-4 mb-4">
+                            <div class="mb-3 text-center col-lg-12">
+                                <h6>Tickets 3</h6>
+                                <small>(H4103-124GI -D6RAP.59759.1)</small>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <label class="form-label">First name</label>
+                                <input type="email" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <label class="form-label">Last name</label>
+                                <input type="email" class="form-control" placeholder="Last name">
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Email </label>
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row border-bottom pb-4 mb-4">
+                            <div class="mb-3 text-center col-lg-12">
+                                <h6>Tickets 3</h6>
+                                <small>(H4103-124GI -D6RAP.59759.1)</small>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <label class="form-label">First name</label>
+                                <input type="email" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <label class="form-label">Last name</label>
+                                <input type="email" class="form-control" placeholder="Last name">
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Email </label>
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row border-bottom pb-4 mb-4">
+                            <div class="mb-3 text-center col-lg-12">
+                                <h6>Tickets 3</h6>
+                                <small>(H4103-124GI -D6RAP.59759.1)</small>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <label class="form-label">First name</label>
+                                <input type="email" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <label class="form-label">Last name</label>
+                                <input type="email" class="form-control" placeholder="Last name">
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Email </label>
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 text-center col-lg-12">
+                                <h6>Other Information</h6>
+                                <p>
+                                    I accept the terms of service and have read the privacy policy. <br>
+                                    I agree that Event may share my information with the event organize
+                                </p>
+                                <a asp-area="" asp-controller="Order" asp-action="Cancel" class="btn btn-light">Cancel</a>
+                                <a asp-area="" asp-controller="Order" asp-action="Payment" class="btn btn-primary">Pay Now</a>
+                                <!-- <button type="submit" class="btn btn-primary">Pay Now</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar mb-0">
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h6> <i class="fas fa-eye"></i> Detail Event </h6>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="list-unstyled mb-3 mt-4 d-block border-bottom">
+                                <li class="mb-2"><strong class="text-dark d-inline-block me-2">Event Name:</strong>Sydney</li>
+                                <li class="mb-2"><strong class="text-dark d-inline-block me-2">Address:</strong>214 West Arnold St. New York</li>
+                                <li class="mb-2"><strong class="text-dark d-inline-block me-2">Date and Time:</strong>Mon. July 10. 2023. 07:00 AM to Fri. July 21. 2023. 10:00 AM</li>
+                                <li class="mb-2"><strong class="text-dark d-inline-block me-2">Location:</strong> United States</li>
+                            </ul>
+                            <ul class="list-unstyled mb-3 d-block">
+                                <li class="mb-2"><strong class="text-dark d-inline-block me-2">Organizer:</strong> UK A</li>
+                            </ul>
+                            <ul class="list-unstyled mb-0 d-flex mt-3">
+                                <li><a class="px-3 py-2 d-block bg-light border-radius me-2" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a class="px-3 py-2 d-block bg-light border-radius me-2" href="#"><i class="fab fa-twitter"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
