@@ -1,0 +1,246 @@
+@{
+    ViewData["Title"] = "Events";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Event For You</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Event List</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event List -->
+<section class="space-ptb bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sidebar">
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h6> <i class="fas fa-filter"></i>Filters </h6>
+                        </div>
+                        <div class="widget-content">
+                            <div class="pb-3">
+                                <a class="collapse-title" data-bs-toggle="collapse" href="#filters">
+                                    Advanced Filters <i class="fas fa-minus-circle"></i>
+                                </a>
+                                <div class="collapse show" id="filters">
+                                    <div class="form-group mb-3">
+                                        <input type="text" class="form-control" placeholder="What are you looking for?">
+                                    </div>
+                                    <div class="form-group mb-3 select-border">
+                                        <select class="form-control basic-select">
+                                            <option>All Categories</option>
+                                            <option>Restaurant </option>
+                                            <option>Night life </option>
+                                            <option>Hotels </option>
+                                            <option>Cafe</option>
+                                            <option>Club & Bars</option>
+                                            <option>Museum</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-0">
+                                <div class="form-group mb-0">
+                                    <a class="btn btn-secondary d-block" href="#">Search</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 mt-4 mt-md-0">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h6 class="mb-0">Showing 1-5 of <span class="text-primary">28 listing</span></h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="listing-item">
+                            <div class="listing-image bg-overlay-half-top">
+                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
+                                <div class="listing-quick-box">
+                                    <a class="category" href="#">Cafe</a>
+                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
+                                </div>
+                            </div>
+                            <div class="listing-details">
+                                <div class="listing-details-inner">
+                                    <div class="listing-title mb-2">
+                                        <h6><a href="detail_event.html">Espresso macchiato</a></h6>
+                                        <span class="listing-price">$21</span>
+                                    </div>
+                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
+                                    <div class="listing-rating-call">
+                                        <a class="listing-rating" href="#">Date</a>
+                                    </div>
+                                </div>
+                                <div class="listing-bottom">
+                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
+                                    <span class="listing-open">Open</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="listing-item">
+                            <div class="listing-image bg-overlay-half-top">
+                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
+                                <div class="listing-quick-box">
+                                    <a class="category" href="#">Cafe</a>
+                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
+                                </div>
+                            </div>
+                            <div class="listing-details">
+                                <div class="listing-details-inner">
+                                    <div class="listing-title mb-2">
+                                        <h6><a href="detail_event.html">Espresso macchiato</a></h6>
+                                        <span class="listing-price">$21</span>
+                                    </div>
+                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
+                                    <div class="listing-rating-call">
+                                        <a class="listing-rating" href="#">Date</a>
+                                    </div>
+                                </div>
+                                <div class="listing-bottom">
+                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
+                                    <span class="listing-open">Open</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="listing-item">
+                            <div class="listing-image bg-overlay-half-top">
+                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
+                                <div class="listing-quick-box">
+                                    <a class="category" href="#">Cafe</a>
+                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
+                                </div>
+                            </div>
+                            <div class="listing-details">
+                                <div class="listing-details-inner">
+                                    <div class="listing-title mb-2">
+                                        <h6><a href="detail_event.html">Espresso macchiato</a></h6>
+                                        <span class="listing-price">$21</span>
+                                    </div>
+                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
+                                    <div class="listing-rating-call">
+                                        <a class="listing-rating" href="#">Date</a>
+                                    </div>
+                                </div>
+                                <div class="listing-bottom">
+                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
+                                    <span class="listing-open">Open</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="listing-item">
+                            <div class="listing-image bg-overlay-half-top">
+                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
+                                <div class="listing-quick-box">
+                                    <a class="category" href="#">Cafe</a>
+                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
+                                </div>
+                            </div>
+                            <div class="listing-details">
+                                <div class="listing-details-inner">
+                                    <div class="listing-title mb-2">
+                                        <h6><a href="detail_event.html">Espresso macchiato</a></h6>
+                                        <span class="listing-price">$21</span>
+                                    </div>
+                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
+                                    <div class="listing-rating-call">
+                                        <a class="listing-rating" href="#">Date</a>
+                                    </div>
+                                </div>
+                                <div class="listing-bottom">
+                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
+                                    <span class="listing-open">Open</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="listing-item">
+                            <div class="listing-image bg-overlay-half-top">
+                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
+                                <div class="listing-quick-box">
+                                    <a class="category" href="#">Cafe</a>
+                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
+                                </div>
+                            </div>
+                            <div class="listing-details">
+                                <div class="listing-details-inner">
+                                    <div class="listing-title mb-2">
+                                        <h6><a href="detail_event.html">Espresso macchiato</a></h6>
+                                        <span class="listing-price">$21</span>
+                                    </div>
+                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
+                                    <div class="listing-rating-call">
+                                        <a class="listing-rating" href="#">Date</a>
+                                    </div>
+                                </div>
+                                <div class="listing-bottom">
+                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
+                                    <span class="listing-open">Open</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="listing-item">
+                            <div class="listing-image bg-overlay-half-top">
+                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
+                                <div class="listing-quick-box">
+                                    <a class="category" href="#">Cafe</a>
+                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
+                                </div>
+                            </div>
+                            <div class="listing-details">
+                                <div class="listing-details-inner">
+                                    <div class="listing-title mb-2">
+                                        <h6><a href="detail_event.html">Espresso macchiato</a></h6>
+                                        <span class="listing-price">$21</span>
+                                    </div>
+                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
+                                    <div class="listing-rating-call">
+                                        <a class="listing-rating" href="#">Date</a>
+                                    </div>
+                                </div>
+                                <div class="listing-bottom">
+                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
+                                    <span class="listing-open">Open</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

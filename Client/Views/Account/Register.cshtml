@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Register Account";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Create Account</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Account</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Register -->
+<section class="space-ptb">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="section-title text-center">
+                    <h2>Welcome</h2>
+                    <div class="sub-title"> <span>Create an account to get started</span></div>
+                </div>
+                <div class="border border-radius mt-4 p-sm-5 p-4">
+                    <form class="row t-sm-4 mt-2 mb-5 align-items-center">
+                        <div class="mb-3 col-sm-12">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="mb-3 col-sm-6">
+                            <input type="text" class="form-control" placeholder="Firstname">
+                        </div>
+                        <div class="mb-3 col-sm-6">
+                            <input type="text" class="form-control" placeholder="Lastname">
+                        </div>
+                        <div class="mb-3 col-sm-12">
+                            <input type="email" class="form-control" placeholder="Email Address">
+                        </div>
+                        <div class="mb-3 col-sm-12">
+                            <input type="Password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="mb-3 col-sm-12">
+                            <input type="Password" class="form-control" placeholder="Confirm Password">
+                        </div>
+                        <div class="mb-3 col-sm-12">
+                            <small>By signing up, I agree to terms of service, privacy policy, and community guidelines</small>
+                        </div>
+                        <div class="col-sm-6 d-grid">
+                            <button type="submit" class="btn btn-primary">Sign up</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled d-flex mb-1 mt-sm-0 mt-3">
+                                <li class="me-1"><a class="text-dark" asp-area="" asp-controller="Account" asp-action="Login"><b>Already Registered User? Click here to login</b></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Error 401 Unauthorized";
+    Layout = "~/Views/Shared/_LayoutError.cshtml";
+}
+
+<section class="space-ptb">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-10 col-md-8 mt-4 mt-sm-0 text-center">
+                <div id="notfound">
+                    <div class="notfound">
+                        <img class="img-fluid w-50" src="~/dist/images/error/401.svg" alt="">
+                        <div class="notfound-404 mt-4">
+                            <h2>Oops! It seems like you're not authorized to access this page.</h2>
+                        </div>
+                        <p class="mt-3 mb-4">
+                            Please ensure that you have the proper credentials or permissions to view the content here. If you believe this is an error, kindly contact the website administrator for assistance.
+                        </p>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Go To Homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,173 @@
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Create Event</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Event</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Create Event -->
+<section class="space-ptb bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sidebar mb-0">
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h6> <i class="far fa-address-book"></i> Event Detail: </h6>
+                        </div>
+                        <div class="widget-content">
+                            <form class="row">
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">Event Title*</label>
+                                    <input type="email" class="form-control" placeholder="Event Title">
+                                </div>
+                                <div class="mb-3 col-lg-12 select-border">
+                                    <label class="form-label">Event Type*</label>
+                                    <select class="form-control basic-select">
+                                        <option value="value 01" selected="selected">Select Event Type</option>
+                                        <option value="value 02">Offline</option>
+                                        <option value="value 02">Online</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">Location*</label>
+                                    <input type="text" class="form-control" placeholder="Location">
+                                </div>
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">Online Event Link</label>
+                                    <input type="text" class="form-control" placeholder="Online Event Link">
+                                </div>
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">Note</label>
+                                    <textarea class="form-control" rows="4" placeholder="Note"></textarea>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label class="form-label">Start Date*</label>
+                                    <input type="date" class="form-control" placeholder="Start Date">
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label class="form-label">End Date*</label>
+                                    <input type="date" class="form-control" placeholder="End Date">
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label class="form-label">Start Time*</label>
+                                    <input type="time" class="form-control" placeholder="Start Time">
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label class="form-label">End Time*</label>
+                                    <input type="time" class="form-control" placeholder="End Time">
+                                </div>
+                                <div class="mb-3 col-lg-12">
+                                    <div class="input-group file-upload">
+                                        <input type="file" class="form-control" id="customFile">
+                                        <label class="input-group-text" for="customFile">Upload Image </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" rows="5" placeholder="Description"></textarea>
+                                </div>
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">Address</label>
+                                    <textarea class="form-control" rows="3" placeholder="Address"></textarea>
+                                </div>
+                                <div class="mb-3 col-lg-12 select-border">
+                                    <label class="form-label">Event Category*</label>
+                                    <select class="form-control basic-select">
+                                        <option value="value 01" selected="selected">Select Event Category</option>
+                                        <option value="value 02">Music</option>
+                                        <option value="value 02">Concert</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-lg-12 select-border">
+                                    <label class="form-label">Organizer Name*</label>
+                                    <select class="form-control basic-select">
+                                        <option value="value 01" selected="selected">Select Organizer Name</option>
+                                        <option value="value 02">AAAA</option>
+                                        <option value="value 02">BBBB</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h6> <i class="fas fa-map-marked-alt"></i> Create Tickets: </h6>
+                        </div>
+                        <div class="widget-content">
+                            <h6 class="font-md">What type of ticket would you like to start with?</h6>
+                            <div class="alert alert-info">If you would like to add more tickets click on "PAID Tickets/FREE Tickets" button</div>
+                            <div class="col-12 form-group">
+                                <a class="btn btn-dark mb-sm-0 mb-3" href="#">PAID Tickets</a>
+                                <a class="btn btn-secondary mb-sm-0 mb-3" href="#">FREE Tickets</a>
+                            </div>
+                            <form class="row mt-4 g-2 align-items-end">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Ticket Name </label>
+                                    <input type="text" class="form-control" placeholder="Ticket Name">
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Ticket Qty </label>
+                                    <input type="text" class="form-control" placeholder="Ticket Qty">
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    <label class="form-label">Ticket Price </label>
+                                    <input type="text" class="form-control" placeholder="Ticket Price ">
+                                </div>
+                                <div class="form-group mb-3 col-md-1">
+                                    <a class="btn btn-light" href="#"> <i class="fas fa-close pe-0"></i> </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="widget mb-0">
+                        <div class="widget-title">
+                            <h6> <i class="far fa-address-book"></i> Additional Settings: </h6>
+                        </div>
+                        <div class="widget-content">
+                            <form class="row">
+                                <div class="mb-3 col-lg-12">
+                                    <label class="form-label">YOUR EVENT IS PUBLISH OR DRAFT?</label>
+                                    <div class="toggle-button-cover">
+                                        <div class="button b2" id="button-status">
+                                            <input type="checkbox" class="checkbox" />
+                                            <div class="knobs">
+                                            <span></span>
+                                            </div>
+                                            <div class="layer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-12 form-group">
+                                    <a class="btn btn-secondary" href="#">Save & Preview</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/dist/js/select2/select2.full.js"></script>
+    <script src="~/dist/js/dropzone/dropzone.js"></script>
+}
