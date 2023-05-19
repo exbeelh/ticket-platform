@@ -131,3 +131,7 @@
 #button-status .checkbox:checked ~ .layer {
     background-color: #fcebeb;
 }
+
+.sidebar .widget .dashboard-nav li a.active {
+    color: #FF2222;
+}
