@@ -23,7 +23,7 @@
                 <h6 class="card-subtitle">This is a list of all order status in the system.</h6>
             </div>
             <div>
-                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#orderStatusModal"><i class="bi bi-plus-lg"></i> Add Order Status</button>
+                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#orderStatusModal" onclick="add()"><i class="bi bi-plus-lg"></i> Add Order Status</button>
             </div>
         </div>
         <div class="table-responsive">
@@ -32,18 +32,15 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Music</td>
-                    </tr>
-                </tbody>
+                <tbody id="orderStatus-list"></tbody>
                 <tfoot>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
@@ -61,7 +58,7 @@
                     <span></span>
                 </button>
             </div>
-            <form class="needs-validation was-validated" novalidate="">
+            <form class="needs-validation" novalidate id="form">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Order Status Name</label>
@@ -83,8 +80,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 	<script src="~/js/orderStatus.js"></script>
-	<script src="~/admin/vendor/js/datatables.min.js"></script>
-    <script>
-        $('#orderStatus_datatable').DataTable();
-    </script>
 }

@@ -15,7 +15,7 @@
       $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
     }
 
-   
+
 
     return false;
   });
@@ -179,20 +179,37 @@
   })
 
   // Init Form validation
-  function formValidation() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    let forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }
-  formValidation();
+//   function formValidation() {
+//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     let forms = document.getElementsByClassName('needs-validation');
+//     // Loop over them and prevent submission
+//     Array.prototype.filter.call(forms, function(form) {
+//       form.addEventListener('submit', function(event) {
+//         if (form.checkValidity() === false) {
+//           event.preventDefault();
+//           event.stopPropagation();
+//         }
+//         form.classList.add('was-validated');
+//       }, false);
+//     });
+//   }
+//   formValidation();
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "preventDuplicates": true,
+        "progressBar": false,
+        "newestOnTop": false,
+        "positionClass": "toast-top-right",
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
 })(jQuery);

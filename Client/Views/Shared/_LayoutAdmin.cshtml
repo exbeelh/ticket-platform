@@ -151,17 +151,6 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a class="" is-active-route asp-area="" asp-controller="SubCategory" asp-action="Index">
-                        <span class="dsh-svg-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" xml:space="preserve">
-                                <path d="M14,23.5c-0.254,0-0.479,0.172-0.545,0.417L2,52.5v1c0,0.734-0.047,1,0.565,1h44.759c1.156,0,2.174-0.779,2.45-1.813 L60,24.5c0,0,0-0.625,0-1H14z" />
-                                <path opacity="0.4" d="M12.731,21.5H53h1v-6.268c0-1.507-1.226-2.732-2.732-2.732H26.515l-5-7H2.732C1.226,5.5,0,6.726,0,8.232v41.796 l10.282-26.717C10.557,22.279,11.575,21.5,12.731,21.5z" />
-                            </svg>
-                            Sub Categories
-                        </span>
-                    </a>
-                </li>
-                <li class="menu-item">
                     <a class="" is-active-route asp-area="" asp-controller="OrderStatus" asp-action="Index">
                         <span class="dsh-svg-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60 60" xml:space="preserve">
@@ -195,7 +184,7 @@
                     </a>
                     <ul id="masterData" class="collapse" aria-labelledby="masterData" data-parent="#side-nav-accordion">
                         <li> <a class="" is-active-route asp-area="" asp-controller="User" asp-action="List"> <span>User List</span> </a> </li>
-                        <li> <a href="../pages/faq.html"> <span>Create User</span> </a> </li>
+                        <li> <a class="" is-active-route asp-area="" asp-controller="User" asp-action="Create"> <span>Create User</span> </a> </li>
                     </ul>
                 </li>
                 <li class="menu-item">
@@ -323,8 +312,12 @@
         </div>
     </main>
 
+    <!-- Main JS -->
+    <script src="~/js/data/data-source.js"></script>
+
     <!-- Plugins -->
     <script src="~/admin/vendor/dist/libs.bundle.js"></script>
+	<script src="~/admin/vendor/js/datatables.min.js"></script>
 
     <!-- Gnarly core JavaScript -->
     <!-- <script src="~/admin/vendor/dist/script.bundle.js"></script> -->

@@ -23,7 +23,7 @@
                 <h6 class="card-subtitle">This is a list of all categories in the system.</h6>
             </div>
             <div>
-                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal"><i class="bi bi-plus-lg"></i> Add Category</button>
+                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal" onclick="add()"><i class="bi bi-plus-lg"></i> Add Category</button>
             </div>
         </div>
         <div class="table-responsive">
@@ -33,20 +33,16 @@
                         <th>No</th>
                         <th>Name</th>
                         <th>Slug</th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Music</td>
-                        <td>Slug</td>
-                    </tr>
-                </tbody>
+                <tbody id="category-list"></tbody>
                 <tfoot>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Slug</th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
@@ -64,7 +60,7 @@
                     <span></span>
                 </button>
             </div>
-            <form class="needs-validation was-validated" novalidate="">
+            <form class="needs-validation" novalidate id="form">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Category Name</label>
@@ -86,8 +82,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 	<script src="~/js/category.js"></script>
-	<script src="~/admin/vendor/js/datatables.min.js"></script>
-    <script>
-        $('#category_datatable').DataTable();
-    </script>
 }

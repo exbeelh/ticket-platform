@@ -23,7 +23,7 @@
                 <h6 class="card-subtitle">This is a list of all countries in the system.</h6>
             </div>
             <div>
-                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#countryModal"><i class="bi bi-plus-lg"></i> Add Country</button>
+                <button type="button" class="btn btn-square btn-primary" data-bs-toggle="modal" data-bs-target="#countryModal" onclick="add()"><i class="bi bi-plus-lg"></i> Add Country</button>
             </div>
         </div>
         <div class="table-responsive">
@@ -31,19 +31,18 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Country ID</th>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Music</td>
-                    </tr>
-                </tbody>
+                <tbody id="country-list"></tbody>
                 <tfoot>
                     <tr>
                         <th>No</th>
+                        <th>Country ID</th>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
@@ -61,8 +60,15 @@
                     <span></span>
                 </button>
             </div>
-            <form class="needs-validation was-validated" novalidate="">
+            <form class="needs-validation" novalidate id="form">
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="country_id">Country ID</label>
+                        <input id="country_id" type="text" class="form-control" name="country_id" placeholder="Country ID" required="">
+                        <div class="invalid-feedback">
+                            Country ID is required field
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="name">Country Name</label>
                         <input id="name" type="text" class="form-control" name="name" placeholder="Country Name" required="">
@@ -83,8 +89,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 	<script src="~/js/country.js"></script>
-	<script src="~/admin/vendor/js/datatables.min.js"></script>
-    <script>
-        $('#country_datatable').DataTable();
-    </script>
 }

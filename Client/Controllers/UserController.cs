@@ -19,8 +19,12 @@ public class UserController : Controller
         return View();
     }
 
-    [HttpGet("/Admin/User/List")]
     public IActionResult List()
+	{
+		return View();
+	}
+
+    public IActionResult Create()
 	{
 		return View();
 	}
