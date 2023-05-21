@@ -40,8 +40,6 @@ public partial class MyContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<SubCategory> SubCategories { get; set; }
-
     public virtual DbSet<Ticket> Tickets { get; set; }
 
     public virtual DbSet<TicketOrder> TicketOrders { get; set; }
@@ -52,7 +50,7 @@ public partial class MyContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83F6A5456B7");
+            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83FC8E9680F");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Password)
@@ -64,12 +62,12 @@ public partial class MyContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Accounts__user_i__5AEE82B9");
+                .HasConstraintName("FK__Accounts__user_i__5629CD9C");
         });
 
         modelBuilder.Entity<AccountRole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83F1FDE4B2A");
+            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83FFD9FDC42");
 
             entity.ToTable("Account_Roles");
 
@@ -80,17 +78,17 @@ public partial class MyContext : DbContext
             entity.HasOne(d => d.Account).WithMany(p => p.AccountRoles)
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Account_R__role___5DCAEF64");
+                .HasConstraintName("FK__Account_R__role___59063A47");
 
             entity.HasOne(d => d.Role).WithMany(p => p.AccountRoles)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Account_R__role___5EBF139D");
+                .HasConstraintName("FK__Account_R__role___59FA5E80");
         });
 
         modelBuilder.Entity<Attendee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Atendees__3213E83F208B2477");
+            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83F7B264BA3");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Code)
@@ -113,15 +111,25 @@ public partial class MyContext : DbContext
             entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.TicketId).HasColumnName("ticket_id");
 
+            entity.HasOne(d => d.Event).WithMany(p => p.Attendees)
+                .HasForeignKey(d => d.EventId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Attendees__event__73BA3083");
+
             entity.HasOne(d => d.Order).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Atendees__code__693CA210");
+                .HasConstraintName("FK__Attendees__code__72C60C4A");
+
+            entity.HasOne(d => d.Ticket).WithMany(p => p.Attendees)
+                .HasForeignKey(d => d.TicketId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Attendees__ticke__74AE54BC");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F606BEF1F");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F638F6F34");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -136,7 +144,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Country>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F2D7E1C1D");
+            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83FBF1F2876");
 
             entity.Property(e => e.Id)
                 .HasMaxLength(3)
@@ -150,14 +158,14 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F4B915949");
+            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F9E4BB109");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("address");
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.Description)
                 .HasColumnType("text")
                 .HasColumnName("description");
@@ -182,28 +190,31 @@ public partial class MyContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("start_date");
             entity.Property(e => e.StartTime).HasColumnName("start_time");
-            entity.Property(e => e.SubCategoryId).HasColumnName("sub_category_id");
+            entity.Property(e => e.StatusId).HasColumnName("status_id");
             entity.Property(e => e.Title)
                 .HasMaxLength(25)
                 .IsUnicode(false)
                 .HasColumnName("title");
             entity.Property(e => e.Type).HasColumnName("type");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Views).HasColumnName("views");
+
+            entity.HasOne(d => d.Category).WithMany(p => p.Events)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK__Events__user_id__6A30C649");
 
             entity.HasOne(d => d.Organizer).WithMany(p => p.Events)
                 .HasForeignKey(d => d.OrganizerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Events__organize__6FE99F9F");
+                .HasConstraintName("FK__Events__organize__6B24EA82");
 
-            entity.HasOne(d => d.SubCategory).WithMany(p => p.Events)
-                .HasForeignKey(d => d.SubCategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Events__created___6EF57B66");
+            entity.HasOne(d => d.User).WithMany(p => p.Events)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Events__user_id__6C190EBB");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F9509A525");
+            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F89AC1A59");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Amount)
@@ -219,7 +230,6 @@ public partial class MyContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("order_date");
             entity.Property(e => e.OrderStatusId).HasColumnName("order_status_id");
-            entity.Property(e => e.PaymentId).HasColumnName("payment_id");
             entity.Property(e => e.TransationId)
                 .HasMaxLength(25)
                 .IsUnicode(false)
@@ -229,20 +239,16 @@ public partial class MyContext : DbContext
             entity.HasOne(d => d.OrderStatus).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.OrderStatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__payment___619B8048");
-
-            entity.HasOne(d => d.Payment).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.PaymentId)
-                .HasConstraintName("FK__Orders__payment___628FA481");
+                .HasConstraintName("FK__Orders__order_st__5CD6CB2B");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Orders__user_id__6383C8BA");
+                .HasConstraintName("FK__Orders__user_id__5DCAEF64");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F030DCFFB");
+            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F28776FCD");
 
             entity.ToTable("Order_Items");
 
@@ -258,13 +264,12 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Order_Ite__order__66603565");
+                .HasConstraintName("FK__Order_Ite__order__6477ECF3");
         });
 
         modelBuilder.Entity<OrderStatuss>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83F293EFF28");
+            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83F4BA3A613");
 
             entity.ToTable("Order_Statusses");
 
@@ -277,10 +282,9 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Organizer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83FA7EA4DF4");
+            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83F3C6BCDD8");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
             entity.Property(e => e.Description)
                 .HasColumnType("text")
                 .HasColumnName("description");
@@ -306,16 +310,16 @@ public partial class MyContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("twitter");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.Organizers)
-                .HasForeignKey(d => d.CreatedBy)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Organizer__creat__6C190EBB");
+            entity.HasOne(d => d.User).WithMany(p => p.Organizers)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Organizer__user___6754599E");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F7807F49E");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F200F121E");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CheckAt)
@@ -329,47 +333,33 @@ public partial class MyContext : DbContext
             entity.Property(e => e.PaymentAt)
                 .HasColumnType("datetime")
                 .HasColumnName("payment_at");
-            entity.Property(e => e.SendBy).HasColumnName("send_by");
             entity.Property(e => e.Status).HasColumnName("status");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Payments__order___619B8048");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Payments)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Payments__check___60A75C0F");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83FCCD7D6BA");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F344A2C00");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("name");
-        });
-
-        modelBuilder.Entity<SubCategory>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Sub_Cate__3213E83F988A08A2");
-
-            entity.ToTable("Sub_Categories");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CategoryId).HasColumnName("category_id");
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("name");
-            entity.Property(e => e.Slug)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("slug");
-
-            entity.HasOne(d => d.Category).WithMany(p => p.SubCategories)
-                .HasForeignKey(d => d.CategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Sub_Categ__categ__4F7CD00D");
         });
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83FA19C5AC7");
+            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F2F670D02");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EventId).HasColumnName("event_id");
@@ -384,12 +374,16 @@ public partial class MyContext : DbContext
             entity.HasOne(d => d.Event).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.EventId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Tickets__event_i__72C60C4A");
+                .HasConstraintName("FK__Tickets__event_i__6EF57B66");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Tickets__user_id__6FE99F9F");
         });
 
         modelBuilder.Entity<TicketOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83F94CC2E48");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FA874A6C2");
 
             entity.ToTable("Ticket_Orders");
 
@@ -400,21 +394,21 @@ public partial class MyContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ticket_Or__order__76969D2E");
+                .HasConstraintName("FK__Ticket_Or__order__787EE5A0");
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.TicketId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ticket_Or__order__75A278F5");
+                .HasConstraintName("FK__Ticket_Or__order__778AC167");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F42638FC7");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83FE2D91648");
 
-            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B514927DAB0DA4").IsUnique();
+            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B51492CE39C7BB").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__AB6E6164EE7A2E0D").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E616489449D39").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
@@ -465,7 +459,7 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Country).WithMany(p => p.Users)
                 .HasForeignKey(d => d.CountryId)
-                .HasConstraintName("FK__Users__country_i__5812160E");
+                .HasConstraintName("FK__Users__country_i__534D60F1");
         });
 
         OnModelCreatingPartial(modelBuilder);

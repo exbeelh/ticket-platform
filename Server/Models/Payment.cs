@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -15,9 +16,11 @@ public partial class Payment
 
     public DateTime? PaymentAt { get; set; }
 
-    public int? SendBy { get; set; }
+    public int? UserId { get; set; }
 
     public DateTime? CheckAt { get; set; }
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    [JsonIgnore] public virtual Order Order { get; set; } = null!;
+
+    [JsonIgnore] public virtual User? User { get; set; }
 }

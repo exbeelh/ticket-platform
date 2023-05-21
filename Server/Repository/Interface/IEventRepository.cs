@@ -5,10 +5,12 @@ namespace Server.Repository.Interface
 {
     public interface IEventRepository : IGeneralRepository<Event, int>
     {
-        Task<IEnumerable<Event>> Upcoming();
-        Task<IEnumerable<Event>> Aprove(int id);
-        Task<IEnumerable<Event>> Ban(int id);
-        Task<IEnumerable<Event>> Cancel(int id);
-        Task<IEnumerable<Event>> Payment(int id);
+        Task<IEnumerable<EventVM>> Upcoming();
+        Task<IEnumerable<EventVM>> Aprove();
+        Task<IEnumerable<EventVM>> Ban();
+        Task<IEnumerable<EventVM>> Cancel(int id);
+        Task<IEnumerable<EventVM>> Payment(int id);
+        Task<IEnumerable<EventVM>> Category();
+        Task<IEnumerable<EventVM>> Search(string query);
     }
 }

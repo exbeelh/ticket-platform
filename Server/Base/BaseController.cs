@@ -70,7 +70,12 @@ namespace Server.Base
                     message = "Data Fail to Insert!"
                 });
             }
-            return CreatedAtAction(nameof(GetAsync), new { id = GetAsync() }, entity);
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                message = "Data successfully added!"
+            });
             
         }
 

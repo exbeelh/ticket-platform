@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -11,5 +12,5 @@ public partial class Category
 
     public string Slug { get; set; } = null!;
 
-    public virtual ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
+    [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 }

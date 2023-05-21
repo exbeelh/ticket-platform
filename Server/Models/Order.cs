@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -25,17 +26,15 @@ public partial class Order
 
     public int? IsCanceled { get; set; }
 
-    public int? PaymentId { get; set; }
+    [JsonIgnore] public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
 
-    public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
+    [JsonIgnore] public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
-    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    [JsonIgnore] public virtual OrderStatuss OrderStatus { get; set; } = null!;
 
-    public virtual OrderStatuss OrderStatus { get; set; } = null!;
+    [JsonIgnore] public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual Payment? Payment { get; set; }
+    [JsonIgnore] public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
 
-    public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
-
-    public virtual User? User { get; set; }
+    [JsonIgnore] public virtual User? User { get; set; }
 }

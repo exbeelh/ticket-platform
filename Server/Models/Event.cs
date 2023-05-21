@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -15,19 +16,17 @@ public partial class Event
 
     public DateTime? EndDate { get; set; }
 
-    public TimeSpan? StartTime { get; set; }
-
-    public TimeSpan? EndTime { get; set; }
-
     public string Image { get; set; } = null!;
 
     public string? Description { get; set; }
 
     public string? Address { get; set; }
 
-    public int SubCategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
-    public int OrganizerId { get; set; }
+    public int? OrganizerId { get; set; }
+
+    public int StatusId { get; set; }
 
     public string? Link { get; set; }
 
@@ -37,11 +36,19 @@ public partial class Event
 
     public int IsPublish { get; set; }
 
-    public int CreatedBy { get; set; }
+    public int? UserId { get; set; }
 
-    public virtual Organizer Organizer { get; set; } = null!;
+    public TimeSpan? StartTime { get; set; }
 
-    public virtual SubCategory SubCategory { get; set; } = null!;
+    public TimeSpan? EndTime { get; set; }
 
-    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    [JsonIgnore] public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
+
+    [JsonIgnore] public virtual Category? Category { get; set; }
+
+    [JsonIgnore] public virtual Organizer? Organizer { get; set; }
+
+    [JsonIgnore] public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+
+    [JsonIgnore] public virtual User? User { get; set; }
 }

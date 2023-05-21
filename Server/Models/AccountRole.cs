@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -11,7 +12,7 @@ public partial class AccountRole
 
     public int RoleId { get; set; }
 
-    public virtual Account Account { get; set; } = null!;
+    [JsonIgnore] public virtual Account Account { get; set; } = null!;
 
-    public virtual Role Role { get; set; } = null!;
+    [JsonIgnore] public virtual Role Role { get; set; } = null!;
 }

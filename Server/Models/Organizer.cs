@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -23,9 +24,9 @@ public partial class Organizer
 
     public string Image { get; set; } = null!;
 
-    public int CreatedBy { get; set; }
+    public int? UserId { get; set; }
 
-    public virtual User CreatedByNavigation { get; set; } = null!;
+    [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
-    public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+    [JsonIgnore] public virtual User? User { get; set; }
 }

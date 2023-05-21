@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Server.Models;
 
@@ -21,5 +22,9 @@ public partial class Attendee
 
     public string? Code { get; set; }
 
-    public virtual Order Order { get; set; } = null!;
+    [JsonIgnore] public virtual Event Event { get; set; } = null!;
+
+    [JsonIgnore] public virtual Order Order { get; set; } = null!;
+
+    [JsonIgnore] public virtual Ticket Ticket { get; set; } = null!;
 }
