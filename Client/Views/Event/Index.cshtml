@@ -36,24 +36,18 @@
                                 </a>
                                 <div class="collapse show" id="filters">
                                     <div class="form-group mb-3">
-                                        <input type="text" class="form-control" placeholder="What are you looking for?">
+                                        <input type="text" class="form-control" name="searchQuery" placeholder="What are you looking for?" id="searchQuery">
                                     </div>
                                     <div class="form-group mb-3 select-border">
-                                        <select class="form-control basic-select">
-                                            <option>All Categories</option>
-                                            <option>Restaurant </option>
-                                            <option>Night life </option>
-                                            <option>Hotels </option>
-                                            <option>Cafe</option>
-                                            <option>Club & Bars</option>
-                                            <option>Museum</option>
+                                        <select class="form-control basic-select-category" id="category_id">
+                                            <option value="">Select Category</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="pt-0">
                                 <div class="form-group mb-0">
-                                    <a class="btn btn-secondary d-block" href="#">Search</a>
+                                    <button type="button" class="btn btn-secondary d-block" id="button-filter">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -61,181 +55,7 @@
                 </div>
             </div>
             <div class="col-lg-9 mt-4 mt-md-0">
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h6 class="mb-0">Showing 1-5 of <span class="text-primary">28 listing</span></h6>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="listing-item">
-                            <div class="listing-image bg-overlay-half-top">
-                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
-                                <div class="listing-quick-box">
-                                    <a class="category" href="#">Cafe</a>
-                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
-                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
-                                </div>
-                            </div>
-                            <div class="listing-details">
-                                <div class="listing-details-inner">
-                                    <div class="listing-title mb-2">
-                                        <h6><a asp-area="" asp-controller="Event" asp-action="Detail">Espresso macchiato</a></h6>
-                                        <span class="listing-price">$21</span>
-                                    </div>
-                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
-                                    <div class="listing-rating-call">
-                                        <a class="listing-rating" href="#">Date</a>
-                                    </div>
-                                </div>
-                                <div class="listing-bottom">
-                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
-                                    <span class="listing-open">Open</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="listing-item">
-                            <div class="listing-image bg-overlay-half-top">
-                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
-                                <div class="listing-quick-box">
-                                    <a class="category" href="#">Cafe</a>
-                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
-                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
-                                </div>
-                            </div>
-                            <div class="listing-details">
-                                <div class="listing-details-inner">
-                                    <div class="listing-title mb-2">
-                                        <h6><a asp-area="" asp-controller="Event" asp-action="Detail">Espresso macchiato</a></h6>
-                                        <span class="listing-price">$21</span>
-                                    </div>
-                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
-                                    <div class="listing-rating-call">
-                                        <a class="listing-rating" href="#">Date</a>
-                                    </div>
-                                </div>
-                                <div class="listing-bottom">
-                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
-                                    <span class="listing-open">Open</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="listing-item">
-                            <div class="listing-image bg-overlay-half-top">
-                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
-                                <div class="listing-quick-box">
-                                    <a class="category" href="#">Cafe</a>
-                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
-                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
-                                </div>
-                            </div>
-                            <div class="listing-details">
-                                <div class="listing-details-inner">
-                                    <div class="listing-title mb-2">
-                                        <h6><a asp-area="" asp-controller="Event" asp-action="Detail">Espresso macchiato</a></h6>
-                                        <span class="listing-price">$21</span>
-                                    </div>
-                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
-                                    <div class="listing-rating-call">
-                                        <a class="listing-rating" href="#">Date</a>
-                                    </div>
-                                </div>
-                                <div class="listing-bottom">
-                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
-                                    <span class="listing-open">Open</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="listing-item">
-                            <div class="listing-image bg-overlay-half-top">
-                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
-                                <div class="listing-quick-box">
-                                    <a class="category" href="#">Cafe</a>
-                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
-                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
-                                </div>
-                            </div>
-                            <div class="listing-details">
-                                <div class="listing-details-inner">
-                                    <div class="listing-title mb-2">
-                                        <h6><a asp-area="" asp-controller="Event" asp-action="Detail">Espresso macchiato</a></h6>
-                                        <span class="listing-price">$21</span>
-                                    </div>
-                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
-                                    <div class="listing-rating-call">
-                                        <a class="listing-rating" href="#">Date</a>
-                                    </div>
-                                </div>
-                                <div class="listing-bottom">
-                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
-                                    <span class="listing-open">Open</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="listing-item">
-                            <div class="listing-image bg-overlay-half-top">
-                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
-                                <div class="listing-quick-box">
-                                    <a class="category" href="#">Cafe</a>
-                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
-                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
-                                </div>
-                            </div>
-                            <div class="listing-details">
-                                <div class="listing-details-inner">
-                                    <div class="listing-title mb-2">
-                                        <h6><a asp-area="" asp-controller="Event" asp-action="Detail">Espresso macchiato</a></h6>
-                                        <span class="listing-price">$21</span>
-                                    </div>
-                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
-                                    <div class="listing-rating-call">
-                                        <a class="listing-rating" href="#">Date</a>
-                                    </div>
-                                </div>
-                                <div class="listing-bottom">
-                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
-                                    <span class="listing-open">Open</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="listing-item">
-                            <div class="listing-image bg-overlay-half-top">
-                                <img class="img-fluid" src="~/dist/images/listing/grid/01.jpg" alt="">
-                                <div class="listing-quick-box">
-                                    <a class="category" href="#">Cafe</a>
-                                    <a class="popup popup-single" href="~/dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
-                                    <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
-                                </div>
-                            </div>
-                            <div class="listing-details">
-                                <div class="listing-details-inner">
-                                    <div class="listing-title mb-2">
-                                        <h6><a asp-area="" asp-controller="Event" asp-action="Detail">Espresso macchiato</a></h6>
-                                        <span class="listing-price">$21</span>
-                                    </div>
-                                    <p class="mb-3">Remind yourself you have nowhere to go except have already been at the bottom.</p>
-                                    <div class="listing-rating-call">
-                                        <a class="listing-rating" href="#">Date</a>
-                                    </div>
-                                </div>
-                                <div class="listing-bottom">
-                                    <a class="listing-loaction" href="#"> <i class="fas fa-map-marker-alt"></i> Piper Drive Zion</a>
-                                    <span class="listing-open">Open</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="row" id="event-list"></div>
             </div>
         </div>
     </div>
@@ -243,4 +63,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/dist/js/select2/select2.full.js"></script>
+    <script src="~/js/events/index.js"></script>
 }

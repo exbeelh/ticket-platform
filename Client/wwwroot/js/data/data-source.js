@@ -530,6 +530,40 @@ class DataSource {
             });
     }
 
+    static searchEvents(searchTerm) {
+        return fetch(`${BASE_URL}api/events/search?searchQuery=${searchTerm}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getEventsByCategoryId(id) {
+        return fetch(`${BASE_URL}api/events/category/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     static insertEvent(event) {
         return fetch(`${BASE_URL}api/events`, {
             method: 'POST',
