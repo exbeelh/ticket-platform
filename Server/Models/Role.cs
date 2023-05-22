@@ -10,5 +10,6 @@ public partial class Role
 
     public string? Name { get; set; }
 
-    [JsonIgnore] public virtual ICollection<AccountRole> AccountRoles { get; set; } = new List<AccountRole>();
+    [JsonIgnore]
+    public virtual ICollection<AccountRole> AccountRoles { get; set; } = new List<AccountRole>();
 }

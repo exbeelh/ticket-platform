@@ -10,9 +10,9 @@ public partial class Order
 
     public string TransationId { get; set; } = null!;
 
-    public int EventId { get; set; }
+    public int? EventId { get; set; }
 
-    public int OrderStatusId { get; set; }
+    public int? OrderStatusId { get; set; }
 
     public DateTime OrderDate { get; set; }
 
@@ -26,15 +26,21 @@ public partial class Order
 
     public int? IsCanceled { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
+    [JsonIgnore]
+    public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
 
-    [JsonIgnore] public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    [JsonIgnore]
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
-    [JsonIgnore] public virtual OrderStatuss OrderStatus { get; set; } = null!;
+    [JsonIgnore]
+    public virtual OrderStatuss? OrderStatus { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+    [JsonIgnore]
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    [JsonIgnore] public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
+    [JsonIgnore]
+    public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
 
-    [JsonIgnore] public virtual User? User { get; set; }
+    [JsonIgnore]
+    public virtual User? User { get; set; }
 }

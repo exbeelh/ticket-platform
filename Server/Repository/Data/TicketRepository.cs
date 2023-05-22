@@ -1,4 +1,6 @@
-﻿using Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Server.Data;
 using Server.Models;
 using Server.Repository.Interface;
 
@@ -10,14 +12,20 @@ namespace Server.Repository.Data
         {
         }
 
-        public Task<Ticket> Sales(int id)
+        public Task<int> Sales(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Ticket> Total()
+        public async Task<int> Total(int id)
         {
-            throw new NotImplementedException();
+            var totalTicketsSold = await (from ticket in _context.Tickets
+                                         join orderItem in _context.OrderItems on ticket.Id equals orderItem.Id
+                                         join order in _context.Orders on orderItem.OrderId equals order.Id
+                                         where order.EventId == id
+                                         select orderItem.Quantity).SumAsync();
+
+            return (int)totalTicketsSold;
         }
     }
 }

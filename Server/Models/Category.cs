@@ -12,5 +12,6 @@ public partial class Category
 
     public string Slug { get; set; } = null!;
 
-    [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+    [JsonIgnore]
+    public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 }

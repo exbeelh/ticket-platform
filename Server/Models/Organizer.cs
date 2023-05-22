@@ -26,7 +26,9 @@ public partial class Organizer
 
     public int? UserId { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Event> Events { get; set; } = new List<Event>();
+    [JsonIgnore]
+    public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
-    [JsonIgnore] public virtual User? User { get; set; }
+    [JsonIgnore]
+    public virtual User? User { get; set; }
 }

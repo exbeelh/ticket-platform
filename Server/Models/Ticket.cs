@@ -8,7 +8,7 @@ public partial class Ticket
 {
     public int Id { get; set; }
 
-    public int EventId { get; set; }
+    public int? EventId { get; set; }
 
     public int Type { get; set; }
 
@@ -20,11 +20,15 @@ public partial class Ticket
 
     public int? UserId { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
+    [JsonIgnore]
+    public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
 
-    [JsonIgnore] public virtual Event Event { get; set; } = null!;
+    [JsonIgnore]
+    public virtual Event? Event { get; set; }
 
-    [JsonIgnore] public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
+    [JsonIgnore]
+    public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
 
-    [JsonIgnore] public virtual User? User { get; set; }
+    [JsonIgnore]
+    public virtual User? User { get; set; }
 }

@@ -50,7 +50,7 @@ public partial class MyContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83FC8E9680F");
+            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83FF91DFDB8");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Password)
@@ -61,13 +61,12 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Accounts__user_i__5629CD9C");
         });
 
         modelBuilder.Entity<AccountRole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83FFD9FDC42");
+            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83F30339B41");
 
             entity.ToTable("Account_Roles");
 
@@ -77,18 +76,16 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.AccountRoles)
                 .HasForeignKey(d => d.AccountId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Account_R__role___59063A47");
 
             entity.HasOne(d => d.Role).WithMany(p => p.AccountRoles)
                 .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Account_R__role___59FA5E80");
         });
 
         modelBuilder.Entity<Attendee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83F7B264BA3");
+            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83F52A6EA01");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Code)
@@ -113,23 +110,20 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.EventId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Attendees__event__73BA3083");
 
             entity.HasOne(d => d.Order).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Attendees__code__72C60C4A");
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.TicketId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Attendees__ticke__74AE54BC");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F638F6F34");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83FBD783EE9");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -144,7 +138,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Country>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83FBF1F2876");
+            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F65A7BFC7");
 
             entity.Property(e => e.Id)
                 .HasMaxLength(3)
@@ -158,7 +152,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F9E4BB109");
+            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F41439451");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
@@ -214,7 +208,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F89AC1A59");
+            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F03A0A7AB");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Amount)
@@ -238,7 +232,6 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.OrderStatus).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.OrderStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orders__order_st__5CD6CB2B");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
@@ -248,7 +241,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F28776FCD");
+            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F9465E9C9");
 
             entity.ToTable("Order_Items");
 
@@ -269,7 +262,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<OrderStatuss>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83F4BA3A613");
+            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83FB8C4FCDC");
 
             entity.ToTable("Order_Statusses");
 
@@ -282,7 +275,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Organizer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83F3C6BCDD8");
+            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83FC3149F2C");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description)
@@ -319,7 +312,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F200F121E");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F09CCAC77");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CheckAt)
@@ -338,7 +331,6 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Payments__order___619B8048");
 
             entity.HasOne(d => d.User).WithMany(p => p.Payments)
@@ -348,7 +340,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F344A2C00");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F075D9101");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -359,7 +351,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F2F670D02");
+            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F23E3BD34");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EventId).HasColumnName("event_id");
@@ -373,7 +365,6 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.EventId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Tickets__event_i__6EF57B66");
 
             entity.HasOne(d => d.User).WithMany(p => p.Tickets)
@@ -383,7 +374,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<TicketOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FA874A6C2");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FA01A6B49");
 
             entity.ToTable("Ticket_Orders");
 
@@ -404,11 +395,11 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83FE2D91648");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F116544AA");
 
-            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B51492CE39C7BB").IsUnique();
+            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B51492F930C3C4").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__AB6E616489449D39").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61643DEBD64F").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)

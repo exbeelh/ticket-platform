@@ -4,7 +4,7 @@ namespace Server.Repository.Interface
 {
     public interface ITicketRepository : IGeneralRepository<Ticket, int>
     {
-        Task<Ticket> Total();
-        Task<Ticket> Sales(int id);
+        Task<int> Total(int id);
+        Task<int> Sales(int id);
     }
 }

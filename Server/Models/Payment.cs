@@ -8,7 +8,7 @@ public partial class Payment
 {
     public int Id { get; set; }
 
-    public int OrderId { get; set; }
+    public int? OrderId { get; set; }
 
     public string? FileImg { get; set; }
 
@@ -20,7 +20,9 @@ public partial class Payment
 
     public DateTime? CheckAt { get; set; }
 
-    [JsonIgnore] public virtual Order Order { get; set; } = null!;
+    [JsonIgnore]
+    public virtual Order? Order { get; set; }
 
-    [JsonIgnore] public virtual User? User { get; set; }
+    [JsonIgnore]
+    public virtual User? User { get; set; }
 }

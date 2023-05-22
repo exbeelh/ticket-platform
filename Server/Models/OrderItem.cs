@@ -16,5 +16,6 @@ public partial class OrderItem
 
     public int? OrderId { get; set; }
 
-    [JsonIgnore] public virtual Order? Order { get; set; }
+    [JsonIgnore]
+    public virtual Order? Order { get; set; }
 }

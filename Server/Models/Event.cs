@@ -16,6 +16,10 @@ public partial class Event
 
     public DateTime? EndDate { get; set; }
 
+    public TimeSpan? StartTime { get; set; }
+
+    public TimeSpan? EndTime { get; set; }
+
     public string Image { get; set; } = null!;
 
     public string? Description { get; set; }
@@ -38,17 +42,18 @@ public partial class Event
 
     public int? UserId { get; set; }
 
-    public TimeSpan? StartTime { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
 
-    public TimeSpan? EndTime { get; set; }
+    [JsonIgnore]
+    public virtual Category? Category { get; set; }
 
-    [JsonIgnore] public virtual ICollection<Attendee> Attendees { get; set; } = new List<Attendee>();
+    [JsonIgnore]
+    public virtual Organizer? Organizer { get; set; }
 
-    [JsonIgnore] public virtual Category? Category { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 
-    [JsonIgnore] public virtual Organizer? Organizer { get; set; }
-
-    [JsonIgnore] public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
-
-    [JsonIgnore] public virtual User? User { get; set; }
+    [JsonIgnore]
+    public virtual User? User { get; set; }
 }
