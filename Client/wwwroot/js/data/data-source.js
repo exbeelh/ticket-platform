@@ -336,7 +336,7 @@ class DataSource {
 
     // Order Status
     static getOrderStatuses() {
-        return fetch(`${BASE_URL}api/orderstatusses`, {
+        return fetch(`${BASE_URL}api/orderstatuses`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -357,7 +357,7 @@ class DataSource {
     }
 
     static getOrderStatusById(id) {
-        return fetch(`${BASE_URL}api/orderstatusses/${id}`, {
+        return fetch(`${BASE_URL}api/orderstatuses/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -378,7 +378,7 @@ class DataSource {
     }
 
     static insertOrderStatus(orderStatus) {
-        return fetch(`${BASE_URL}api/orderstatusses`, {
+        return fetch(`${BASE_URL}api/orderstatuses`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -401,7 +401,7 @@ class DataSource {
     }
 
     static updateOrderStatus(orderStatus) {
-        return fetch(`${BASE_URL}api/orderstatusses/${orderStatus.id}`, {
+        return fetch(`${BASE_URL}api/orderstatuses/${orderStatus.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -424,7 +424,7 @@ class DataSource {
     }
 
     static deleteOrderStatus(id) {
-        return fetch(`${BASE_URL}api/orderstatusses/${id}`, {
+        return fetch(`${BASE_URL}api/orderstatuses/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -435,6 +435,202 @@ class DataSource {
             })
             .then((responseJson) => {
                 if (responseJson && responseJson.status === 204) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    // Events
+    static getEvents() {
+        return fetch(`${BASE_URL}api/events`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getUpcomingEvents() {
+        return fetch(`${BASE_URL}api/events/upcoming`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getEventById(id) {
+        return fetch(`${BASE_URL}api/events/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getEventBySlug(slug) {
+        return fetch(`${BASE_URL}api/events/detail/${slug}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static insertEvent(event) {
+        return fetch(`${BASE_URL}api/events`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(event),
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static approveEvent(id) {
+        return fetch(`${BASE_URL}api/events/approve/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static bannedEvent(id) {
+        return fetch(`${BASE_URL}api/events/banned/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    // Organizers
+    static getOrganizerById(id) {
+        return fetch(`${BASE_URL}api/organizers/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    // Tickets
+    static getTicketsByEventId(id) {
+        return fetch(`${BASE_URL}api/events/tickets/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
                     return Promise.resolve(responseJson);
                 } else {
                     return Promise.reject(`Something went wrong`);

@@ -19,7 +19,8 @@ public class EventController : Controller
 		return View();
 	}
 
-    public IActionResult Detail()
+    [Route("/Event/D/{slug}")]
+    public IActionResult DetailEvent()
     {
         return View();
     }
@@ -45,6 +46,20 @@ public class EventController : Controller
     }
 
     public IActionResult Revenue()
+    {
+        return View();
+    }
+
+    /**
+        * List all events
+    */
+    public IActionResult List()
+    {
+        return View();
+    }
+
+    [Route("/Event/Detail/{id}")]
+    public IActionResult Detail()
     {
         return View();
     }

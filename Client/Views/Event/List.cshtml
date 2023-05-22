@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Event List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-wrapper d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
+    <div class="breadcrumb-wrapper--inner d-flex flex-column-reverse">
+        <h1>Event List</h1>
+        <ol class="breadcrumb style-1">
+            <li class="breadcrumb-item"><a class="" asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">Event List</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="dsh-section-title d-flex align-items-center justify-content-between flex-wrap flex-md-nowrap">
+            <div>
+                <h5 class="card-title">Events</h5>
+                <h6 class="card-subtitle">This is a list of all events in the system.</h6>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="event_datatable" class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="event-list"></tbody>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/events/list.js"></script>
+}

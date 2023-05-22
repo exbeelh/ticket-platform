@@ -1,0 +1,93 @@
+@{
+    ViewData["Title"] = "Detail Event";
+}
+
+<!-- Page Title -->
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(dist/images/bg/02.jpg);">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-lg-6">
+                <h1 class="text-white">Detail Event</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detail Event</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Detail Event -->
+<section class="space-ptb bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-9">
+                <h2 id="event_title"></h2>
+                <a class="listing-loaction text-dark mb-3 d-block" href="#" id="event_type"> <i class="fas fa-map-marker-alt pe-2 text-primary"></i> </a>
+                <div class="d-sm-flex d-block">
+                    <span class="d-inline-block ms-0" id="event_datetime"></span>
+                </div>
+            </div>
+            <div class="col-md-3 text-md-end mt-3 mt-md-0">
+                <a class="btn btn-success" asp-area="" asp-controller="Order" asp-action="Booking"> <i class="fa fa-ticket pe-2"></i> Buy Tickets</a>
+                <!-- <h3 class="h2 d-block my-2 text-primary" id="event_ticket"> </h3> -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="listing-detail-page">
+                    <div class="listing-detail-box mb-3">
+                        <img class="img-fluid w-100" src="~/dist/images/gallery/01.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="listing-detail-page">
+                    <div class="listing-detail-box mb-3">
+                        <div class="mt-0">
+                            <div class="detail-title">
+                                <h5>Description</h5>
+                            </div>
+                            <p id="event_description"></p>
+                        </div>
+                    </div>
+                    <div class="listing-detail-box mb-3">
+                        <div class="detail-title">
+                            <h5>Organizer</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="avatar avatar-lg">
+                                    <img src="~/dist/images/avatar/01.jpg" class="img-fluid rounded-circle" alt="...">
+                                </div>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="px-md-4 mt-3 mt-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="mt-0" id="organizer_name"></h6>
+                                    </div>
+                                    <p id="organizer_description"></p>
+                                    <div class="d-flex">
+                                        <a class="bg-light text-dark border-radius px-3 py-1 font-sm" href="#"> <i class="fas fa-eye pe-1"></i> View Organizer Profile </a>
+                                        <a class="bg-success-soft text-success border-radius px-3 py-1 ms-4 font-sm" href="#"> <i class="far fa-heart pe-1"></i> Follow</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/events/detailEvent.js"></script>
+}

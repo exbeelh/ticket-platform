@@ -25,141 +25,158 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="sidebar mb-0">
-                    <div class="widget">
-                        <div class="widget-title">
-                            <h6> <i class="far fa-address-book"></i> Event Detail: </h6>
-                        </div>
-                        <div class="widget-content">
-                            <form class="row">
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">Event Title*</label>
-                                    <input type="email" class="form-control" placeholder="Event Title">
-                                </div>
-                                <div class="mb-3 col-lg-12 select-border">
-                                    <label class="form-label">Event Type*</label>
-                                    <select class="form-control basic-select">
-                                        <option value="value 01" selected="selected">Select Event Type</option>
-                                        <option value="value 02">Offline</option>
-                                        <option value="value 02">Online</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">Location*</label>
-                                    <input type="text" class="form-control" placeholder="Location">
-                                </div>
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">Online Event Link</label>
-                                    <input type="text" class="form-control" placeholder="Online Event Link">
-                                </div>
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">Note</label>
-                                    <textarea class="form-control" rows="4" placeholder="Note"></textarea>
-                                </div>
-                                <div class="mb-3 col-lg-6">
-                                    <label class="form-label">Start Date*</label>
-                                    <input type="date" class="form-control" placeholder="Start Date">
-                                </div>
-                                <div class="mb-3 col-lg-6">
-                                    <label class="form-label">End Date*</label>
-                                    <input type="date" class="form-control" placeholder="End Date">
-                                </div>
-                                <div class="mb-3 col-lg-6">
-                                    <label class="form-label">Start Time*</label>
-                                    <input type="time" class="form-control" placeholder="Start Time">
-                                </div>
-                                <div class="mb-3 col-lg-6">
-                                    <label class="form-label">End Time*</label>
-                                    <input type="time" class="form-control" placeholder="End Time">
-                                </div>
-                                <div class="mb-3 col-lg-12">
-                                    <div class="input-group file-upload">
-                                        <input type="file" class="form-control" id="customFile">
-                                        <label class="input-group-text" for="customFile">Upload Image </label>
-                                    </div>
-                                </div>
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">Description</label>
-                                    <textarea class="form-control" rows="5" placeholder="Description"></textarea>
-                                </div>
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">Address</label>
-                                    <textarea class="form-control" rows="3" placeholder="Address"></textarea>
-                                </div>
-                                <div class="mb-3 col-lg-12 select-border">
-                                    <label class="form-label">Event Category*</label>
-                                    <select class="form-control basic-select">
-                                        <option value="value 01" selected="selected">Select Event Category</option>
-                                        <option value="value 02">Music</option>
-                                        <option value="value 02">Concert</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3 col-lg-12 select-border">
-                                    <label class="form-label">Organizer Name*</label>
-                                    <select class="form-control basic-select">
-                                        <option value="value 01" selected="selected">Select Organizer Name</option>
-                                        <option value="value 02">AAAA</option>
-                                        <option value="value 02">BBBB</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="widget">
-                        <div class="widget-title">
-                            <h6> <i class="fas fa-map-marked-alt"></i> Create Tickets: </h6>
-                        </div>
-                        <div class="widget-content">
-                            <h6 class="font-md">What type of ticket would you like to start with?</h6>
-                            <div class="alert alert-info">If you would like to add more tickets click on "PAID Tickets/FREE Tickets" button</div>
-                            <div class="col-12 form-group">
-                                <a class="btn btn-dark mb-sm-0 mb-3" href="#">PAID Tickets</a>
-                                <a class="btn btn-secondary mb-sm-0 mb-3" href="#">FREE Tickets</a>
+                    <form class="needs-validation" novalidate id="form">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h6> <i class="far fa-address-book"></i> Event Detail: </h6>
                             </div>
-                            <form class="row mt-4 g-2 align-items-end">
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label">Ticket Name </label>
-                                    <input type="text" class="form-control" placeholder="Ticket Name">
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <label class="form-label">Ticket Qty </label>
-                                    <input type="text" class="form-control" placeholder="Ticket Qty">
-                                </div>
-                                <div class="mb-3 col-md-3">
-                                    <label class="form-label">Ticket Price </label>
-                                    <input type="text" class="form-control" placeholder="Ticket Price ">
-                                </div>
-                                <div class="form-group mb-3 col-md-1">
-                                    <a class="btn btn-light" href="#"> <i class="fas fa-close pe-0"></i> </a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="widget mb-0">
-                        <div class="widget-title">
-                            <h6> <i class="far fa-address-book"></i> Additional Settings: </h6>
-                        </div>
-                        <div class="widget-content">
-                            <form class="row">
-                                <div class="mb-3 col-lg-12">
-                                    <label class="form-label">YOUR EVENT IS PUBLISH OR DRAFT?</label>
-                                    <div class="toggle-button-cover">
-                                        <div class="button b2" id="button-status">
-                                            <input type="checkbox" class="checkbox" />
-                                            <div class="knobs">
-                                            <span></span>
-                                            </div>
-                                            <div class="layer"></div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="mb-3 col-lg-12">
+                                        <label class="form-label">Event Title*</label>
+                                        <input type="text" class="form-control" placeholder="Event Title" id="title" required="">
+                                        <div class="invalid-feedback">
+                                            Event Title is required field
                                         </div>
                                     </div>
+                                    <div class="mb-3 col-lg-12 select-border">
+                                        <label class="form-label">Event Type*</label>
+                                        <select class="form-control basic-select" name="type" id="type" required="">
+                                            <option value="0" selected>Offline</option>
+                                            <option value="1">Online</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Event Type is required field
+                                        </div>
+                                    </div>
+                                    <div class="offline">
+                                        <div class="mb-3 col-lg-12">
+                                            <label class="form-label">Address*</label>
+                                            <input type="text" name="address" class="form-control" id="address" placeholder="Address">
+                                            <div class="invalid-feedback">
+                                                Address is required field
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="online d-none">
+                                        <div class="mb-3 col-lg-12">
+                                            <label class="form-label">Online Event Link*</label>
+                                            <input type="text" name="link" class="form-control" placeholder="Online Event Link" id="link">
+                                            <div class="invalid-feedback">
+                                                Online Event Link is required field
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 col-lg-12">
+                                            <label class="form-label">Note*</label>
+                                            <textarea class="form-control" name="note" rows="4" placeholder="Note" id="note"></textarea>
+                                            <div class="invalid-feedback">
+                                                Note is required field
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-lg-6">
+                                        <label class="form-label">Start Date*</label>
+                                        <input type="date" name="start_date" class="form-control" placeholder="Start Date" id="start_date" required="">
+                                        <div class="invalid-feedback">
+                                            Start Date is required field
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-lg-6">
+                                        <label class="form-label">End Date*</label>
+                                        <input type="date" name="end_date" class="form-control" placeholder="End Date" id="end_date" required="">
+                                        <div class="invalid-feedback">
+                                            End Date is required field
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-lg-6">
+                                        <label class="form-label">Start Time*</label>
+                                        <input type="time" name="start_time" class="form-control" placeholder="Start Time" id="start_time" required="">
+                                        <div class="invalid-feedback">
+                                            Start Time is required field
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-lg-6">
+                                        <label class="form-label">End Time*</label>
+                                        <input type="time" name="end_time" class="form-control" placeholder="End Time" id="end_time" required="">
+                                        <div class="invalid-feedback">
+                                            End Time is required field
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-lg-12">
+                                        <div class="input-group file-upload">
+                                            <input type="file" name="image" class="form-control" id="customFile">
+                                            <label class="input-group-text" for="customFile">Upload Image </label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-lg-12">
+                                        <label class="form-label">Description</label>
+                                        <textarea class="form-control" name="description" rows="5" placeholder="Description" id="description"></textarea>
+                                    </div>
+                                    <div class="mb-3 col-lg-12 select-border">
+                                        <label class="form-label">Event Category*</label>
+                                        <select name="category_id" class="form-control basic-select-category" id="category_id">
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="mb-3 col-12 form-group">
-                                    <a class="btn btn-secondary" href="#">Save & Preview</a>
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h6> <i class="fas fa-map-marked-alt"></i> Create Tickets: </h6>
+                            </div>
+                            <div class="widget-content">
+                                <h6 class="font-md">What type of ticket would you like to start with?</h6>
+                                <div class="alert alert-info">If you would like to add more tickets click on "PAID Tickets/FREE Tickets" button</div>
+                                <div class="col-12 form-group">
+                                    <a class="btn btn-dark mb-sm-0 mb-3" href="#">PAID Tickets</a>
+                                    <a class="btn btn-secondary mb-sm-0 mb-3" href="#">FREE Tickets</a>
+                                </div>
+                                <div class="row mt-4 g-2 align-items-end">
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">Ticket Name </label>
+                                        <input type="text" class="form-control" placeholder="Ticket Name">
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label class="form-label">Ticket Qty </label>
+                                        <input type="text" class="form-control" placeholder="Ticket Qty">
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        <label class="form-label">Ticket Price </label>
+                                        <input type="text" class="form-control" placeholder="Ticket Price ">
+                                    </div>
+                                    <div class="form-group mb-3 col-md-1">
+                                        <a class="btn btn-light" href="#"> <i class="fas fa-close pe-0"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget mb-0">
+                            <div class="widget-title">
+                                <h6> <i class="far fa-address-book"></i> Additional Settings: </h6>
+                            </div>
+                            <div class="widget-content">
+                                <div class="row">
+                                    <div class="mb-3 col-lg-12">
+                                        <label class="form-label">YOUR EVENT IS PUBLISH OR DRAFT?</label>
+                                        <div class="toggle-button-cover">
+                                            <div class="button b2" id="button-status">
+                                                <input type="checkbox" name="is_publish" class="checkbox" id="is_publish"/>
+                                                <div class="knobs">
+                                                <span></span>
+                                                </div>
+                                                <div class="layer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col-12 form-group">
+                                        <button type="submit" class="btn btn-secondary" id="submit-btn">Save & Preview</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -170,4 +187,5 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/dist/js/select2/select2.full.js"></script>
     <script src="~/dist/js/dropzone/dropzone.js"></script>
+    <script src="~/js/events/create.js"></script>
 }

@@ -1,112 +1,163 @@
 @{
     ViewData["Title"] = "Detail Event";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<!-- Page Title -->
-<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
-    <div class="container">
-        <div class="row position-relative">
-            <div class="col-lg-6">
-                <h1 class="text-white">Detail Event</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Detail Event</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+<!-- Breadcrumbs -->
+<div class="breadcrumb-wrapper d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
+    <div class="breadcrumb-wrapper--inner d-flex flex-column-reverse">
+        <h1>Detail Event</h1>
+        <ol class="breadcrumb style-1">
+            <li class="breadcrumb-item"><a class="" asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">Detail Event</li>
+        </ol>
     </div>
-</section>
+    <div class="breadcrumb-controls mt-sm-0 mt-3">
+        <a asp-area="" asp-controller="Event" asp-action="List" class="btn btn-secondary">Kembali</a>
+    </div>
+</div>
 
-<!-- Detail Event -->
-<section class="space-ptb bg-light">
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col-md-9">
-                <h2>Honey Restaurant</h2>
-                <a class="listing-loaction text-dark mb-3 d-block" href="#"> <i class="fas fa-map-marker-alt pe-2 text-primary"></i> West Division Street</a>
-                <div class="d-sm-flex d-block">
-                    <span class="d-inline-block ms-0">Date</span>
-                </div>
-                <ul class="list-unstyled listing-detail-meta mb-0 mt-4">
-                    <li><a href="#"><i class="far fa-bookmark"></i> Bookmark</a></li>
-                    <li class="social-share"><a href="#"><i class="fas fa-share-alt"></i> Share</a>
-                        <div class="social-box">
-                            <ul class="list-unstyled">
-                                <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i>Facebook </a></li>
-                                <li><a class="twitter" href="#"><i class="fab fa-twitter"></i>twitter </a></li>
-                                <li><a class="linkedin" href="#"><i class="fab fa-linkedin-in"></i>linkedin </a></li>
-                                <li><a class="instagram" href="#"><i class="fab fa-instagram"></i>instagram </a></li>
-                            </ul>
+<div class="dsh-product-details">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="dsh-product-thumb">
+                        <!-- Main Thumb -->
+                        <div class="dsh-product-primary-thumb">
+                            <div class="thumb dsh-slider-item">
+                                <img src="http://via.placeholder.com/600" alt="detail">
+                            </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-3 text-md-end mt-3 mt-md-0">
-                <a class="btn btn-success" asp-area="" asp-controller="Order" asp-action="Booking"> <i class="fa fa-ticket pe-2"></i> Buy Tickets</a>
-                <h3 class="h2 d-block my-2 text-primary"> 199$</h3>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="listing-detail-page">
-                    <div class="listing-detail-box mb-3">
-                        <img class="img-fluid w-100" src="~/dist/images/gallery/01.jpg" alt="">
+                        <!-- /Main Thumb -->
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="col-lg-8">
+                    <div class="dsh-product-content">
+                        <h2 id="event_title"></h2>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="listing-detail-page">
-                    <div class="listing-detail-box mb-3">
-                        <div class="mt-0">
-                            <div class="detail-title">
-                                <h5>Description</h5>
-                            </div>
-                            <p>The other virtues practice in succession by Franklin were silence, order, resolution, frugality, industry, sincerity, Justice, moderation, cleanliness, tranquility, chastity and humility.</p>
-                            <p class="mb-0">From eight till twelve he worked at his trade. From twelve to one he read or overlooked his accounts and dined. From two to five he worked at his trade. The rest of the evening until 10 he spent in music, or diversion of some sort. This time is used also to put things in their places. In the last thing before retiring was examination of the day. At the age of 79, he ascribed his health to temperance; the acquisition of misfortune to industry and frugality;</p>
+                        <!-- Price -->
+                        <div class="dsh-price-wrapper">
+                            <p class="dsh-price">$8.99</p>
+                            <p class="dsh-discounted-price">$12.88</p>
                         </div>
-                    </div>
-                    <div class="listing-detail-box mb-3">
-                        <div class="detail-title">
-                            <h5>Location</h5>
-                        </div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15384.040823456671!2d144.96230200000002!3d-37.805673!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642df33fe61f5%3A0xae70b199abca592d!2sBell%20St%20%2F%20Brunswick%20St!5e1!3m2!1sen!2sin!4v1669099111026!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width: 100%; height: 300px;"></iframe>
-                    </div>
-                    <div class="listing-detail-box mb-3">
-                        <div class="detail-title">
-                            <h5>Organizer</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1">
-                                <div class="avatar avatar-lg">
-                                    <img src="~/dist/images/avatar/01.jpg" class="img-fluid rounded-circle" alt="...">
+                        <!-- /Price -->
+
+                        <hr class="dsh-seperator">
+
+                        <!-- Product Meta -->
+                        <ul class="product-meta">
+                            <li>
+                                <span>Event Type: </span>
+                                <div class="text-muted dsh-product-meta-item">
+                                    <span id="event_type"></span>
                                 </div>
-                            </div>
-                            <div class="col-md-11">
-                                <div class="px-md-4 mt-3 mt-md-0">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mt-0">Alice Williams</h6>
-                                    </div>
-                                    <p>Then work backwards to develop the plan. What steps are required to get you to the goals? Make the plan as detailed as possible. Try to visualize and then plan.</p>
-                                    <div class="d-flex">
-                                        <a class="bg-light text-dark border-radius px-3 py-1 font-sm" href="#"> <i class="fas fa-eye pe-1"></i> View Organizer Profile </a>
-                                        <a class="bg-success-soft text-success border-radius px-3 py-1 ms-4 font-sm" href="#"> <i class="far fa-heart pe-1"></i> Follow</a>
-                                    </div>
+                            </li>
+                            <li>
+                                <span>Date: </span>
+                                <div class="text-muted dsh-product-meta-item">
+                                    <span id="event_datetime"></span>
                                 </div>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
+                        <!-- /Product Meta -->
+
+                        <hr class="dsh-seperator">
+
+                        <ul class="product-meta">
+                            <li class="offline d-none">
+                                <span>Address: </span>
+                                <div class="text-muted dsh-product-meta-item">
+                                    <span id="event_address"></span>
+                                </div>
+                            </li>
+                            <li class="online d-none">
+                                <span>Online Event Link: </span>
+                                <div class="text-muted dsh-product-meta-item">
+                                    <span id="event_link"></span>
+                                </div>
+                            </li>
+                            <li class="online d-none">
+                                <span>Note: </span>
+                                <div class="text-muted dsh-product-meta-item">
+                                    <span id="event_note"></span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+    <!-- Additional Information -->
+    <div class="card dsh-product-additional-info">
+        <div class="card-header p-0">
+            <ul class="nav nav-bordered mb-0" id="bordered-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab-event-desc-tab" data-bs-toggle="pill" href="#tab-event-desc" role="tab" aria-controls="tab-event-desc" aria-selected="true">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-event_ticket-tab" data-bs-toggle="pill" href="#tab-event_ticket" role="tab" aria-controls="tab-event_ticket" aria-selected="false">Tickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-event-organizer-tab" data-bs-toggle="pill" href="#tab-event-organizer" role="tab" aria-controls="tab-event-organizer" aria-selected="false">Organizer</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="bordered-tabContent">
+                <div class="tab-pane fade show active" id="tab-event-desc" role="tabpanel" aria-labelledby="tab-event-desc-tab">
+                    <h5 class="card-title">Description</h5>
+                    <span id="event_description"></span>
+                </div>
+                <div class="tab-pane fade" id="tab-event_ticket" role="tabpanel" aria-labelledby="tab-event_ticket-tab">
+                    <h5 class="card-title">Additional Information</h5>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Attributes</th>
+                                <th scope="col">Values</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Color</th>
+                                <td>blue, red, yellow, green</td>
+                            </tr>
+                            <tr>
+                                <th>Capacity</th>
+                                <td>16gb, 32gb, 64gb, 128gb</td>
+                            </tr>
+                            <tr>
+                                <th>Dimensions (Inches)</th>
+                                <td>5.86 x 2.68 x 0.32 in</td>
+                            </tr>
+                            <tr>
+                                <th>Weight (g)</th>
+                                <td>155g</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="tab-event-organizer" role="tabpanel" aria-labelledby="tab-event-organizer-tab">
+                    <div class="media p-0">
+                        <img src="http://via.placeholder.com/30" class="rounded-circle" alt="widget">
+                        <div class="media-body">
+                            <h6 class="mb-0">Bobbie Cashly</h6>
+                            <span class="text-muted">Director and Producer</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Additional Information -->
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/events/detail.js"></script>
 }

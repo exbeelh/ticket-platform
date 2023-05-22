@@ -77,7 +77,7 @@
 
 .layer {
     width: 100%;
-    background-color: #ebf7fc;
+    background-color: #fcebeb;
     transition: 0.3s ease all;
     z-index: 1;
 }
@@ -106,12 +106,12 @@
 }
 
 #button-status .knobs:before {
-    content: 'PUBLISH';
+    content: 'DRAFT';
     left: 4px;
 }
 
 #button-status .knobs:after {
-    content: 'DRAFT';
+    content: 'PUBLISH';
     right: 4px;
 }
 
@@ -119,17 +119,17 @@
     width: 65px;
     left: 70px;
     height: 28px;
-    background-color: #03a9f4;
+    background-color: #f44336;
     z-index: 2;
 }
 
 #button-status .checkbox:checked + .knobs span {
     left: 4px;
-    background-color: #f44336;
+    background-color: #03a9f4;
 }
 
 #button-status .checkbox:checked ~ .layer {
-    background-color: #fcebeb;
+    background-color: #ebf7fc;
 }
 
 .sidebar .widget .dashboard-nav li a.active {
