@@ -10,6 +10,8 @@ public partial class Event
 
     public string Title { get; set; } = null!;
 
+    public string Slug { get; set; } = null!;
+
     public int Type { get; set; }
 
     public DateTime? StartDate { get; set; }

@@ -28,6 +28,6 @@ public partial class Attendee
     [JsonIgnore]
     public virtual Order? Order { get; set; }
 
-    [JsonIgnore] 
+    [JsonIgnore]
     public virtual Ticket? Ticket { get; set; }
 }

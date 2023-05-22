@@ -4,7 +4,7 @@ using Server.Repository.Interface;
 
 namespace Server.Repository.Data
 {
-    public class OrderStatusRepository : GeneralRepository<OrderStatuss, int, MyContext>, IOrderStatusRepository
+    public class OrderStatusRepository : GeneralRepository<OrderStatus, int, MyContext>, IOrderStatusRepository
     {
         public OrderStatusRepository(MyContext context) : base(context)
         {

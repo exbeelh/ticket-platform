@@ -10,6 +10,8 @@ public partial class Ticket
 
     public int? EventId { get; set; }
 
+    public string? Name { get; set; }
+
     public int Type { get; set; }
 
     public int QuantityAvaible { get; set; }

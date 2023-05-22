@@ -12,9 +12,9 @@ public partial class Account
 
     public string Password { get; set; } = null!;
 
-    [JsonIgnore] 
+    [JsonIgnore]
     public virtual ICollection<AccountRole> AccountRoles { get; set; } = new List<AccountRole>();
 
-    [JsonIgnore] 
+    [JsonIgnore]
     public virtual User? User { get; set; }
 }

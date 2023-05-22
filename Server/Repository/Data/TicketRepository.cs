@@ -20,10 +20,10 @@ namespace Server.Repository.Data
         public async Task<int> Total(int id)
         {
             var totalTicketsSold = await (from ticket in _context.Tickets
-                                         join orderItem in _context.OrderItems on ticket.Id equals orderItem.Id
-                                         join order in _context.Orders on orderItem.OrderId equals order.Id
-                                         where order.EventId == id
-                                         select orderItem.Quantity).SumAsync();
+                                          join orderItem in _context.OrderItems on ticket.Id equals orderItem.Id
+                                          join order in _context.Orders on orderItem.OrderId equals order.Id
+                                          where order.EventId == id
+                                          select orderItem.Quantity).SumAsync();
 
             return (int)totalTicketsSold;
         }

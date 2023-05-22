@@ -33,7 +33,7 @@ public partial class Order
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
     [JsonIgnore]
-    public virtual OrderStatuss? OrderStatus { get; set; }
+    public virtual OrderStatus? OrderStatus { get; set; }
 
     [JsonIgnore]
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();

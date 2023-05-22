@@ -12,9 +12,9 @@ public partial class AccountRole
 
     public int? RoleId { get; set; }
 
-    [JsonIgnore] 
+    [JsonIgnore]
     public virtual Account? Account { get; set; }
 
-    [JsonIgnore] 
+    [JsonIgnore]
     public virtual Role? Role { get; set; }
 }

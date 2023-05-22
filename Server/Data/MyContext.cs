@@ -32,7 +32,7 @@ public partial class MyContext : DbContext
 
     public virtual DbSet<OrderItem> OrderItems { get; set; }
 
-    public virtual DbSet<OrderStatuss> OrderStatusses { get; set; }
+    public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
 
     public virtual DbSet<Organizer> Organizers { get; set; }
 
@@ -50,7 +50,7 @@ public partial class MyContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83FF91DFDB8");
+            entity.HasKey(e => e.Id).HasName("PK__Accounts__3213E83F796435E2");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Password)
@@ -66,7 +66,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<AccountRole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83F30339B41");
+            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83F5F96162F");
 
             entity.ToTable("Account_Roles");
 
@@ -85,7 +85,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Attendee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83F52A6EA01");
+            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83F3A87A80E");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Code)
@@ -123,7 +123,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83FBD783EE9");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F1E3627A4");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -138,7 +138,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Country>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F65A7BFC7");
+            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F87FD1514");
 
             entity.Property(e => e.Id)
                 .HasMaxLength(3)
@@ -152,7 +152,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F41439451");
+            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F17E8339E");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
@@ -180,6 +180,10 @@ public partial class MyContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("note");
             entity.Property(e => e.OrganizerId).HasColumnName("organizer_id");
+            entity.Property(e => e.Slug)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("slug");
             entity.Property(e => e.StartDate)
                 .HasColumnType("date")
                 .HasColumnName("start_date");
@@ -208,7 +212,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F03A0A7AB");
+            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83F520E50D5");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Amount)
@@ -241,7 +245,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F9465E9C9");
+            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F4901892D");
 
             entity.ToTable("Order_Items");
 
@@ -260,11 +264,11 @@ public partial class MyContext : DbContext
                 .HasConstraintName("FK__Order_Ite__order__6477ECF3");
         });
 
-        modelBuilder.Entity<OrderStatuss>(entity =>
+        modelBuilder.Entity<OrderStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83FB8C4FCDC");
+            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83F4CEBB0D8");
 
-            entity.ToTable("Order_Statusses");
+            entity.ToTable("Order_Statuses");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -275,7 +279,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Organizer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83FC3149F2C");
+            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83F5F290024");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description)
@@ -312,7 +316,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F09CCAC77");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83FD3E4CC8B");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CheckAt)
@@ -340,7 +344,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F075D9101");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F73C30943");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -351,10 +355,14 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F23E3BD34");
+            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83FC7D1304C");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EventId).HasColumnName("event_id");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("name");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(8, 2)")
                 .HasColumnName("price");
@@ -374,7 +382,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<TicketOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FA01A6B49");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FD70C14F9");
 
             entity.ToTable("Ticket_Orders");
 
@@ -384,22 +392,20 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Ticket_Or__order__787EE5A0");
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.TicketId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Ticket_Or__order__778AC167");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F116544AA");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F9387518B");
 
-            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B51492F930C3C4").IsUnique();
+            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B51492BE7207C8").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61643DEBD64F").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E6164C4360CE6").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)

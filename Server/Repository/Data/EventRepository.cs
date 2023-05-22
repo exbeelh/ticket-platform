@@ -1,4 +1,5 @@
-﻿using Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.Models;
 using Server.Repository.Interface;
 using Server.ViewModel;
@@ -7,8 +8,11 @@ namespace Server.Repository.Data
 {
     public class EventRepository : GeneralRepository<Event, int, MyContext>, IEventRepository
     {
-        public EventRepository(MyContext context) : base(context)
+        private readonly ICategoryRepository _categoryRepository;
+
+        public EventRepository(MyContext context, ICategoryRepository categoryRepository) : base(context)
         {
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IEnumerable<EventVM>> Aprove()
@@ -21,6 +25,7 @@ namespace Server.Repository.Data
                 {
                     Title = e.Title,
                     Type = e.Type,
+                    Slug = e.Slug,
                     StartDate = e.StartDate,
                     EndDate = e.EndDate,
                     StartTime = e.StartTime.ToString(),
@@ -43,6 +48,7 @@ namespace Server.Repository.Data
                 {
                     Title = e.Title,
                     Type = e.Type,
+                    Slug = e.Slug,
                     StartDate = e.StartDate,
                     EndDate = e.EndDate,
                     StartTime = e.StartTime.ToString(),
@@ -55,19 +61,26 @@ namespace Server.Repository.Data
             return getBanned!;
         }
 
-        public Task<IEnumerable<EventVM>> Cancel(int id)
+        public async Task<IEnumerable<EventVM>> Category(int id)
         {
-            throw new NotImplementedException();
-        }
+            var filteredEvents = from events in _context.Events
+                                 join category in _context.Categories on events.CategoryId equals category.Id
+                                 where events.CategoryId == id
+                                 select new EventVM
+                                 {
+                                     Title = events.Title,
+                                     Type = events.Type,
+                                     Slug = events.Slug,
+                                     StartDate = events.StartDate,
+                                     EndDate = events.EndDate,
+                                     StartTime = events.StartTime.ToString(),
+                                     EndTime = events.EndTime.ToString(),
+                                     Image = events.Image,
+                                     Description = events.Description,
+                                     Address = events.Address
+                                 };
 
-        public Task<IEnumerable<EventVM>> Category()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<EventVM>> Payment(int id)
-        {
-            throw new NotImplementedException();
+            return await filteredEvents.ToListAsync();
         }
 
         public async Task<IEnumerable<EventVM>> Search(string query)
@@ -80,6 +93,7 @@ namespace Server.Repository.Data
                 {
                     Title = e.Title,
                     Type = e.Type,
+                    Slug = e.Slug,
                     StartDate = e.StartDate,
                     EndDate = e.EndDate,
                     StartTime = e.StartTime.ToString(),
@@ -97,10 +111,11 @@ namespace Server.Repository.Data
             var getEvent = await GetAllAsync();
             var dateNow = DateTime.Now;
 
-            var getUpcoming = getEvent.Where(e => e.StartDate > dateNow).Select(e => new EventVM
+            var getUpcoming = getEvent.Where(e => e.StartDate > dateNow && e.StatusId == 1).Select(e => new EventVM
             {
                 Title = e.Title,
                 Type = e.Type,
+                Slug = e.Slug,
                 StartDate = e.StartDate,
                 EndDate = e.EndDate,
                 StartTime = e.StartTime.ToString(),

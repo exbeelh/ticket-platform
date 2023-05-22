@@ -6,6 +6,8 @@
         
         public int Type { get; set; }
 
+        public string Slug { get; set; } = null!;
+
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }

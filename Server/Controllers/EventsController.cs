@@ -42,6 +42,18 @@ namespace Server.Controllers
             });
         }
 
+        [HttpGet("Category/{id}")]
+        public async Task<ActionResult> Category(int id)
+        {
+            var entity = await _repository.Category(id);
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = entity
+            });
+        }
+
         [HttpPut("Approve/{id}")]
         public async Task<ActionResult> Aprove(int id)
         {
