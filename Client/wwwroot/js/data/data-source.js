@@ -674,4 +674,28 @@ class DataSource {
                 return Promise.reject(error);
             });
     }
+
+    // Orders
+    static buyTickets(order) {
+        return fetch(`${BASE_URL}api/orders/buytickets`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order),
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(responseJson);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
 }

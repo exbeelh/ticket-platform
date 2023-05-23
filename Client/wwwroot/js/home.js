@@ -26,7 +26,7 @@ const getCategories = async () => {
         result.data.forEach((category) => {
             categories += `
                 <li class="category-item-01">
-                    <a href="#">
+                    <a href="event" data-categoryId="${category.id}">
                         <div class="category-icon">
                             <img class="img-fluid" src="dist/images/category/01.jpg" alt="">
                         </div>
@@ -85,7 +85,6 @@ const renderResult = (result) => {
             </div>
         `;
     });
-
 
     const upcomingEventElement = document.querySelector('#upcoming-events');
     upcomingEventElement.innerHTML = upcomingEvent;
