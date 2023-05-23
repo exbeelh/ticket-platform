@@ -101,21 +101,22 @@ const renderResult = (result) => {
                 <div class="row border-bottom pb-4 mb-4">
                     <input type="hidden" name="order_id" value="${data.id}">
                     <input type="hidden" name="event_id" value="${event.id}">
+                    <input type="hidden" name="transaction_id" value="${data.transationId}">
                     <input type="hidden" name="ticket_id[]" value="${ticket.ticketOrder.ticketId}">
                     <div class="mb-3 text-center col-lg-12">
                         <h6>${ticket.orderItem.id}</h6>
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label class="form-label">First name</label>
-                        <input type="text" name="firstname[]" class="form-control" placeholder="First name" required="">
+                        <input type="text" name="firstname[]" class="form-control" placeholder="First name" required="" value="${user.firstname}">
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label class="form-label">Last name</label>
-                        <input type="text" name="lastname[]" class="form-control" placeholder="Last name">
+                        <input type="text" name="lastname[]" class="form-control" placeholder="Last name" value="${user.lastname}">
                     </div>
                     <div class="mb-3 col-lg-12">
                         <label class="form-label">Email </label>
-                        <input type="email" name="email[]" class="form-control" placeholder="Email" required="">
+                        <input type="email" name="email[]" class="form-control" placeholder="Email" required="" value="${user.email}">
                     </div>
                 </div>
             `);
@@ -131,44 +132,46 @@ const handleBooking = async () => {
     let submitButton = $('#form button[type=submit]');
     let form = $('#form');
 
-    form.submit(async function (event) {
-        event.preventDefault();
+    submitButton.attr('disabled', true);
+    submitButton.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`);
 
-        submitButton.attr('disabled', true);
-        submitButton.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`);
+    let data = form.serializeArray();
+    let event_id = '';
+    let order_id = '';
+    let transaction_id = '';
+    let tickets = [];
+    let firstnames = [];
+    let lastnames = [];
+    let emails = [];
+    let attendees = [];
 
-        let data = form.serializeArray();
-        let event_id = '';
-        let order_id = '';
-        let tickets = [];
-        let firstnames = [];
-        let lastnames = [];
-        let emails = [];
-        let attendees = [];
+    data.forEach((item) => {
+        if(item.name === 'event_id') event_id = item.value;
+        if(item.name === 'order_id') order_id = item.value;
+        if(item.name === 'transaction_id') transaction_id = item.value;
+        if(item.name === 'ticket_id[]') tickets.push(item.value);
+        if(item.name === 'firstname[]') firstnames.push(item.value);
+        if(item.name === 'lastname[]') lastnames.push(item.value);
+        if(item.name === 'email[]') emails.push(item.value);
+    });
 
-        data.forEach((item) => {
-            if(item.name === 'event_id') event_id = item.value;
-            if(item.name === 'order_id') order_id = item.value;
-            if(item.name === 'ticket_id[]') tickets.push(item.value);
-            if(item.name === 'firstname[]') firstnames.push(item.value);
-            if(item.name === 'lastname[]') lastnames.push(item.value);
-            if(item.name === 'email[]') emails.push(item.value);
+    for(let i = 0; i < tickets.length; i++) {
+        attendees.push({
+            eventId:  parseInt(event_id),
+            ticketId: parseInt(tickets[i]),
+            firstname: firstnames[i],
+            lastname: lastnames[i],
+            email: emails[i]
         });
+    }
 
-        for(let i = 0; i < tickets.length; i++) {
-            attendees.push({
-                eventId: event_id,
-                orderId: order_id,
-                ticketId: tickets[i],
-                firstname: firstnames[i],
-                lastname: lastnames[i],
-                email: emails[i]
-            });
-        }
+    let payloads = {
+        orderId: parseInt(order_id),
+        attendees: attendees
+    }
 
-        await saveBooking(attendees).then((result) => {
-            console.log(result);
-        });
+    await saveBooking(payloads).then((result) => {
+        window.location.href = '/payment/' + transaction_id;
     });
 };
 

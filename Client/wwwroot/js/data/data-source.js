@@ -719,4 +719,49 @@ class DataSource {
                 return Promise.reject(error);
             });
     }
+
+    static saveBooking(booking) {
+        return fetch(`${BASE_URL}api/orders/booking`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(booking),
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    // Payment
+    static uploadPayment(payment) {
+        return fetch(`${BASE_URL}api/payments/upload`, {
+            method: 'POST',
+            body: payment,
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                console.log("Errorrr : ", error);
+                return Promise.reject(error);
+            });
+    }
 }

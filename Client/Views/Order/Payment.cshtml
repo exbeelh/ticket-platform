@@ -44,18 +44,29 @@
                         <div class="detail-title">
                             <h5>Payment Detail</h5>
                         </div>
+                        <div class="row border-bottom pb-4 mb-4">
+                            <div class="col-12">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2 d-flex"><strong class="text-dark d-inline-block w-25 me-2">Payment By:</strong> <span class="ms-auto" id="payment_by"></span></li>
+                                    <li class="mb-2 d-flex"><strong class="text-dark d-inline-block w-25 me-2">Email:</strong> <span class="ms-auto" id="email"></span></li>
+                                    <li class="mb-2 d-flex"><strong class="text-dark d-inline-block w-25 me-2">Total Paid Amount:</strong> <span class="ms-auto" id="total_paid_amount"></span></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="mb-3 col-lg-12">
-                                <div class="input-group file-upload">
-                                    <input type="file" class="form-control" id="customFile">
-                                    <label class="input-group-text" for="customFile">Upload Image </label>
+                            <form id="form" class="needs-validation" novalidate id="form" enctype="multipart/form-data">
+                                <input type="hidden" name="order_id" id="order_id">
+                                <div class="mb-3 col-lg-12">
+                                    <div class="input-group file-upload">
+                                        <input type="file" name="imageFile" class="form-control" id="customFile">
+                                        <label class="input-group-text" for="customFile">Upload Image</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mb-3 col-lg-12">
-                                <a asp-area="" asp-controller="Order" asp-action="Cancel" class="btn btn-light">Cancel</a>
-                                <a asp-area="" asp-controller="Order" asp-action="Success" class="btn btn-primary">Send Payment</a>
-                                <!-- <button type="submit" class="btn btn-primary">Send Payment</button> -->
-                            </div>
+                                <div class="mb-3 col-lg-12">
+                                    <a asp-area="" asp-controller="Order" asp-action="Cancel" class="btn btn-light">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Send Payment</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -82,4 +93,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/orders/payment.js"></script>
 }
