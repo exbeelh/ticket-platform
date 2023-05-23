@@ -14,6 +14,7 @@ public class OrderController : Controller
         return View();
     }
 
+    [Route("/Booking/{transactionId}")]
 	public IActionResult Booking()
 	{
 		return View();

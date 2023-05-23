@@ -688,10 +688,31 @@ class DataSource {
                 return response.json();
             })
             .then((responseJson) => {
-                if (responseJson && responseJson.status === 200) {
+                if (responseJson) {
                     return Promise.resolve(responseJson);
                 } else {
-                    return Promise.reject(responseJson);
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getBookingByTransactionId(id) {
+        return fetch(`${BASE_URL}api/orders/booking/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
                 }
             })
             .catch((error) => {

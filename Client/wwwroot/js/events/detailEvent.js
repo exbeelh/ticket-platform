@@ -30,8 +30,19 @@ const getTickets = async (id) => {
     }
 };
 
-const buyTickets = async () => {
+const buyTickets = async (order) => {
+    try {
+        const result = await DataSource.buyTickets(order);
 
+        if(result.code === 400) {
+            alert(result.message);
+            return;
+        }
+
+        return result.data;
+    } catch (message) {
+        alert(message);
+    }
 };
 
 const renderDetail = (result) => {
@@ -157,22 +168,9 @@ const events = () => {
             ticketOrders: ticketOrders
         };
 
-        let result = await DataSource.buyTickets(order);
-
-        if(result.code === 400) {
-            alert(result.message);
-            submitButton.attr('disabled', false);
-            submitButton.html('Buy Tickets');
-            return;
-        }
-
-        alert('Success buy tickets').then(() => {
-            window.location.href = '/order/booking/' + result.data.transactionId;
+        await buyTickets(order).then((result) => {
+            window.location.href = '/booking/' + result.transationId;
         });
-
-        // localStorage.setItem('ticketData', JSON.stringify(ticketData));
-
-        // window.location.href = '/checkout';
     });
 };
 
