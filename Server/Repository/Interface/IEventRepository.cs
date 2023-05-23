@@ -10,6 +10,7 @@ namespace Server.Repository.Interface
         Task<IEnumerable<EventVM>> Ban();
         Task<IEnumerable<EventVM>> Category(int id);
         Task<IEnumerable<EventVM>> Search(string query);
+        Task<Event> Detail(string slug);
         Task<EventTicketVM> Ticket(int id);
     }
 }

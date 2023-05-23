@@ -42,6 +42,18 @@ namespace Server.Controllers
             });
         }
 
+        [HttpGet("Details/{slug}")]
+        public async Task<ActionResult> Details(string slug)
+        {
+            var entity = await _repository.Detail(slug);
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = entity
+            });
+        }
+
         [HttpGet("Category/{id}")]
         public async Task<ActionResult> Category(int id)
         {

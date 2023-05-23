@@ -155,5 +155,14 @@ namespace Server.Repository.Data
 
             return await filteredEvents.ToListAsync();
         }
+
+        public async Task<Event> Detail(string slug)
+        {
+            var data = await (from events in _context.Events
+                              where events.Slug == slug).FirstOrDefaultAsync();
+
+            return data!;
+                       
+        }
     }
 }
