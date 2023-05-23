@@ -183,12 +183,6 @@ const main = () => {
     let url = window.location.pathname;
     let id = url.substring(url.lastIndexOf('/') + 1);
     getEvent(id);
-
-    Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-    );
 };
 
 main();
