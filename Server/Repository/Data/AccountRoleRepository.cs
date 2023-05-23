@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Server.Data;
+﻿using Server.Data;
 using Server.Models;
 using Server.Repository.Interface;
 
@@ -15,12 +14,12 @@ namespace Server.Repository.Data
 
         public async Task<IEnumerable<string>> GetRolesByIdAsync(int id)
         {
-            var getAccountRoleByAccountNik = GetAllAsync().Result.Where(x => x.AccountId == id);
+            var getAccountRoleByUserId = GetAllAsync().Result.Where(x => x.AccountId == id);
             var getRole = await _roleRepository.GetAllAsync();
 
-            var getRoleById = from ar in getAccountRoleByAccountNik
-                               join r in getRole on ar.RoleId equals r.Id
-                               select r.Name;
+            var getRoleById = from ar in getAccountRoleByUserId
+                              join r in getRole on ar.RoleId equals r.Id
+                              select r.Name;
 
             return getRoleById;
         }

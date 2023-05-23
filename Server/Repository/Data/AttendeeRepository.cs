@@ -2,7 +2,7 @@
 using Server.Data;
 using Server.Models;
 using Server.Repository.Interface;
-using Server.ViewModel;
+using Server.ViewModels;
 using System.Net.Sockets;
 
 namespace Server.Repository.Data

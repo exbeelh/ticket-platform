@@ -5,7 +5,7 @@ using Server.Base;
 using Server.Handlers.Contracts;
 using Server.Models;
 using Server.Repository.Interface;
-using Server.ViewModel;
+using Server.ViewModels;
 using System.Net;
 using System.Security.Claims;
 
@@ -13,6 +13,7 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class AccountsController : BaseController<IAccountRepository, Account, int>
     {
         private readonly ITokenService _tokenService;
@@ -76,14 +77,14 @@ namespace Server.Controllers
                     });
                 }
 
-                var userdata = await _repository.GetUserDataAsync(loginVM.Email);
+                var userData = await _repository.GetUserDataAsync(loginVM.Email);
 
                 var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Email, userdata.Email),
-                    new Claim(ClaimTypes.Name, userdata.Email),
-                    new Claim(ClaimTypes.NameIdentifier, userdata.FullName),
-                    new Claim(ClaimTypes.NameIdentifier, userdata.Id.ToString())
+                    new Claim(ClaimTypes.Email, userData.Email),
+                    new Claim(ClaimTypes.Name, userData.Email),
+                    new Claim(ClaimTypes.NameIdentifier, userData.FullName),
+                    new Claim("ID", userData.Id.ToString())
                 };
 
                 var getRoles = await _repository.GetRoleByEmailAsync(loginVM.Email);
@@ -94,8 +95,6 @@ namespace Server.Controllers
 
                 var accessToken = _tokenService.GenerateAccessToken(claims);
                 var refreshToken = _tokenService.GenerateRefreshToken();
-
-                // await _repository.UpdateToken(userdata.Email, refreshToken, DateTime.Now.AddDays(1));
 
                 var generatedToken = new TokenResponseVM
                 {
@@ -112,8 +111,10 @@ namespace Server.Controllers
                     data = generatedToken
                 });
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
+
                 return BadRequest(new
                 {
                     code = StatusCodes.Status400BadRequest,

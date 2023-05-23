@@ -1,7 +1,7 @@
 ﻿using Server.Data;
 using Server.Models;
 using Server.Repository.Interface;
-using Server.ViewModel;
+using Server.ViewModels;
 
 namespace Server.Repository.Data
 {

@@ -1,4 +1,4 @@
-﻿namespace Server.ViewModel
+﻿namespace Server.ViewModels
 {
     public class RevenueVM
     {

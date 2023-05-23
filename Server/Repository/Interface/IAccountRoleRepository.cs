@@ -4,6 +4,6 @@ namespace Server.Repository.Interface
 {
     public interface IAccountRoleRepository : IGeneralRepository<AccountRole, int>
     {
-        Task<string> GetRolesByIdAsync(int id);
+        Task<IEnumerable<string>> GetRolesByIdAsync(int id);
     }
 }

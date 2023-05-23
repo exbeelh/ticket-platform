@@ -2,7 +2,7 @@
 using Server.Handlers;
 using Server.Models;
 using Server.Repository.Interface;
-using Server.ViewModel;
+using Server.ViewModels;
 
 namespace Server.Repository.Data
 {
@@ -42,7 +42,7 @@ namespace Server.Repository.Data
                                                 account => account.UserId,
                                                 (u, a) => new UserDataVM
                                                 {
-                                                    Id = a.UserId,
+                                                    Id = u.Id,
                                                     FullName = u.Firstname + " " + u.Lastname,
                                                     Email = u.Email
                                                 })

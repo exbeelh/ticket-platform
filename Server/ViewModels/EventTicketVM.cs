@@ -1,9 +1,11 @@
-﻿namespace Server.ViewModel
+﻿using Server.Models;
+
+namespace Server.ViewModels
 {
-    public class EventVM
+    public class EventTicketVM
     {
         public string Title { get; set; } = null!;
-        
+
         public int Type { get; set; }
 
         public string Slug { get; set; } = null!;
@@ -23,5 +25,7 @@
         public string? Description { get; set; }
 
         public string? Address { get; set; }
+
+        public ICollection<Ticket>? TicketList { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Server.Models;
-using Server.ViewModel;
+using Server.ViewModels;
 
 namespace Server.Repository.Interface
 {

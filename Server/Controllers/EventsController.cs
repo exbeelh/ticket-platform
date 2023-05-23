@@ -4,7 +4,7 @@ using Server.Base;
 using Server.Models;
 using Server.Repository.Data;
 using Server.Repository.Interface;
-using Server.ViewModel;
+using Server.ViewModels;
 using System.Net;
 
 namespace Server.Controllers

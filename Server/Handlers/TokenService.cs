@@ -19,6 +19,14 @@ public class TokenService : ITokenService
     public string GenerateAccessToken(IEnumerable<Claim> claims)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+
+        if (securityKey.KeySize < 256)
+        {
+            var originalKey = securityKey.Key;
+            Array.Resize(ref originalKey, 32);
+            securityKey = new SymmetricSecurityKey(originalKey);
+        }
+
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(
             issuer: _configuration["JWT:Issuer"],
