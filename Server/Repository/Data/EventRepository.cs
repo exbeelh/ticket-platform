@@ -159,7 +159,8 @@ namespace Server.Repository.Data
         public async Task<Event> Detail(string slug)
         {
             var data = await (from events in _context.Events
-                              where events.Slug == slug).FirstOrDefaultAsync();
+                              where events.Slug == slug
+                              select events).FirstOrDefaultAsync();
 
             return data!;
                        
