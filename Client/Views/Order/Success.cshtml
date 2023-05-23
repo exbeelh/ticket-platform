@@ -25,10 +25,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="bg-white p-4 shadow-sm border-radius">
-                    <h4 class="mb-4">Nama Event</h4>
+                    <h4 class="mb-4" id="event_title"></h4>
                     <h6 class="mb-4">Your order has been saved to My Tickets</h6>
                     <div class="mb-4">
-                        <a href="">Order Id : 5RL97D15P9</a> 2 Tickets
+                        <a href="">Order Id : <span id="transaction_id"></span></a> <span id="total_ticket"></span> Tickets
                     </div>
                     <a asp-area="" asp-controller="Order" asp-action="Index" class="btn btn-secondary">GO TO MY TICKETS</a>
                 </div>
@@ -39,4 +39,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/orders/success.js"></script>
 }

@@ -28,6 +28,7 @@ const renderResult = (result) => {
     let user = data.user;
 
     $('#order_id').val(data.id);
+    $('#transaction_id').val(data.transactionId);
     $('#payment_by').text(user.firstname + ' ' + user.lastname);
     $('#email').text(user.email);
     $('#total_paid_amount').text(formatRupiah(data.amount));
@@ -60,7 +61,7 @@ const events = () => {
                     formData.append('imageFile', $('#customFile')[0].files[0]);
 
                     await uploadPayment(formData).then((result) => {
-                        console.log(result);
+                       window.location.href = '/orders/success/' + $('#transaction_id').val();
                     });
                 }
 

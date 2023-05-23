@@ -565,7 +565,7 @@ class DataSource {
     }
 
     static insertEvent(event) {
-        return fetch(`${BASE_URL}api/events`, {
+        return fetch(`${BASE_URL}api/events/request`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

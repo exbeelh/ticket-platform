@@ -1,4 +1,67 @@
+let index = 1;
+
+const addTicket = (type) => {
+    $('#tickets').append(`
+        <div class="row mt-2 g-2 align-items-stretch" id="ticket_${index}">
+            <div class="mb-3 col-md-4">
+                <label class="form-label">Ticket Name </label>
+                <input type="text" class="form-control" name="ticket_name[]" placeholder="Ticket Name" id="ticket_name_${index}" required="">
+                <div class="invalid-feedback">
+                    Ticket Name is required field
+                </div>
+            </div>
+            <div class="mb-3 col-md-4">
+                <label class="form-label">Ticket Qty </label>
+                <input type="text" class="form-control" name="ticket_qty[]" placeholder="Ticket Qty" id="ticket_qty_${index}" required="">
+                <div class="invalid-feedback">
+                    Ticket Quantity is required field
+                </div>
+            </div>
+            <div class="mb-3 col-md-3">
+                <label class="form-label">Ticket Price </label>
+                <input type="text" class="form-control ticket_price_${index}" name="ticket_price[]" placeholder="Ticket Price" required="">
+                <div class="invalid-feedback">
+                    Ticket Price is required field
+                </div>
+                <small>Buyer total : <span id="total_${index}"></span></small>
+            </div>
+            <div class="form-group mb-3 col-md-1">
+                <button type="button" class="btn btn-light" onclick="removeTicket(${index})"> <i class="fas fa-close pe-0"></i></button>
+            </div>
+        </div>
+    `);
+
+    if (type === 'free') {
+        $(`.ticket_price_${index}`).attr('disabled', true);
+        $(`.ticket_price_${index}`).val("FREE");
+    }
+
+    index++;
+};
+
+const removeTicket = (index) => {
+    $(`#ticket_${index}`).remove();
+};
+
 const insertEvent = async () => {
+    let tickets = [];
+    $('input[name="ticket_name[]"]').each((index, element) => {
+        const name = $(element).val();
+        const qty = $('input[name="ticket_qty[]"]').eq(index).val();
+        const price = $('input[name="ticket_price[]"]').eq(index).val() == 'FREE' ? 0 : $('input[name="ticket_price[]"]').eq(index).val();
+        const type = price === 'FREE' ? 0 : 1;
+
+        tickets.push({
+            eventId: 1,
+            name: name,
+            type: type,
+            quantityAvaible: qty,
+            quantitySold: 0,
+            price: price,
+            userId: 1,
+        });
+    });
+
     let event = {
         title: $('#title').val(),
         slug: $('#title').val().toLowerCase().replace(/ /g, '-'),
@@ -15,22 +78,20 @@ const insertEvent = async () => {
         description: $('#description').val(),
         isPublish: $('#is_publish').is(':checked') ? 1 : 0,
         userId: 1,
-        organizerId: 1,
-        statusId: 0,
-        views: 1,
+        tickets: tickets,
     };
 
     try {
         console.log(event);
         await DataSource.insertEvent(event);
-        alert('Event has been added');
-        // toastr.success('Event has been added', 'Success');
 
-        // $('#categoryModal').modal('hide');
-        // reloadData();
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Event has been added, please wait for admin approval',
+        });
     } catch (message) {
         alert(message);
-        // toastr.error(message, 'Oops...');
     }
 };
 
@@ -46,7 +107,6 @@ const events = () => {
                 event.stopPropagation();
 
                 if (form.checkValidity() === true) {
-                    console.log('add');
                     await insertEvent();
                 }
 
@@ -101,6 +161,11 @@ const events = () => {
             },
             cache: true,
         },
+    });
+
+    $('#tickets').on('keyup', 'input[name="ticket_price[]"]', function () {
+        const total = $(this).val() * 0.1;
+        $(this).parent().parent().find('span').html(total);
     });
 };
 

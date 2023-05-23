@@ -31,6 +31,7 @@ public class OrderController : Controller
 		return View();
 	}
 
+    [Route("/Order/Success/{transactionId}")]
 	public IActionResult Success() // Order ID
 	{
 		return View();
