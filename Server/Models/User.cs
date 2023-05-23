@@ -33,7 +33,7 @@ public partial class User
     public string? CountryId { get; set; }
 
     [JsonIgnore]
-    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
+    public virtual Account? Account { get; set; }
 
     [JsonIgnore]
     public virtual Country? Country { get; set; }

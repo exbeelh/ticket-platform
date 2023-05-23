@@ -54,6 +54,18 @@ namespace Server.Controllers
             });
         }
 
+        [HttpGet("Tickets/{id}")]
+        public async Task<ActionResult> Ticket(int id)
+        {
+            var entity = await _repository.Ticket(id);
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = entity
+            });
+        }
+
         [HttpPut("Approve/{id}")]
         public async Task<ActionResult> Aprove(int id)
         {
