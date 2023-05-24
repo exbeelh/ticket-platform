@@ -1,4 +1,4 @@
-const BASE_URL = 'https://localhost:7291/';
+const BASE_URL = 'https://localhost:7292/';
 
 class DataSource {
     // Category
@@ -567,10 +567,7 @@ class DataSource {
     static insertEvent(event) {
         return fetch(`${BASE_URL}api/events/request`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(event),
+            body: event,
         })
             .then((response) => {
                 return response.json();

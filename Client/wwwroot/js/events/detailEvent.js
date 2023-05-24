@@ -83,7 +83,7 @@ const renderDetail = (result) => {
                             <input type="hidden" name="tid[]" value="${ticket.price}">
                             <span class="ticket-price">
                                 <small>${ticketDetail}</small>
-                                <small class="ticket-remaiming badge bg-danger">${ticket.quantityAvaible} Remaining</small>
+                                <small class="ticket-remaiming badge bg-danger">${ticket.quantityAvailable} Remaining</small>
                             </span>
                         </div>
                         <div class="">

@@ -52,43 +52,55 @@ const insertEvent = async () => {
         const type = price === 'FREE' ? 0 : 1;
 
         tickets.push({
-            eventId: 1,
             name: name,
             type: type,
-            quantityAvaible: qty,
+            quantityAvailable: qty,
             quantitySold: 0,
             price: price,
             userId: 1,
         });
     });
 
-    let event = {
-        title: $('#title').val(),
-        slug: $('#title').val().toLowerCase().replace(/ /g, '-'),
-        type: parseInt($('#type').val()),
-        address: $('#address').val(),
-        link: $('#link').val(),
-        note: $('#note').val(),
-        startDate: $('#start_date').val(),
-        endDate: $('#end_date').val(),
-        startTime: $('#start_time').val() + ':00',
-        endTime: $('#end_time').val() + ':00',
-        image: 'default.jpg',
-        categoryId: parseInt($('#category_id').val()),
-        description: $('#description').val(),
-        isPublish: $('#is_publish').is(':checked') ? 1 : 0,
-        userId: 1,
-        tickets: tickets,
-    };
+    var formData = new FormData();
+    formData.append('title', $('#title').val());
+    formData.append('slug', $('#title').val().toLowerCase().replace(/ /g, '-'));
+    formData.append('type', parseInt($('#type').val()));
+    formData.append('address', $('#address').val());
+    formData.append('link', $('#link').val());
+    formData.append('note', $('#note').val());
+    formData.append('startDate', $('#start_date').val());
+    formData.append('endDate', $('#end_date').val());
+    formData.append('startTime', $('#start_time').val() + ':00');
+    formData.append('endTime', $('#end_time').val() + ':00');
+    formData.append('image', 'default.jpg');
+    formData.append('imageFile', $('#customFile')[0].files[0]);
+    formData.append('categoryId', parseInt($('#category_id').val()));
+    formData.append('description', $('#description').val());
+    formData.append('isPublish', $('#is_publish').is(':checked') ? 1 : 0);
+    formData.append('userId', 1);
+
+    tickets.forEach((ticket, index) => {
+        formData.append(`tickets[${index}].name`, ticket.name);
+        formData.append(`tickets[${index}].type`, ticket.type);
+        formData.append(`tickets[${index}].quantityAvailable`, ticket.quantityAvailable);
+        formData.append(`tickets[${index}].quantitySold`, ticket.quantitySold);
+        formData.append(`tickets[${index}].price`, ticket.price);
+        formData.append(`tickets[${index}].userId`, ticket.userId);
+    });
 
     try {
-        console.log(event);
-        await DataSource.insertEvent(event);
+        await DataSource.insertEvent(formData);
 
         Swal.fire({
             icon: 'success',
             title: 'Success',
             text: 'Event has been added, please wait for admin approval',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/event/create';
+            }
         });
     } catch (message) {
         alert(message);
@@ -142,7 +154,7 @@ const events = () => {
     $('.basic-select-category').select2({
         placeholder: 'Select Category',
         ajax: {
-            url: 'https://localhost:7291/api/categories',
+            url: 'https://localhost:7292/api/categories',
             dataType: 'json',
             data: function (params) {
                 return {

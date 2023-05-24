@@ -90,7 +90,7 @@ const events = () => {
     $('.basic-select-category').select2({
         placeholder: 'Select Category',
         ajax: {
-            url: 'https://localhost:7291/api/categories',
+            url: 'https://localhost:7292/api/categories',
             dataType: 'json',
             data: function (params) {
                 return {

@@ -18,7 +18,6 @@ const uploadPayment = async (data) => {
 
         return result.data;
     } catch (message) {
-        console.log(message);
         alert(message);
     }
 };
@@ -28,7 +27,7 @@ const renderResult = (result) => {
     let user = data.user;
 
     $('#order_id').val(data.id);
-    $('#transaction_id').val(data.transactionId);
+    $('#transaction_id').val(data.transationId);
     $('#payment_by').text(user.firstname + ' ' + user.lastname);
     $('#email').text(user.email);
     $('#total_paid_amount').text(formatRupiah(data.amount));
@@ -61,7 +60,7 @@ const events = () => {
                     formData.append('imageFile', $('#customFile')[0].files[0]);
 
                     await uploadPayment(formData).then((result) => {
-                       window.location.href = '/orders/success/' + $('#transaction_id').val();
+                       window.location.href = '/order/success/' + $('#transaction_id').val();
                     });
                 }
 

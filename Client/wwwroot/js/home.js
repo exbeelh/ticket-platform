@@ -50,6 +50,15 @@ const getCategories = async () => {
 
 const renderResult = (result) => {
     let upcomingEvent = '';
+
+    if (result.data.length === 0) {
+        upcomingEvent = `
+            <div class="col-lg-12 col-sm-12 mb-4">
+                <h3 class="text-center">No upcoming events</h3>
+            </div>
+        `;
+    }
+
     result.data.forEach((event) => {
         let eventType = event.type === 1 ? 'Online' : 'Offline';
         let eventDate = new Date(event.startDate);
