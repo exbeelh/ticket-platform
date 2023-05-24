@@ -134,7 +134,6 @@ namespace Server.Repository.Data
             await using var transaction = _context.Database.BeginTransaction();
             try
             {
-                // check order if exist
                 var checkOrder = await GetByIdAsync(saveBookingVM.OrderId);
                 if (checkOrder == null)
                 {
@@ -163,6 +162,67 @@ namespace Server.Repository.Data
                 await transaction.RollbackAsync();
                 return 0;
             }
+        }
+
+        public async Task<IEnumerable<MyTicketVM>> MyTickets(int id)
+        {
+            var getOrders = await GetAllAsync();
+            var getTicketOrders = await _ticketOrderRepository.GetAllAsync();
+            var getOrderItems = await _orderItemRepository.GetAllAsync();
+            var getOrderStatus = await _orderStatusRepository.GetAllAsync();
+            var getEvent = await _eventRepository.GetAllAsync();
+            var getUser = await _userRepository.GetAllAsync();
+
+            var result = (from order in getOrders
+                          join orderStatus in getOrderStatus on order.OrderStatusId equals orderStatus.Id
+                          join ev in getEvent on order.EventId equals ev.Id
+                          join user in getUser on order.UserId equals user.Id
+                          where order.UserId == id
+                          select new MyTicketVM()
+                          {
+                              OrderId = order.Id,
+                              TransactionId = order.TransactionId,
+                              EventName = ev.Title,
+                              OrderStatusId = order.OrderStatusId,
+                              OrderStatusName = orderStatus.Name,
+                              OrderDate = order.OrderDate,
+                          }).ToList();
+
+            return result;
+        }
+
+        public async Task<OrderDetailVM> GetOrderDetail(string transactionId)
+        {
+            var getOrders = await GetAllAsync();
+            var getTicketOrders = await _ticketOrderRepository.GetAllAsync();
+            var getOrderItems = await _orderItemRepository.GetAllAsync();
+            var getEvent = await _eventRepository.GetAllAsync();
+            var getUser = await _userRepository.GetAllAsync();
+
+            var result = (from order in getOrders
+                          join ticketOrder in getTicketOrders on order.Id equals ticketOrder.OrderId
+                          join orderItem in getOrderItems on order.Id equals orderItem.OrderId
+                          join ev in getEvent on order.EventId equals ev.Id
+                          join user in getUser on order.UserId equals user.Id
+                          where order.TransactionId == transactionId
+                          select new OrderDetailVM()
+                          {
+                              Id = order.Id,
+                              TransactionId = order.TransactionId,
+                              EventId = order.EventId,
+                              OrderStatusId = order.OrderStatusId,
+                              OrderDate = order.OrderDate,
+                              BookingFee = order.BookingFee,
+                              Amount = order.Amount,
+                              UserId = order.UserId,
+                              IsPayment = order.IsPayment,
+                              IsCanceled = order.IsCanceled,
+                              Event = ev,
+                              User = user,
+                              OrderItems = getOrderItems.Where(x => x.OrderId == order.Id).ToList()
+                          }).FirstOrDefault();
+
+            return result;
         }
     }
 }

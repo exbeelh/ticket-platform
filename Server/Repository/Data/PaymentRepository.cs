@@ -35,6 +35,12 @@ namespace Server.Repository.Data
             };
 
             await _context.Payments.AddAsync(payment);
+
+            // update order status
+            var order = await _orderRepository.GetByIdAsync(uploadProofVM.OrderId);
+            order.OrderStatusId = 2;
+            _context.Orders.Update(order);
+
             var created = await _context.SaveChangesAsync();
             return created;
         }
@@ -68,6 +74,58 @@ namespace Server.Repository.Data
                             }).ToList();
 
             return payments;
+        }
+
+        public async Task<int> Approve(int id)
+        {
+            await using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var payment = await GetByIdAsync(id);
+                payment.Status = 1;
+                payment.CheckAt = DateTime.Now;
+                _context.Payments.Update(payment);
+
+                var order = await _orderRepository.GetByIdAsync((int)payment.OrderId);
+                order.OrderStatusId = 3;
+                _context.Orders.Update(order);
+
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                await transaction.RollbackAsync();
+                return 0;
+            }
+        }
+
+        public async Task<int> Reject(int id)
+        {
+            await using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var payment = await GetByIdAsync(id);
+                payment.Status = 2;
+                payment.CheckAt = DateTime.Now;
+                _context.Payments.Update(payment);
+
+                var order = await _orderRepository.GetByIdAsync((int)payment.OrderId);
+                order.OrderStatusId = 4;
+                _context.Orders.Update(order);
+
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                await transaction.RollbackAsync();
+                return 0;
+            }
         }
     }
 }

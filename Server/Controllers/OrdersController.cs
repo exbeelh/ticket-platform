@@ -84,5 +84,51 @@ namespace Server.Controllers
                 data = "Booking saved"
             });
         }
+
+        [HttpGet("MyTickets/{id}")]
+        public async Task<ActionResult> MyTickets(int id)
+        {
+            var result = await _repository.MyTickets(id);
+
+            if (result == null)
+            {
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    data = "Failed to get my tickets"
+                });
+            }
+
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = result
+            });
+        }
+
+        [HttpGet("Detail/{transactionId}")]
+        public async Task<ActionResult> Detail(string transactionId)
+        {
+            var result = await _repository.GetOrderDetail(transactionId);
+
+            if (result == null)
+            {
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    data = "Failed to get order details"
+                });
+            }
+
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = result
+            });
+        }
     }
 }

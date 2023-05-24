@@ -12,5 +12,7 @@ namespace Server.Repository.Interface
         Task<string> GenerateTransactionId();
         Task<BookingVM?> GetOrderDetailsByTransactionId(string transactionId);
         Task<int> saveBooking(SaveBookingVM saveBookingVM);
+        Task<IEnumerable<MyTicketVM>> MyTickets(int id);
+        Task<OrderDetailVM> GetOrderDetail(string transactionId);
     }
 }

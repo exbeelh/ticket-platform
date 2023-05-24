@@ -17,53 +17,53 @@ namespace Server.Controllers
         }
 
         [HttpPut("Approve/{id}")]
-        public async Task<ActionResult> Aprove(int id)
+        public async Task<ActionResult> Approved(int id)
         {
-            var entity = await _repository.GetByIdAsync(id);
-            if (entity == null)
+            var entity = await _repository.Approve(id);
+
+            if (entity > 0)
             {
-                return NotFound(new
+                return Ok(new
                 {
-                    code = StatusCodes.Status404NotFound,
-                    status = HttpStatusCode.NotFound.ToString(),
-                    message = "Data Not Found!"
+                    code = StatusCodes.Status200OK,
+                    status = HttpStatusCode.OK.ToString(),
+                    data = "Payment has been Approved!"
                 });
             }
-
-            entity.Status = 1;
-            await _repository.UpdateAsync(entity);
-
-            return Ok(new
+            else
             {
-                code = StatusCodes.Status200OK,
-                status = HttpStatusCode.OK.ToString(),
-                data = "Event has been Approved!"
-            });
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    data = "Payment Failed to Approved!"
+                });
+            }
         }
 
         [HttpPut("Reject/{id}")]
-        public async Task<ActionResult> Banned(int id)
+        public async Task<ActionResult> Reject(int id)
         {
-            var entity = await _repository.GetByIdAsync(id);
-            if (entity == null)
+            var entity = await _repository.Reject(id);
+
+            if (entity > 0)
             {
-                return NotFound(new
+                return Ok(new
                 {
-                    code = StatusCodes.Status404NotFound,
-                    status = HttpStatusCode.NotFound.ToString(),
-                    message = "Data Not Found!"
+                    code = StatusCodes.Status200OK,
+                    status = HttpStatusCode.OK.ToString(),
+                    data = "Payment has been Rejected!"
                 });
             }
-
-            entity.Status = 2;
-            await _repository.UpdateAsync(entity);
-
-            return Ok(new
+            else
             {
-                code = StatusCodes.Status200OK,
-                status = HttpStatusCode.OK.ToString(),
-                data = "Event has been Banned!"
-            });
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    data = "Payment Failed to Rejected!"
+                });
+            }
         }
 
         [HttpPost("Upload")]
