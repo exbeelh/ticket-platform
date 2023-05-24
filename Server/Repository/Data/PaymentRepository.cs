@@ -13,14 +13,18 @@ namespace Server.Repository.Data
         private readonly IUserRepository _userRepository;
         private readonly IOrganizerRepository _organizerRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly IOrderItemRepository _orderItemRepository;
+        private readonly ITicketRepository _ticketRepository;
 
-        public PaymentRepository(MyContext context, IOrderRepository orderRepository, IEventRepository eventRepository, IUserRepository userRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository) : base(context)
+        public PaymentRepository(MyContext context, IOrderRepository orderRepository, IEventRepository eventRepository, IUserRepository userRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository, IOrderItemRepository orderItemRepository, ITicketRepository ticketRepository) : base(context)
         {
             _orderRepository = orderRepository;
             _eventRepository = eventRepository;
             _userRepository = userRepository;
             _organizerRepository = organizerRepository;
             _fileRepository = fileRepository;
+            _orderItemRepository = orderItemRepository;
+            _ticketRepository = ticketRepository;
         }
 
         public async Task<int> UploadProof(UploadProofVM uploadProofVM)
@@ -89,6 +93,15 @@ namespace Server.Repository.Data
                 var order = await _orderRepository.GetByIdAsync((int)payment.OrderId);
                 order.OrderStatusId = 3;
                 _context.Orders.Update(order);
+
+                var orderItems = await _orderItemRepository.GetByOrderId((int)payment.OrderId);
+                foreach (var item in orderItems)
+                {
+                    var ticket = await _ticketRepository.GetByName(item.Name);
+                    ticket.QuantityAvailable -= (int)item.Quantity;
+                    ticket.QuantitySold += (int)item.Quantity;
+                    _context.Tickets.Update(ticket);
+                }
 
                 await _context.SaveChangesAsync();
 

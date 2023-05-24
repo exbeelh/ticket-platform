@@ -27,5 +27,11 @@ namespace Server.Repository.Data
 
             return (int)totalTicketsSold;
         }
+
+        public async Task<Ticket> GetByName(string name)
+        {
+            var data = await _context.Tickets.FirstOrDefaultAsync(x => x.Name == name);
+            return data;
+        }
     }
 }

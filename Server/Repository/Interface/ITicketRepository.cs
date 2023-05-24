@@ -6,5 +6,6 @@ namespace Server.Repository.Interface
     {
         Task<int> Total(int id);
         Task<int> Sales(int id);
+        Task<Ticket> GetByName(string name);
     }
 }

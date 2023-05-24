@@ -164,7 +164,7 @@ namespace Server.Repository.Data
             }
         }
 
-        public async Task<IEnumerable<MyTicketVM>> MyTickets(int id)
+        public async Task<IEnumerable<MyTicketVM>> MyTickets(int userId)
         {
             var getOrders = await GetAllAsync();
             var getTicketOrders = await _ticketOrderRepository.GetAllAsync();
@@ -177,7 +177,7 @@ namespace Server.Repository.Data
                           join orderStatus in getOrderStatus on order.OrderStatusId equals orderStatus.Id
                           join ev in getEvent on order.EventId equals ev.Id
                           join user in getUser on order.UserId equals user.Id
-                          where order.UserId == id
+                          where order.UserId == userId
                           select new MyTicketVM()
                           {
                               OrderId = order.Id,

@@ -11,9 +11,9 @@ namespace Server.Repository.Data
         {
         }
 
-        public Task<Organizer> GetByUserId(int id)
+        public async Task<Organizer> GetByUserId(int id)
         {
-            var data = _context.Organizers.Where(x => x.UserId == id).FirstOrDefaultAsync();
+            var data = await _context.Organizers.Where(x => x.UserId == id).FirstOrDefaultAsync();
             return data;
         }
     }
