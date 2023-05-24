@@ -68,29 +68,14 @@ namespace Server.Repository.Data
             return await filteredEvents.ToListAsync();
         }
 
-        public async Task<EventTicketVM> Ticket(int id)
+        public async Task<IEnumerable<Ticket?>> Ticket(int id)
         {
-            var data = from events in _context.Events
-                       join ticket in _context.Tickets on events.Id equals ticket.EventId
-                       where events.Id == id
-                       select new EventTicketVM
-                       {
-                           Title = events.Title,
-                           Type = events.Type,
-                           Slug = events.Slug,
-                           StartDate = events.StartDate,
-                           EndDate = events.EndDate,
-                           StartTime = events.StartTime.ToString(),
-                           EndTime = events.EndTime.ToString(),
-                           Image = events.Image,
-                           Description = events.Description,
-                           Address = events.Address,
-                           TicketList = (from tickets in _context.Tickets
-                                         where ticket.Id == events.Id
-                                         select ticket).ToList()
-                       };
+            var getTickets = await _ticketRepository.GetAllAsync();
+            var getEvent = await GetByIdAsync(id);
 
-            return await data.FirstOrDefaultAsync();
+            var filteredTickets = getTickets.Where(t => t.EventId == getEvent.Id).ToList();
+
+            return filteredTickets;
         }
 
         public async Task<IEnumerable<EventVM>> Category(int id)

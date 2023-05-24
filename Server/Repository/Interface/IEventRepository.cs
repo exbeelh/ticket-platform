@@ -11,7 +11,7 @@ namespace Server.Repository.Interface
         Task<IEnumerable<EventVM>> Category(int id);
         Task<IEnumerable<EventVM>> Search(string query);
         Task<Event> Detail(string slug);
-        Task<EventTicketVM> Ticket(int id);
+        Task<IEnumerable<Ticket?>> Ticket(int id);
         Task<int> RequestEvent(RequestEventVM requestEventVM);
     }
 }
