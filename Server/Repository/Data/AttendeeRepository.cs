@@ -25,7 +25,7 @@ namespace Server.Repository.Data
                              TransactionId = order.TransactionId,
                              FullName = user.Firstname + " " + user.Lastname,
                              Price = ticket.Price,
-                             quantity = ticket.QuantityAvaible
+                             quantity = ticket.QuantityAvailable
                          };
 
             return await result.ToListAsync();

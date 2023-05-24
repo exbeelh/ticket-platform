@@ -42,7 +42,7 @@ namespace Server.Controllers
             });
         }
 
-        [HttpGet("Details/{slug}")]
+        [HttpGet("Detail/{slug}")]
         public async Task<ActionResult> Details(string slug)
         {
             var entity = await _repository.Detail(slug);

@@ -163,7 +163,7 @@ namespace Server.Repository.Data
                               select events).FirstOrDefaultAsync();
 
             return data!;
-                       
+
         }
     }
 }
