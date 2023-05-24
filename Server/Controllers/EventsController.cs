@@ -153,5 +153,30 @@ namespace Server.Controllers
                 data = entity
             });
         }
+
+        [HttpPost("Request")]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult> RequestEvent([FromForm] RequestEventVM requestEventVM)
+        {
+            var entity = await _repository.RequestEvent(requestEventVM);
+            if (entity > 0)
+            {
+                return Ok(new
+                {
+                    code = StatusCodes.Status200OK,
+                    status = HttpStatusCode.OK.ToString(),
+                    data = "Request Event Success!"
+                });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    message = "Request Event Failed!"
+                });
+            }
+        }
     }
 }
