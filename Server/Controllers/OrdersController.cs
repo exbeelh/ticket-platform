@@ -85,7 +85,7 @@ namespace Server.Controllers
             });
         }
 
-        [HttpGet("MyTickets/{id}")]
+        [HttpGet("MyTickets/{userId}")]
         public async Task<ActionResult> MyTickets(int id)
         {
             var result = await _repository.MyTickets(id);
