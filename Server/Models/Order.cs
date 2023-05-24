@@ -8,7 +8,7 @@ public partial class Order
 {
     public int Id { get; set; }
 
-    public string TransationId { get; set; } = null!;
+    public string TransactionId { get; set; } = null!;
 
     public int? EventId { get; set; }
 

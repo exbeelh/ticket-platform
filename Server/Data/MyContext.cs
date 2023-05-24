@@ -50,13 +50,13 @@ public partial class MyContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Accounts__B9BE370F4C98921E");
+            entity.HasKey(e => e.UserId).HasName("PK__Accounts__B9BE370FA5B6C633");
 
             entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
                 .HasColumnName("user_id");
             entity.Property(e => e.Password)
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("password");
 
@@ -68,7 +68,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<AccountRole>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83FE3F008F8");
+            entity.HasKey(e => e.Id).HasName("PK__Account___3213E83F734196EC");
 
             entity.ToTable("Account_Roles");
 
@@ -78,16 +78,16 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.AccountRoles)
                 .HasForeignKey(d => d.AccountId)
-                .HasConstraintName("FK__Account_R__role___5BE2A6F2");
+                .HasConstraintName("FK__Account_R__role___59063A47");
 
             entity.HasOne(d => d.Role).WithMany(p => p.AccountRoles)
                 .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__Account_R__role___5CD6CB2B");
+                .HasConstraintName("FK__Account_R__role___59FA5E80");
         });
 
         modelBuilder.Entity<Attendee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83FD866E001");
+            entity.HasKey(e => e.Id).HasName("PK__Attendee__3213E83F465A474B");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Code)
@@ -112,20 +112,20 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK__Attendees__event__76969D2E");
+                .HasConstraintName("FK__Attendees__event__73BA3083");
 
             entity.HasOne(d => d.Order).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__Attendees__code__75A278F5");
+                .HasConstraintName("FK__Attendees__code__72C60C4A");
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.Attendees)
                 .HasForeignKey(d => d.TicketId)
-                .HasConstraintName("FK__Attendees__ticke__778AC167");
+                .HasConstraintName("FK__Attendees__ticke__74AE54BC");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F5E4AC1E8");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83FCA98C461");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -140,7 +140,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Country>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F3FAE8D41");
+            entity.HasKey(e => e.Id).HasName("PK__Countrie__3213E83F9332D84E");
 
             entity.Property(e => e.Id)
                 .HasMaxLength(3)
@@ -154,7 +154,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F96D580AC");
+            entity.HasKey(e => e.Id).HasName("PK__Events__3213E83F1B564AF3");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
@@ -201,20 +201,20 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Events)
                 .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK__Events__user_id__6D0D32F4");
+                .HasConstraintName("FK__Events__user_id__6A30C649");
 
             entity.HasOne(d => d.Organizer).WithMany(p => p.Events)
                 .HasForeignKey(d => d.OrganizerId)
-                .HasConstraintName("FK__Events__organize__6E01572D");
+                .HasConstraintName("FK__Events__organize__6B24EA82");
 
             entity.HasOne(d => d.User).WithMany(p => p.Events)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Events__user_id__6EF57B66");
+                .HasConstraintName("FK__Events__user_id__6C190EBB");
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83FF9ABE273");
+            entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83FDA49FD1B");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Amount)
@@ -230,28 +230,32 @@ public partial class MyContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("order_date");
             entity.Property(e => e.OrderStatusId).HasColumnName("order_status_id");
-            entity.Property(e => e.TransationId)
+            entity.Property(e => e.TransactionId)
                 .HasMaxLength(25)
                 .IsUnicode(false)
-                .HasColumnName("transation_id");
+                .HasColumnName("transaction_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.OrderStatus).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.OrderStatusId)
-                .HasConstraintName("FK__Orders__order_st__5FB337D6");
+                .HasConstraintName("FK__Orders__order_st__5CD6CB2B");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Orders__user_id__60A75C0F");
+                .HasConstraintName("FK__Orders__user_id__5DCAEF64");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F58BFF3E6");
+            entity.HasKey(e => e.Id).HasName("PK__Order_It__3213E83F330FB0E9");
 
             entity.ToTable("Order_Items");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("name");
             entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
             entity.Property(e => e.UnitBookingFee)
@@ -263,12 +267,12 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__Order_Ite__order__6754599E");
+                .HasConstraintName("FK__Order_Ite__order__6477ECF3");
         });
 
         modelBuilder.Entity<OrderStatus>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83FE4F6DC7F");
+            entity.HasKey(e => e.Id).HasName("PK__Order_St__3213E83F5DB83BFA");
 
             entity.ToTable("Order_Statuses");
 
@@ -281,7 +285,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Organizer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83F808B06D3");
+            entity.HasKey(e => e.Id).HasName("PK__Organize__3213E83FF1F3FA54");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description)
@@ -313,12 +317,12 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Organizers)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Organizer__user___6A30C649");
+                .HasConstraintName("FK__Organizer__user___6754599E");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F46EA1C6D");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F3C87A596");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CheckAt)
@@ -337,16 +341,16 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__Payments__order___6477ECF3");
+                .HasConstraintName("FK__Payments__order___619B8048");
 
             entity.HasOne(d => d.User).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Payments__check___6383C8BA");
+                .HasConstraintName("FK__Payments__check___60A75C0F");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F13DE6351");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F03BCE82C");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name)
@@ -357,7 +361,7 @@ public partial class MyContext : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F0A41C6B4");
+            entity.HasKey(e => e.Id).HasName("PK__Tickets__3213E83F0645743D");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.EventId).HasColumnName("event_id");
@@ -375,16 +379,16 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Event).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.EventId)
-                .HasConstraintName("FK__Tickets__event_i__71D1E811");
+                .HasConstraintName("FK__Tickets__event_i__6EF57B66");
 
             entity.HasOne(d => d.User).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Tickets__user_id__72C60C4A");
+                .HasConstraintName("FK__Tickets__user_id__6FE99F9F");
         });
 
         modelBuilder.Entity<TicketOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83F7102C4B9");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83FFF3D6255");
 
             entity.ToTable("Ticket_Orders");
 
@@ -394,20 +398,20 @@ public partial class MyContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__Ticket_Or__order__7B5B524B");
+                .HasConstraintName("FK__Ticket_Or__order__787EE5A0");
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.TicketOrders)
                 .HasForeignKey(d => d.TicketId)
-                .HasConstraintName("FK__Ticket_Or__order__7A672E12");
+                .HasConstraintName("FK__Ticket_Or__order__778AC167");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F647CD537");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F00DD2909");
 
-            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B514922D8D037B").IsUnique();
+            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__57B5149270CFE957").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__AB6E616423209F88").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61648A4BABE1").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Address)
