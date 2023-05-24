@@ -14,7 +14,7 @@ public partial class Ticket
 
     public int Type { get; set; }
 
-    public int QuantityAvaible { get; set; }
+    public int QuantityAvailable { get; set; }
 
     public int QuantitySold { get; set; }
 

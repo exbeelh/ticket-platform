@@ -22,7 +22,7 @@ namespace Server.Repository.Data
                          where events.Id == id && order.OrderStatusId == 1
                          select new AttendeeVM
                          {
-                             TransactionId = order.TransationId,
+                             TransactionId = order.TransactionId,
                              FullName = user.Firstname + " " + user.Lastname,
                              Price = ticket.Price,
                              quantity = ticket.QuantityAvaible
