@@ -39,11 +39,12 @@ namespace Server.Repository.Data
             return created;
         }
 
-        public async Task<IEnumerable<Payment>> GetByUserOrganizerId(int id)
+        public async Task<IEnumerable<PaymentDetailVM>> GetByUserOrganizerId(int id)
         {
             var getPayment = await GetAllAsync();
             var getOrders = await _orderRepository.GetAllAsync();
             var getEvents = await _eventRepository.GetAllAsync();
+            var getUsers = await _userRepository.GetAllAsync();
 
             var getUser = await _userRepository.GetByIdAsync(id);
             var getOrganizer = await _organizerRepository.GetByUserId(getUser!.Id);
@@ -51,9 +52,20 @@ namespace Server.Repository.Data
             var payments = (from p in getPayment
                             join o in getOrders on p.OrderId equals o.Id
                             join e in getEvents on o.EventId equals e.Id
+                            join u in getUsers on o.UserId equals u.Id
                             where e.OrganizerId == getOrganizer.Id
                             where p.Status == 0
-                            select p).ToList();
+                            select new PaymentDetailVM
+                            {
+                                Id = p.Id,
+                                FileImg = p.FileImg,
+                                Status = p.Status,
+                                PaymentAt = p.PaymentAt,
+                                CheckAt = p.CheckAt,
+                                Order = o,
+                                Event = e,
+                                User = u
+                            }).ToList();
 
             return payments;
         }

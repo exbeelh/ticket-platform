@@ -69,6 +69,7 @@ namespace Server.Repository.Data
                 {
                     await _orderItemRepository.InsertAsync(new OrderItem()
                     {
+                        Name = orderItem.Name,
                         OrderId = order.Id,
                         Quantity = orderItem.Quantity,
                         UnitPrice = orderItem.UnitPrice,
