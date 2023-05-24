@@ -71,7 +71,7 @@ const renderResult = (result) => {
 
         summaryList.append(`
             <tr>
-                <td>ticket1</td>
+                <td>${orderItem.name}</td>
                 <td>${formatRupiah(orderItem.unitPrice)}</td>
                 <td>${formatRupiah(orderItem.unitBookingFee)}</td>
                 <td>${orderItem.quantity}</td>
@@ -101,10 +101,10 @@ const renderResult = (result) => {
                 <div class="row border-bottom pb-4 mb-4">
                     <input type="hidden" name="order_id" value="${data.id}">
                     <input type="hidden" name="event_id" value="${event.id}">
-                    <input type="hidden" name="transaction_id" value="${data.transationId}">
+                    <input type="hidden" name="transaction_id" value="${data.transactionId}">
                     <input type="hidden" name="ticket_id[]" value="${ticket.ticketOrder.ticketId}">
                     <div class="mb-3 text-center col-lg-12">
-                        <h6>${ticket.orderItem.id}</h6>
+                        <h6>${ticket.orderItem.name}</h6>
                     </div>
                     <div class="mb-3 col-lg-6">
                         <label class="form-label">First name</label>
@@ -171,7 +171,7 @@ const handleBooking = async () => {
     }
 
     await saveBooking(payloads).then((result) => {
-        window.location.href = '/payment/' + transaction_id;
+        window.location.href = '/pay/' + transaction_id;
     });
 };
 

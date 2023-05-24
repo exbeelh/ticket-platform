@@ -761,4 +761,69 @@ class DataSource {
                 return Promise.reject(error);
             });
     }
+
+    static getListPendingPayment(userId) {
+        return fetch(`${BASE_URL}api/payments/listpendingpayment?id=${userId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static approvePayment(id) {
+        return fetch(`${BASE_URL}api/payments/approve/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static rejectPayment(id) {
+        return fetch(`${BASE_URL}api/payments/reject/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
 }

@@ -149,6 +149,7 @@ const events = () => {
             if(ticketQty[i] === 0) continue;
 
             orderItems.push({
+                name: ticketNames[i],
                 quantity: ticketQty[i],
                 unitPrice: ticketPrices[i],
                 unitBookingFee: ticketPrices[i] * 0.1,
@@ -169,7 +170,7 @@ const events = () => {
         };
 
         await buyTickets(order).then((result) => {
-            window.location.href = '/booking/' + result.transationId;
+            window.location.href = '/booking/' + result.transactionId;
         });
     });
 };

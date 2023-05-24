@@ -11,7 +11,7 @@ const renderResult = (result) => {
     let data = result.data;
 
     $('#event_title').text(data.event.title);
-    $('#transaction_id').text(data.transationId);
+    $('#transaction_id').text(data.transactionId);
 
     let totalTickets = 0;
 

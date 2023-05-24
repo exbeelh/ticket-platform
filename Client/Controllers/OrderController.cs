@@ -20,7 +20,7 @@ public class OrderController : Controller
 		return View();
 	}
 
-    [Route("/Payment/{transactionId}")]
+    [Route("/Pay/{transactionId}")]
 	public IActionResult Payment()
 	{
 		return View();

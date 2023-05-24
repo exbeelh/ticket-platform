@@ -27,7 +27,7 @@ const renderResult = (result) => {
     let user = data.user;
 
     $('#order_id').val(data.id);
-    $('#transaction_id').val(data.transationId);
+    $('#transaction_id').val(data.transactionId);
     $('#payment_by').text(user.firstname + ' ' + user.lastname);
     $('#email').text(user.email);
     $('#total_paid_amount').text(formatRupiah(data.amount));
