@@ -12,14 +12,20 @@ namespace Server.Repository.Data
         private readonly IUserRepository _userRepository;
         private readonly IOrganizerRepository _organizerRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly IOrderItemRepository _orderItemRepository;
+        private readonly ITicketRepository _ticketRepository;
+        private readonly IAttendeeRepository _attendeeRepository;
 
-        public PaymentRepository(MyContext context, IOrderRepository orderRepository, IEventRepository eventRepository, IUserRepository userRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository) : base(context)
+        public PaymentRepository(MyContext context, IOrderRepository orderRepository, IEventRepository eventRepository, IUserRepository userRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository, IOrderItemRepository orderItemRepository, ITicketRepository ticketRepository, IAttendeeRepository attendeeRepository) : base(context)
         {
             _orderRepository = orderRepository;
             _eventRepository = eventRepository;
             _userRepository = userRepository;
             _organizerRepository = organizerRepository;
             _fileRepository = fileRepository;
+            _orderItemRepository = orderItemRepository;
+            _ticketRepository = ticketRepository;
+            _attendeeRepository = attendeeRepository;
         }
 
         public async Task<int> UploadProof(UploadProofVM uploadProofVM)
@@ -34,6 +40,12 @@ namespace Server.Repository.Data
             };
 
             await _context.Payments.AddAsync(payment);
+
+            // update order status
+            var order = await _orderRepository.GetByIdAsync(uploadProofVM.OrderId);
+            order.OrderStatusId = 2;
+            _context.Orders.Update(order);
+
             var created = await _context.SaveChangesAsync();
             return created;
         }
@@ -67,6 +79,78 @@ namespace Server.Repository.Data
                             }).ToList();
 
             return payments;
+        }
+
+        public async Task<int> Approve(int id)
+        {
+            await using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var payment = await GetByIdAsync(id);
+                payment.Status = 1;
+                payment.CheckAt = DateTime.Now;
+                _context.Payments.Update(payment);
+
+                var order = await _orderRepository.GetByIdAsync((int)payment.OrderId);
+                order.OrderStatusId = 3;
+                order.IsPayment = 1;
+                _context.Orders.Update(order);
+
+                // Update Ticket Quantity
+                var orderItems = await _orderItemRepository.GetByOrderId((int)payment.OrderId);
+                foreach (var item in orderItems)
+                {
+                    var ticket = await _ticketRepository.GetByName(item.Name);
+                    ticket.QuantityAvailable -= (int)item.Quantity;
+                    ticket.QuantitySold += (int)item.Quantity;
+                    _context.Tickets.Update(ticket);
+                }
+
+                // Generate Code for each ticket Attendee
+                var orderItemAttendees = await _attendeeRepository.GetByOrderId((int)payment.OrderId);
+                foreach (var item in orderItemAttendees)
+                {
+                    var code = Guid.NewGuid().ToString("N").Substring(0, 15).ToUpper();
+                    item.Code = code;
+                    _context.Attendees.Update(item);
+                }
+
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                await transaction.RollbackAsync();
+                return 0;
+            }
+        }
+
+        public async Task<int> Reject(int id)
+        {
+            await using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var payment = await GetByIdAsync(id);
+                payment.Status = 2;
+                payment.CheckAt = DateTime.Now;
+                _context.Payments.Update(payment);
+
+                var order = await _orderRepository.GetByIdAsync((int)payment.OrderId);
+                order.OrderStatusId = 4;
+                _context.Orders.Update(order);
+
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                await transaction.RollbackAsync();
+                return 0;
+            }
         }
     }
 }

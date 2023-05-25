@@ -219,5 +219,18 @@ namespace Server.Controllers
                 });
             }
         }
+
+        [HttpGet("ListEventOrganizer/{userId}")]
+        public async Task<ActionResult> ListEventOrganizer(int userId)
+        {
+            var entity = await _repository.GetByUserOrganizerId(userId);
+
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = entity
+            });
+        }
     }
 }

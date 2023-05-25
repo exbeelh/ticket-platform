@@ -7,5 +7,7 @@ namespace Server.Repository.Interface
     {
         Task<int> UploadProof(UploadProofVM uploadProofVM);
         Task<IEnumerable<PaymentDetailVM>> GetByUserOrganizerId(int id);
+        Task<int> Approve(int id);
+        Task<int> Reject(int id);
     }
 }

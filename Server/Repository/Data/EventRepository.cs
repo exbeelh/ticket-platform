@@ -13,13 +13,15 @@ namespace Server.Repository.Data
         private readonly ITicketRepository _ticketRepository;
         private readonly IOrganizerRepository _organizerRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly IUserRepository _userRepository;
 
-        public EventRepository(MyContext context, ICategoryRepository categoryRepository, ITicketRepository ticketRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository) : base(context)
+        public EventRepository(MyContext context, ICategoryRepository categoryRepository, ITicketRepository ticketRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository, IUserRepository userRepository) : base(context)
         {
             _categoryRepository = categoryRepository;
             _ticketRepository = ticketRepository;
             _organizerRepository = organizerRepository;
             _fileRepository = fileRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<EventVM>> Aprove()
@@ -254,6 +256,17 @@ namespace Server.Repository.Data
                 await transaction.RollbackAsync();
                 return 0;
             }
+        }
+
+        public async Task<IEnumerable<Event>> GetByUserOrganizerId(int userId)
+        {
+            var getOrganizer = await _organizerRepository.GetByUserId(userId);
+
+            var data = await (from events in _context.Events
+                              where events.OrganizerId == getOrganizer.Id
+                              select events).ToListAsync();
+
+            return data;
         }
 
     }

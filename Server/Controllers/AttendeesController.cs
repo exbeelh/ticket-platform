@@ -15,10 +15,10 @@ namespace Server.Controllers
         {
         }
 
-        [HttpGet("OrderTickets/{id}")]
-        public async Task<ActionResult> OrderTickets(int id)
+        [HttpGet("OrderTickets/{eventId}")]
+        public async Task<ActionResult> OrderTickets(int eventId)
         {
-            var entity = await _repository.OrderTickets(id);
+            var entity = await _repository.OrderTickets(eventId);
 
             return Ok(new
             {

@@ -11,14 +11,54 @@ namespace Server.Repository.Data
         private readonly ITicketOrderRepository _ticketOrderRepository;
         private readonly IOrderItemRepository _orderItemRepository;
         private readonly IEventRepository _eventRepository;
+        private readonly IOrderStatusRepository _orderStatusRepository;
 
-
-        public OrderRepository(MyContext context, IUserRepository userRepository, ITicketOrderRepository ticketOrderRepository, IOrderItemRepository orderItemRepository, IEventRepository eventRepository) : base(context)
+        public OrderRepository(MyContext context, IUserRepository userRepository, IOrderStatusRepository orderStatusRepository, ITicketOrderRepository ticketOrderRepository, IOrderItemRepository orderItemRepository, IEventRepository eventRepository) : base(context)
         {
             _userRepository = userRepository;
             _ticketOrderRepository = ticketOrderRepository;
             _orderItemRepository = orderItemRepository;
             _eventRepository = eventRepository;
+            _orderStatusRepository = orderStatusRepository;
+        }
+
+        public async Task<IEnumerable<RevenueVM>> Revenue(int id)
+        {
+            var getOrders = await GetAllAsync();
+            var orderItems = await _orderItemRepository.GetAllAsync();
+
+            var data = from orderItem in orderItems
+                       join order in getOrders on orderItem.OrderId equals order.Id
+                       where order.EventId == id
+                       select new RevenueVM()
+                       {
+                           TicketName = orderItem.Name!,
+                           OrderId = order.Id,
+                           Quantity = orderItem.Quantity,
+                           Price = orderItem.UnitPrice,
+                           TotalPrice = orderItem.UnitPrice * orderItem.Quantity,
+                           Commission = order.BookingFee,
+                           FinalAmount = (orderItem.UnitPrice * orderItem.Quantity) + order.BookingFee
+                       };
+
+            return data;
+        }
+
+        public async Task<IEnumerable<TicketSalesVM>> TicketSales(int id)
+        {
+            var getOrders = await GetAllAsync();
+            var orderItems = await _orderItemRepository.GetByOrderId(id);
+
+            var ticketSales = getOrders.Where(x => x.EventId == id).Select(x => new TicketSalesVM()
+            {
+                OrderId = x.Id,
+                TransactionId = x.TransactionId,
+                Quantity = orderItems.Where(y => y.OrderId == x.Id).Sum(y => y.Quantity),
+                Payment = x.Amount,
+                OrderDate = x.OrderDate
+            });
+
+            return ticketSales;
         }
 
         public async Task<Order> BuyTickets(OrderTicketVM orderTicketVM)
@@ -118,7 +158,6 @@ namespace Server.Repository.Data
             await using var transaction = _context.Database.BeginTransaction();
             try
             {
-                // check order if exist
                 var checkOrder = await GetByIdAsync(saveBookingVM.OrderId);
                 if (checkOrder == null)
                 {
@@ -148,6 +187,67 @@ namespace Server.Repository.Data
                 await transaction.RollbackAsync();
                 return 0;
             }
+        }
+
+        public async Task<IEnumerable<MyTicketVM>> MyTickets(int userId)
+        {
+            var getOrders = await GetAllAsync();
+            var getTicketOrders = await _ticketOrderRepository.GetAllAsync();
+            var getOrderItems = await _orderItemRepository.GetAllAsync();
+            var getOrderStatus = await _orderStatusRepository.GetAllAsync();
+            var getEvent = await _eventRepository.GetAllAsync();
+            var getUser = await _userRepository.GetAllAsync();
+
+            var result = (from order in getOrders
+                          join orderStatus in getOrderStatus on order.OrderStatusId equals orderStatus.Id
+                          join ev in getEvent on order.EventId equals ev.Id
+                          join user in getUser on order.UserId equals user.Id
+                          where order.UserId == userId
+                          select new MyTicketVM()
+                          {
+                              OrderId = order.Id,
+                              TransactionId = order.TransactionId,
+                              EventName = ev.Title,
+                              OrderStatusId = order.OrderStatusId,
+                              OrderStatusName = orderStatus.Name,
+                              OrderDate = order.OrderDate,
+                          }).ToList();
+
+            return result;
+        }
+
+        public async Task<OrderDetailVM> GetOrderDetail(string transactionId)
+        {
+            var getOrders = await GetAllAsync();
+            var getTicketOrders = await _ticketOrderRepository.GetAllAsync();
+            var getOrderItems = await _orderItemRepository.GetAllAsync();
+            var getEvent = await _eventRepository.GetAllAsync();
+            var getUser = await _userRepository.GetAllAsync();
+
+            var result = (from order in getOrders
+                          join ticketOrder in getTicketOrders on order.Id equals ticketOrder.OrderId
+                          join orderItem in getOrderItems on order.Id equals orderItem.OrderId
+                          join ev in getEvent on order.EventId equals ev.Id
+                          join user in getUser on order.UserId equals user.Id
+                          where order.TransactionId == transactionId
+                          select new OrderDetailVM()
+                          {
+                              Id = order.Id,
+                              TransactionId = order.TransactionId,
+                              EventId = order.EventId,
+                              OrderStatusId = order.OrderStatusId,
+                              OrderDate = order.OrderDate,
+                              BookingFee = order.BookingFee,
+                              Amount = order.Amount,
+                              UserId = order.UserId,
+                              IsPayment = order.IsPayment,
+                              IsCanceled = order.IsCanceled,
+                              Event = ev,
+                              User = user,
+                              OrderItems = getOrderItems.Where(x => x.OrderId == order.Id).ToList()
+                          }).FirstOrDefault();
+
+            return result!;
         }
     }
 }

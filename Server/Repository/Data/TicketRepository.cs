@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Server.Data;
 using Server.Models;
+using Server.ViewModels;
 using Server.Repository.Interface;
 
 namespace Server.Repository.Data
@@ -21,24 +22,41 @@ namespace Server.Repository.Data
             _orderRepository = orderRepository;
         }
 
-        public Task<int> Sales(int id)
+        public async Task<TotalVM> Total(int eventId)
         {
-            throw new NotImplementedException();
+            // get total all tickets quantityAvailable + quantitySold
+            var totalAllTickets = await (from ticket in _context.Tickets
+                                         where ticket.EventId == eventId
+                                         select ticket.QuantityAvailable + ticket.QuantitySold).SumAsync();
+
+            var totalTicketsSold = await (from ticket in _context.Tickets
+                                          join orderItem in _context.OrderItems on ticket.Id equals orderItem.Id
+                                          join order in _context.Orders on orderItem.OrderId equals order.Id
+                                          where order.EventId == eventId
+                                          select orderItem.Quantity).SumAsync();
+
+            var totalTicketsRemaining = totalAllTickets - totalTicketsSold;
+
+            var totalVM = new TotalVM
+            {
+                TotalAllTickets = totalAllTickets,
+                TotalTicketsSold = totalTicketsSold,
+                TotalTicketsRemaining = totalTicketsRemaining
+            };
+
+            return totalVM;
         }
 
-        public async Task<int> Total(int id)
+        public async Task<Ticket> GetByName(string name)
         {
-            var getTickets = await GetAllAsync();
-            var getOrderItems = await _orderItemRepository.GetAllAsync();
-            var getOrders = await _orderRepository.GetAllAsync();
+            var data = await _context.Tickets.FirstOrDefaultAsync(x => x.Name == name);
+            return data!;
+        }
 
-            var totalTicketsSold = (from ticket in getTickets
-                                    join orderItem in getOrderItems on ticket.Id equals orderItem.Id
-                                    join order in _context.Orders on orderItem.OrderId equals order.Id
-                                    where order.EventId == id
-                                    select orderItem.Quantity).Sum();
-
-            return (int)totalTicketsSold!;
+        public async Task<IEnumerable<Ticket>> GetByEventId(int eventId)
+        {
+            var data = await _context.Tickets.Where(x => x.EventId == eventId).ToListAsync();
+            return data;
         }
     }
 }

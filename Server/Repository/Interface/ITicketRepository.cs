@@ -1,10 +1,12 @@
 ﻿using Server.Models;
+using Server.ViewModels;
 
 namespace Server.Repository.Interface
 {
     public interface ITicketRepository : IGeneralRepository<Ticket, int>
     {
-        Task<int> Total(int id);
-        Task<int> Sales(int id);
+        Task<TotalVM> Total(int eventId);
+        Task<Ticket> GetByName(string name);
+        Task<IEnumerable<Ticket>> GetByEventId(int eventId);
     }
 }
