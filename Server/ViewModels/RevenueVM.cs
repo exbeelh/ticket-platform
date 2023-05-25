@@ -3,7 +3,7 @@
     public class RevenueVM
     {
         public string TicketName { get; set; }
-        public int OrderId { get; set; }
+        public string TransactionId { get; set; }
         public int? Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal? TotalPrice { get; set; }

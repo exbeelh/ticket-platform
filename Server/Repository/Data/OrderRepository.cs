@@ -33,7 +33,7 @@ namespace Server.Repository.Data
                        select new RevenueVM()
                        {
                            TicketName = orderItem.Name!,
-                           OrderId = order.Id,
+                           TransactionId = order.TransactionId,
                            Quantity = orderItem.Quantity,
                            Price = orderItem.UnitPrice,
                            TotalPrice = orderItem.UnitPrice * orderItem.Quantity,
