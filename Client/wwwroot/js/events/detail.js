@@ -46,7 +46,6 @@ const main = () => {
     // get event id from url
     let url = window.location.pathname;
     let id = url.substring(url.lastIndexOf('/') + 1);
-    console.log(id);
     getEvent(id);
 }
 

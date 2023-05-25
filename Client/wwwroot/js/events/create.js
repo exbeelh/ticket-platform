@@ -154,7 +154,7 @@ const events = () => {
     $('.basic-select-category').select2({
         placeholder: 'Select Category',
         ajax: {
-            url: 'https://localhost:7292/api/categories',
+            url: `${BASE_URL_API}/api/categories`,
             dataType: 'json',
             data: function (params) {
                 return {

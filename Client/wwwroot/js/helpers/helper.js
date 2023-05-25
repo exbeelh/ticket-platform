@@ -15,3 +15,31 @@ const statusOrder = (status, name) => {
         return `<label class="badge mb-0 bg-danger">${name}</label>`;
     }
 }
+
+const percentageProgress = (percent) => {
+    if (percent > 75) {
+        return `
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">${percent}%</div>
+            </div>
+        `;
+    } else if (percent > 50) {
+        return `
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">${percent}%</div>
+            </div>
+        `;
+    } else if (percent > 25) {
+        return `
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: ${percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">${percent}%</div>
+            </div>
+        `;
+    } else {
+        return `
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: ${percent}%" aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">${percent}%</div>
+            </div>
+        `;
+    }
+}

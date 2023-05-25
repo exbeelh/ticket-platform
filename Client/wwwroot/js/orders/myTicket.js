@@ -8,7 +8,6 @@ const getMyTicket = async (id) => {
 };
 
 const renderResult = (result) => {
-    console.log(result);
     let html = '';
 
     if (result.data.length === 0) {

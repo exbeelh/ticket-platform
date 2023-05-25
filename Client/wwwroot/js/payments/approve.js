@@ -63,7 +63,7 @@ const renderResult = (result) => {
                                 <strong class="col-6 col-sm-3">Payment Date: </strong> <span>${month}, ${time}</span>
                             </div>
                             <div class="d-flex">
-                                <a class="btn btn-secondary btn-sm" href="https://localhost:7292/images/${item.fileImg}" target="_blank"> <i class="far fa-file-image pe-1"></i> Payment Image </a>
+                                <a class="btn btn-secondary btn-sm" href="${BASE_URL_API}/images/${item.fileImg}" target="_blank"> <i class="far fa-file-image pe-1"></i> Payment Image </a>
                             </div>
                         </div>
                     </div>

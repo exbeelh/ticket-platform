@@ -38,7 +38,7 @@ const renderResult = (result) => {
                     <div class="listing-details">
                         <div class="listing-details-inner">
                             <div class="listing-title mb-2">
-                                <h6><a href="event/d/${event.slug}">${event.title}</a></h6>
+                                <h6><a href="${BASE_URL}/event/d/${event.slug}">${event.title}</a></h6>
                                 <span class="listing-price" id="event_ticket_${event.id}"></span>
                             </div>
                             <p class="mb-3">${event.description}</p>
@@ -90,7 +90,7 @@ const events = () => {
     $('.basic-select-category').select2({
         placeholder: 'Select Category',
         ajax: {
-            url: 'https://localhost:7292/api/categories',
+            url: `${BASE_URL_API}/api/categories`,
             dataType: 'json',
             data: function (params) {
                 return {

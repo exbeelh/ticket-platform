@@ -1,9 +1,9 @@
-const BASE_URL = 'https://localhost:7292/';
+const BASE_URL_API = 'https://localhost:7292';
 
 class DataSource {
     // Category
     static getCategories() {
-        return fetch(`${BASE_URL}api/categories`, {
+        return fetch(`${BASE_URL_API}/api/categories`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -24,7 +24,7 @@ class DataSource {
     }
 
     static getCategoryById(id) {
-        return fetch(`${BASE_URL}api/categories/${id}`, {
+        return fetch(`${BASE_URL_API}/api/categories/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -45,7 +45,7 @@ class DataSource {
     }
 
     static insertCategory(category) {
-        return fetch(`${BASE_URL}api/categories`, {
+        return fetch(`${BASE_URL_API}/api/categories`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ class DataSource {
     }
 
     static updateCategory(category) {
-        return fetch(`${BASE_URL}api/categories/${category.id}`, {
+        return fetch(`${BASE_URL_API}/api/categories/${category.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ class DataSource {
     }
 
     static deleteCategory(id) {
-        return fetch(`${BASE_URL}api/categories/${id}`, {
+        return fetch(`${BASE_URL_API}/api/categories/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ class DataSource {
 
     // Countries
     static getCountries() {
-        return fetch(`${BASE_URL}api/countries`, {
+        return fetch(`${BASE_URL_API}/api/countries`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -135,7 +135,7 @@ class DataSource {
     }
 
     static getCountryById(id) {
-        return fetch(`${BASE_URL}api/countries/${id}`, {
+        return fetch(`${BASE_URL_API}/api/countries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -156,7 +156,7 @@ class DataSource {
     }
 
     static insertCountry(country) {
-        return fetch(`${BASE_URL}api/countries`, {
+        return fetch(`${BASE_URL_API}/api/countries`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ class DataSource {
     }
 
     static updateCountry(country) {
-        return fetch(`${BASE_URL}api/countries/${country.id}`, {
+        return fetch(`${BASE_URL_API}/api/countries/${country.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -202,7 +202,7 @@ class DataSource {
     }
 
     static deleteCountry(id) {
-        return fetch(`${BASE_URL}api/countries/${id}`, {
+        return fetch(`${BASE_URL_API}/api/countries/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -225,7 +225,7 @@ class DataSource {
 
     // Role
     static getRoles() {
-        return fetch(`${BASE_URL}api/roles`, {
+        return fetch(`${BASE_URL_API}/api/roles`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -246,7 +246,7 @@ class DataSource {
     }
 
     static getRoleById(id) {
-        return fetch(`${BASE_URL}api/roles/${id}`, {
+        return fetch(`${BASE_URL_API}/api/roles/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -267,7 +267,7 @@ class DataSource {
     }
 
     static insertRole(role) {
-        return fetch(`${BASE_URL}api/roles`, {
+        return fetch(`${BASE_URL_API}/api/roles`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -290,7 +290,7 @@ class DataSource {
     }
 
     static updateRole(role) {
-        return fetch(`${BASE_URL}api/roles/${role.id}`, {
+        return fetch(`${BASE_URL_API}/api/roles/${role.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ class DataSource {
     }
 
     static deleteRole(id) {
-        return fetch(`${BASE_URL}api/roles/${id}`, {
+        return fetch(`${BASE_URL_API}/api/roles/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -336,7 +336,7 @@ class DataSource {
 
     // Order Status
     static getOrderStatuses() {
-        return fetch(`${BASE_URL}api/orderstatuses`, {
+        return fetch(`${BASE_URL_API}/api/orderstatuses`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -357,7 +357,7 @@ class DataSource {
     }
 
     static getOrderStatusById(id) {
-        return fetch(`${BASE_URL}api/orderstatuses/${id}`, {
+        return fetch(`${BASE_URL_API}/api/orderstatuses/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -378,7 +378,7 @@ class DataSource {
     }
 
     static insertOrderStatus(orderStatus) {
-        return fetch(`${BASE_URL}api/orderstatuses`, {
+        return fetch(`${BASE_URL_API}/api/orderstatuses`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -401,7 +401,7 @@ class DataSource {
     }
 
     static updateOrderStatus(orderStatus) {
-        return fetch(`${BASE_URL}api/orderstatuses/${orderStatus.id}`, {
+        return fetch(`${BASE_URL_API}/api/orderstatuses/${orderStatus.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -424,7 +424,7 @@ class DataSource {
     }
 
     static deleteOrderStatus(id) {
-        return fetch(`${BASE_URL}api/orderstatuses/${id}`, {
+        return fetch(`${BASE_URL_API}/api/orderstatuses/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -447,7 +447,7 @@ class DataSource {
 
     // Events
     static getEvents() {
-        return fetch(`${BASE_URL}api/events`, {
+        return fetch(`${BASE_URL_API}/api/events`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -468,7 +468,7 @@ class DataSource {
     }
 
     static getUpcomingEvents() {
-        return fetch(`${BASE_URL}api/events/upcoming`, {
+        return fetch(`${BASE_URL_API}/api/events/upcoming`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -489,7 +489,28 @@ class DataSource {
     }
 
     static getEventById(id) {
-        return fetch(`${BASE_URL}api/events/${id}`, {
+        return fetch(`${BASE_URL_API}/api/events/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getTicketsByEventId(id) {
+        return fetch(`${BASE_URL_API}/api/events/tickets/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -510,7 +531,7 @@ class DataSource {
     }
 
     static getEventBySlug(slug) {
-        return fetch(`${BASE_URL}api/events/detail/${slug}`, {
+        return fetch(`${BASE_URL_API}/api/events/detail/${slug}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -531,7 +552,7 @@ class DataSource {
     }
 
     static searchEvents(searchTerm) {
-        return fetch(`${BASE_URL}api/events/search?searchQuery=${searchTerm}`, {
+        return fetch(`${BASE_URL_API}/api/events/search?searchQuery=${searchTerm}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -548,7 +569,7 @@ class DataSource {
     }
 
     static getEventsByCategoryId(id) {
-        return fetch(`${BASE_URL}api/events/category/${id}`, {
+        return fetch(`${BASE_URL_API}/api/events/category/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -565,7 +586,7 @@ class DataSource {
     }
 
     static insertEvent(event) {
-        return fetch(`${BASE_URL}api/events/request`, {
+        return fetch(`${BASE_URL_API}/api/events/request`, {
             method: 'POST',
             body: event,
         })
@@ -585,7 +606,7 @@ class DataSource {
     }
 
     static approveEvent(id) {
-        return fetch(`${BASE_URL}api/events/approve/${id}`, {
+        return fetch(`${BASE_URL_API}/api/events/approve/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -607,7 +628,7 @@ class DataSource {
     }
 
     static bannedEvent(id) {
-        return fetch(`${BASE_URL}api/events/banned/${id}`, {
+        return fetch(`${BASE_URL_API}/api/events/banned/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -630,7 +651,7 @@ class DataSource {
 
     // Organizers
     static getOrganizerById(id) {
-        return fetch(`${BASE_URL}api/organizers/${id}`, {
+        return fetch(`${BASE_URL_API}/api/organizers/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -651,8 +672,8 @@ class DataSource {
     }
 
     // Tickets
-    static getTicketsByEventId(id) {
-        return fetch(`${BASE_URL}api/events/tickets/${id}`, {
+    static getMyTicket(id) {
+        return fetch(`${BASE_URL_API}/api/orders/mytickets/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -661,19 +682,49 @@ class DataSource {
                 return response.json();
             })
             .then((responseJson) => {
-                if (responseJson) {
-                    return Promise.resolve(responseJson);
-                } else {
-                    return Promise.reject(`Something went wrong`);
-                }
+                return Promise.resolve(responseJson);
             })
             .catch((error) => {
                 return Promise.reject(error);
             });
     }
 
-    static getMyTicket(id) {
-        return fetch(`${BASE_URL}api/orders/mytickets/${id}`, {
+    static getListEventOrganizer(id) {
+        return fetch(`${BASE_URL_API}/api/events/listeventorganizer/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getTotalByEventId(id) {
+        return fetch(`${BASE_URL_API}/api/tickets/total/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getTicketEventByEventId(id) {
+        return fetch(`${BASE_URL_API}/api/tickets/event/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -691,7 +742,7 @@ class DataSource {
 
     // Orders
     static buyTickets(order) {
-        return fetch(`${BASE_URL}api/orders/buytickets`, {
+        return fetch(`${BASE_URL_API}/api/orders/buytickets`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -714,7 +765,7 @@ class DataSource {
     }
 
     static getBookingByTransactionId(id) {
-        return fetch(`${BASE_URL}api/orders/booking/${id}`, {
+        return fetch(`${BASE_URL_API}/api/orders/booking/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -735,7 +786,7 @@ class DataSource {
     }
 
     static saveBooking(booking) {
-        return fetch(`${BASE_URL}api/orders/booking`, {
+        return fetch(`${BASE_URL_API}/api/orders/booking`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -757,9 +808,51 @@ class DataSource {
             });
     }
 
+    static getTicketSalesByEventId(id) {
+        return fetch(`${BASE_URL_API}/api/orders/ticketsales/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getRevenueByEventId(id) {
+        return fetch(`${BASE_URL_API}/api/orders/revenue/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     // Payment
     static uploadPayment(payment) {
-        return fetch(`${BASE_URL}api/payments/upload`, {
+        return fetch(`${BASE_URL_API}/api/payments/upload`, {
             method: 'POST',
             body: payment,
         })
@@ -780,7 +873,7 @@ class DataSource {
     }
 
     static getListPendingPayment(userId) {
-        return fetch(`${BASE_URL}api/payments/listpendingpayment?id=${userId}`, {
+        return fetch(`${BASE_URL_API}/api/payments/listpendingpayment?id=${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -801,7 +894,7 @@ class DataSource {
     }
 
     static approvePayment(id) {
-        return fetch(`${BASE_URL}api/payments/approve/${id}`, {
+        return fetch(`${BASE_URL_API}/api/payments/approve/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -823,7 +916,7 @@ class DataSource {
     }
 
     static rejectPayment(id) {
-        return fetch(`${BASE_URL}api/payments/reject/${id}`, {
+        return fetch(`${BASE_URL_API}/api/payments/reject/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -831,6 +924,28 @@ class DataSource {
         })
             .then((response) => {
                 return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    // Attendees
+    static getOrderTicketsByEventId(id) {
+        return fetch(`${BASE_URL_API}/api/attendees/ordertickets/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
             })
             .then((responseJson) => {
                 if (responseJson && responseJson.status === 200) {
