@@ -47,13 +47,16 @@ namespace Server.Repository.Data
         public async Task<IEnumerable<TicketSalesVM>> TicketSales(int id)
         {
             var getOrders = await GetAllAsync();
+            var getUsers = await _userRepository.GetAllAsync();
             var orderItems = await _orderItemRepository.GetAllAsync();
 
             var ticketSales = from order in getOrders
+                              join user in getUsers on order.UserId equals user.Id
                               where order.EventId == id && order.OrderStatusId == 3
                               select new TicketSalesVM()
                               {
                                   OrderId = order.Id,
+                                  FullName = user.Firstname + " " + user.Lastname,
                                   TransactionId = order.TransactionId,
                                   Quantity = orderItems.Where(y => y.OrderId == order.Id).Sum(y => y.Quantity),
                                   Payment = order.Amount,
