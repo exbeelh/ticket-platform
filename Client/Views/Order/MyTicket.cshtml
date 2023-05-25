@@ -46,43 +46,11 @@
                                             <th> Event Title</th>
                                             <th> Booking Date</th>
                                             <th> Status </th>
-                                            <th> Action</th>
+                                            <th width="155px"> Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>#8860IK01PO</td>
-                                            <td>Event Sydney</td>
-                                            <td>On May 14, 2023</td>
-                                            <td>
-                                                <label class="badge mb-0 bg-warning">Waiting Approval From Event Organizer</label>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-light btn-sm" asp-area="" asp-controller="Order" asp-action="Index"> <i class="fa fa-eye"></i>Detail</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#8860IK01PO</td>
-                                            <td>Event Sydney</td>
-                                            <td>On May 14, 2023</td>
-                                            <td>
-                                                <label class="badge mb-0 bg-danger">Rejected</label>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-light btn-sm" asp-area="" asp-controller="Order" asp-action="Index"> <i class="fa fa-eye"></i>Detail</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#8860IK01PO</td>
-                                            <td>Event Sydney</td>
-                                            <td>On May 14, 2023</td>
-                                            <td>
-                                                <label class="badge mb-0 bg-success">Approval</label>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-light btn-sm" asp-area="" asp-controller="Order" asp-action="Index"> <i class="fa fa-eye"></i>Detail</a>
-                                            </td>
-                                        </tr>
+                                    <tbody id="ticket_list">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -96,4 +64,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/orders/myTicket.js"></script>
 }

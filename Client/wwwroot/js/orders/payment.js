@@ -56,7 +56,7 @@ const events = () => {
 
                     var formData = new FormData();
                     formData.append("orderId", parseInt($('#order_id').val()));
-                    formData.append("userId", 1);
+                    formData.append("userId", JWTUserID);
                     formData.append('imageFile', $('#customFile')[0].files[0]);
 
                     await uploadPayment(formData).then((result) => {

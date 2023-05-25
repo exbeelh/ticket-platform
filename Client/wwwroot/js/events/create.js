@@ -57,7 +57,7 @@ const insertEvent = async () => {
             quantityAvailable: qty,
             quantitySold: 0,
             price: price,
-            userId: 1,
+            userId: JWTUserID,
         });
     });
 
@@ -77,7 +77,7 @@ const insertEvent = async () => {
     formData.append('categoryId', parseInt($('#category_id').val()));
     formData.append('description', $('#description').val());
     formData.append('isPublish', $('#is_publish').is(':checked') ? 1 : 0);
-    formData.append('userId', 1);
+    formData.append('userId', JWTUserID);
 
     tickets.forEach((ticket, index) => {
         formData.append(`tickets[${index}].name`, ticket.name);

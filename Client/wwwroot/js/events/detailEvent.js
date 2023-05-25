@@ -164,7 +164,7 @@ const events = () => {
             eventId: parseInt(event_id),
             bookingFee: ticketFee,
             amount: ticketTotal + ticketFee,
-            userId: 1,
+            userId: JWTUserID,
             orderItems: orderItems,
             ticketOrders: ticketOrders
         };

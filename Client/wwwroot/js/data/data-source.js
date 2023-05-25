@@ -672,6 +672,23 @@ class DataSource {
             });
     }
 
+    static getMyTicket(id) {
+        return fetch(`${BASE_URL}api/orders/mytickets/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     // Orders
     static buyTickets(order) {
         return fetch(`${BASE_URL}api/orders/buytickets`, {

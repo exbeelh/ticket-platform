@@ -11,24 +11,64 @@ const renderResult = (result) => {
     let data = result.data;
     let html = '';
 
+    if(data.length === 0) {
+        html += `
+            <div class="text-center">
+                <h6 class="mb-3"> No request payment </h6>
+            </div>
+        `;
+
+        $('#list_pending_payment').html(html);
+        return;
+    }
+
     data.forEach((item, index) => {
         let date = new Date(item.paymentAt);
         let month = date.toLocaleString('default', { weekday: "long", month: "long", year: "numeric", day: "numeric" });
         let time = date.toLocaleString('default', { hour: "numeric", minute: "numeric", second: "numeric" });
 
+        let dateOrder = new Date(item.order.orderDate);
+        let monthOrder = dateOrder.toLocaleString('default', { weekday: "long", month: "long", year: "numeric", day: "numeric" });
+
         html += `
-            <tr>
-                <td>${item.order.transactionId}</td>
-                <td>${item.user.firstname} ${item.user.lastname}</td>
-                <td>${item.event.title} </td>
-                <td>${month}, ${time}</td>
-                <td>${formatRupiah(item.order.amount)}</td>
-                <td><a href="${item.fileImg}" target="_blank">File</a></td>
-                <td>
-                    <button type="button" class="btn btn-success btn-sm" onclick="approvePayment(${item.id})">Approve</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="rejectPayment(${item.id})">Reject</button>
-                </td>
-            </tr>
+            <div class="border-bottom pb-4 mb-4">
+                <div class="row">
+                    <div class="col-xl-1 col-lg-2">
+                        <div class="avatar avatar-lg">
+                            <img src="../dist/images/avatar/01.jpg" class="img-fluid rounded-circle" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-xl-11 col-lg-10">
+                        <div class="px-xl-4 px-0 mt-lg-0 mt-3">
+                            <div class="d-sm-flex align-items-center">
+                                <h6 class="mt-0">${item.user.firstname}</h6>
+                                <div class="d-flex ms-auto mb-3">
+                                    <a href="javascript:void(0)" class="bg-success-soft text-success border-radius px-3 py-1 font-sm me-2" onclick="approvePayment(${item.id})"> Approved </a>
+                                    <href="javascript:void(0)" class="bg-danger-soft text-danger border-radius px-3 py-1 font-sm" onclick="rejectPayment(${item.id})"> Rejected </href=>
+                                </div>
+                            </div>
+                            <div class="booking-item d-flex mb-3">
+                                <strong class="col-6 col-sm-3">Order ID: </strong> <span>${item.order.transactionId}</span>
+                            </div>
+                            <div class="booking-item d-flex mb-3">
+                                <strong class="col-6 col-sm-3">Event Title: </strong> <span>${item.event.title}</span>
+                            </div>
+                            <div class="booking-item d-flex mb-3">
+                                <strong class="col-6 col-sm-3">Order Date: </strong> <span>${monthOrder}</span>
+                            </div>
+                            <div class="booking-item d-flex mb-3">
+                                <strong class="col-6 col-sm-3">Amount: </strong> <span>${formatRupiah(item.order.amount)}</span>
+                            </div>
+                            <div class="booking-item d-flex mb-3">
+                                <strong class="col-6 col-sm-3">Payment Date: </strong> <span>${month}, ${time}</span>
+                            </div>
+                            <div class="d-flex">
+                                <a class="btn btn-secondary btn-sm" href="https://localhost:7292/images/${item.fileImg}" target="_blank"> <i class="far fa-file-image pe-1"></i> Payment Image </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         `;
     });
 
@@ -91,7 +131,7 @@ const events = async () => {
 };
 
 const main = () => {
-    getListPendingPayment(1);
+    getListPendingPayment(JWTUserID);
     events();
 }
 
