@@ -13,5 +13,6 @@ namespace Server.Repository.Interface
         Task<Event> Detail(string slug);
         Task<IEnumerable<Ticket?>> Ticket(int id);
         Task<int> RequestEvent(RequestEventVM requestEventVM);
+        Task<IEnumerable<Event>> GetByUserOrganizerId(int userId);
     }
 }

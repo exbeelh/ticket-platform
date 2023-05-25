@@ -2,9 +2,12 @@
 {
     public class RevenueVM
     {
-        public int Type { get; set; }
-        public int Quantity { get; set; }
+        public string TicketName { get; set; }
+        public int OrderId { get; set; }
+        public int? Quantity { get; set; }
         public decimal Price { get; set; }
-        public int TotalPrice { get; set; }
+        public decimal? TotalPrice { get; set; }
+        public decimal Commission { get; set; }
+        public decimal? FinalAmount { get; set; }
     }
 }

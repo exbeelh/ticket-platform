@@ -15,8 +15,9 @@ namespace Server.Repository.Data
         private readonly IFileRepository _fileRepository;
         private readonly IOrderItemRepository _orderItemRepository;
         private readonly ITicketRepository _ticketRepository;
+        private readonly IAttendeeRepository _attendeeRepository;
 
-        public PaymentRepository(MyContext context, IOrderRepository orderRepository, IEventRepository eventRepository, IUserRepository userRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository, IOrderItemRepository orderItemRepository, ITicketRepository ticketRepository) : base(context)
+        public PaymentRepository(MyContext context, IOrderRepository orderRepository, IEventRepository eventRepository, IUserRepository userRepository, IOrganizerRepository organizerRepository, IFileRepository fileRepository, IOrderItemRepository orderItemRepository, ITicketRepository ticketRepository, IAttendeeRepository attendeeRepository) : base(context)
         {
             _orderRepository = orderRepository;
             _eventRepository = eventRepository;
@@ -25,6 +26,7 @@ namespace Server.Repository.Data
             _fileRepository = fileRepository;
             _orderItemRepository = orderItemRepository;
             _ticketRepository = ticketRepository;
+            _attendeeRepository = attendeeRepository;
         }
 
         public async Task<int> UploadProof(UploadProofVM uploadProofVM)
@@ -92,8 +94,10 @@ namespace Server.Repository.Data
 
                 var order = await _orderRepository.GetByIdAsync((int)payment.OrderId);
                 order.OrderStatusId = 3;
+                order.IsPayment = 1;
                 _context.Orders.Update(order);
 
+                // Update Ticket Quantity
                 var orderItems = await _orderItemRepository.GetByOrderId((int)payment.OrderId);
                 foreach (var item in orderItems)
                 {
@@ -101,6 +105,15 @@ namespace Server.Repository.Data
                     ticket.QuantityAvailable -= (int)item.Quantity;
                     ticket.QuantitySold += (int)item.Quantity;
                     _context.Tickets.Update(ticket);
+                }
+
+                // Generate Code for each ticket Attendee
+                var orderItemAttendees = await _attendeeRepository.GetByOrderId((int)payment.OrderId);
+                foreach (var item in orderItemAttendees)
+                {
+                    var code = Guid.NewGuid().ToString("N").Substring(0, 15).ToUpper();
+                    item.Code = code;
+                    _context.Attendees.Update(item);
                 }
 
                 await _context.SaveChangesAsync();

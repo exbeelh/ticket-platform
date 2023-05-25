@@ -13,7 +13,6 @@ namespace Server.Repository.Data
         private readonly IOrderItemRepository _orderItemRepository;
         private readonly IEventRepository _eventRepository;
 
-
         public OrderRepository(MyContext context, IUserRepository userRepository, IOrderStatusRepository orderStatusRepository, ITicketOrderRepository ticketOrderRepository, IOrderItemRepository orderItemRepository, IEventRepository eventRepository) : base(context)
         {
             _userRepository = userRepository;
@@ -23,19 +22,43 @@ namespace Server.Repository.Data
             _eventRepository = eventRepository;
         }
 
-        public Task<Order> Details(int id)
+        public async Task<IEnumerable<RevenueVM>> Revenue(int id)
         {
-            throw new NotImplementedException();
+            var getOrders = await GetAllAsync();
+            var orderItems = await _orderItemRepository.GetAllAsync();
+
+            var data = from orderItem in orderItems
+                        join order in getOrders on orderItem.OrderId equals order.Id
+                        where order.EventId == id
+                        select new RevenueVM()
+                        {
+                            TicketName = orderItem.Name,
+                            OrderId = order.Id,
+                            Quantity = orderItem.Quantity,
+                            Price = orderItem.UnitPrice,
+                            TotalPrice = orderItem.UnitPrice * orderItem.Quantity,
+                            Commission = order.BookingFee,
+                            FinalAmount = (orderItem.UnitPrice * orderItem.Quantity) + order.BookingFee
+                        };
+
+            return data;
         }
 
-        public Task<IEnumerable<EventVM>> Revenue(int id)
+        public async Task<IEnumerable<TicketSalesVM>> TicketSales(int id)
         {
-            throw new NotImplementedException();
-        }
+            var getOrders = await GetAllAsync();
+            var orderItems = await _orderItemRepository.GetByOrderId(id);
 
-        public Task<RevenueVM> TicketSales(int id)
-        {
-            throw new NotImplementedException();
+            var ticketSales = getOrders.Where(x => x.EventId == id).Select(x => new TicketSalesVM()
+            {
+                OrderId = x.Id,
+                TransactionId = x.TransactionId,
+                Quantity = orderItems.Where(y => y.OrderId == x.Id).Sum(y => y.Quantity),
+                Payment = x.Amount,
+                OrderDate = x.OrderDate
+            });
+
+            return ticketSales;
         }
 
         public async Task<Order> BuyTickets(OrderTicketVM orderTicketVM)
