@@ -148,7 +148,7 @@ namespace Server.Repository.Data
 
             var filteredEvents = from events in getEvents
                                  join category in getCategories on events.CategoryId equals category.Id
-                                 where events.StartDate > DateTime.Now && events.StatusId == 1
+                                 where events.StartDate > DateTime.Now && events.StatusId == 1 && events.IsPublish == 1
                                  select new EventVM
                                  {
                                      Title = events.Title,
