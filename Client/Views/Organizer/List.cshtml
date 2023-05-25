@@ -1,0 +1,66 @@
+@{
+    ViewData["Title"] = "Organizer List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-wrapper d-flex align-items-start align-items-sm-center justify-content-between flex-column flex-sm-row">
+    <div class="breadcrumb-wrapper--inner d-flex flex-column-reverse">
+        <h1>Organizer List</h1>
+        <ol class="breadcrumb style-1">
+            <li class="breadcrumb-item"><a class="" asp-area="" asp-controller="Admin" asp-action="Index">Dashboard</a></li>
+            <li class="breadcrumb-item" aria-current="page">Organizer List</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Card -->
+<div class="card">
+    <div class="card-body">
+        <div class="dsh-section-title d-flex align-items-center justify-content-between flex-wrap flex-md-nowrap">
+            <div>
+                <h5 class="card-title">Organizer List</h5>
+                <h6 class="card-subtitle">This is a list of all organizer in the system.</h6>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="organizer_datatable" class="table">
+                <thead>
+                    <tr>
+                        <th class="dsh-tooltip text-center" title="Thumbnail" data-bs-placement="top"><i class="bi bi-images"></i></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                        <th>Social Media</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="organizer-list">
+                    <tr>
+                        <td class="text-center"> <img class="rounded-circle" src="http://via.placeholder.com/30" alt="user"> </td>
+                        <td> <a href="#" class="btn-link">Margot Bobbie</a> </td>
+                        <td>+123 456 789</td>
+                        <td>margotbobbie@example.com</td>
+                        <td>2019/12/18</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="dsh-tooltip text-center" title="Thumbnail" data-bs-placement="top"><i class="bi bi-images"></i></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                        <th>Social Media</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/organizers/list.js"></script>
+}

@@ -10,8 +10,27 @@ const getEvent = async (id) => {
     }
 };
 
+const getOrganizer = async (id) => {
+    try {
+        const result = await DataSource.getOrganizerById(id);
+
+        return result.data;
+    } catch (message) {
+        alert(message);
+    }
+};
+
+const getTickets = async (id) => {
+    try {
+        const result = await DataSource.getTicketsByEventId(id);
+
+        return result.data;
+    } catch (message) {
+        alert(message);
+    }
+};
+
 const renderDetail = (result) => {
-    console.log(result);
     let event = result.data;
     let eventType = event.type === 1 ? 'Online' : 'Offline';
     let eventDateStart = new Date(event.startDate);
@@ -33,8 +52,36 @@ const renderDetail = (result) => {
     $('#event_link').text(event.link);
     $('#event_note').text(event.note);
     $('#event_link').attr('href', event.link);
-    $('#event_image').attr('src', event.image);
+    $('#event_image').attr('src', `${BASE_URL_API}/images/${event.image}`);
     $('#event_image').attr('alt', event.title);
+
+    getOrganizer(event.organizerId).then((organizer) => {
+        $('#organizer_name').text(organizer.name);
+        $('#organizer_description').text(organizer.description);
+        // $('#organizer_image').attr('src', organizer.image);
+    });
+
+    getTickets(event.id).then((tickets) => {
+        $('#ticket_list').empty();
+
+        tickets.forEach((ticket) => {
+            let ticketHtml = `
+                <tr>
+                    <td>${ticket.name}</td>
+                    <td>${formatRupiah(ticket.price)}</td>
+                    <td>${ticket.quantityAvailable + ticket.quantitySold}</td>
+                </tr>
+            `;
+
+            $('#ticket_list').append(ticketHtml);
+        });
+
+        const prices = tickets.map(ticket => ticket.price);
+        const lowestPrice = Math.min(...prices) === 0 ? 'Free' : formatRupiah(Math.min(...prices));
+        const highestPrice = Math.max(...prices);
+
+        $('.dsh-price').text(lowestPrice + ' - ' + formatRupiah(highestPrice));
+    });
 };
 
 const events = () => {

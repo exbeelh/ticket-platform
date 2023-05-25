@@ -8,7 +8,6 @@ const getListEventOrganizer = async (id) => {
 };
 
 const renderResult = (result) => {
-    console.log(result);
     let html = '';
 
     if (result.data.length === 0) {
@@ -32,7 +31,7 @@ const renderResult = (result) => {
                 <div class="row g-0">
                     <div class="col-lg-4 col-md-5">
                         <div class="listing-image bg-overlay-half-top h-100">
-                            <img class="img-fluid" src="../dist/images/listing/grid/01.jpg" alt="">
+                            <img class="img-fluid" src="${BASE_URL_API}/images/${event.image}" alt="">
                             <div class="listing-quick-box">
                             </div>
                             <div class="listing-info">

@@ -13,4 +13,9 @@ public class OrganizerController : Controller
     {
         return View();
     }
+
+    public IActionResult List()
+    {
+        return View();
+    }
 }

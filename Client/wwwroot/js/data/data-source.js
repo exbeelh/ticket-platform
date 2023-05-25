@@ -671,6 +671,27 @@ class DataSource {
             });
     }
 
+    static getOrganizers() {
+        return fetch(`${BASE_URL_API}/api/organizers`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     // Tickets
     static getMyTicket(id) {
         return fetch(`${BASE_URL_API}/api/orders/mytickets/${id}`, {
@@ -815,14 +836,10 @@ class DataSource {
             },
         })
             .then((response) => {
-                return response;
+                return response.json();
             })
             .then((responseJson) => {
-                if (responseJson && responseJson.status === 200) {
-                    return Promise.resolve(responseJson);
-                } else {
-                    return Promise.reject(`Something went wrong`);
-                }
+                return Promise.resolve(responseJson);
             })
             .catch((error) => {
                 return Promise.reject(error);
@@ -836,10 +853,27 @@ class DataSource {
             },
         })
             .then((response) => {
-                return response;
+                return response.json();
             })
             .then((responseJson) => {
-                if (responseJson && responseJson.status === 200) {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getOrderDetailByTransactionId(id) {
+        return fetch(`${BASE_URL_API}/api/orders/detail/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
                     return Promise.resolve(responseJson);
                 } else {
                     return Promise.reject(`Something went wrong`);
@@ -867,7 +901,6 @@ class DataSource {
                 }
             })
             .catch((error) => {
-                console.log("Errorrr : ", error);
                 return Promise.reject(error);
             });
     }
@@ -948,7 +981,25 @@ class DataSource {
                 return response.json();
             })
             .then((responseJson) => {
-                if (responseJson && responseJson.status === 200) {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    // Users
+    static getUsers() {
+        return fetch(`${BASE_URL_API}/api/users`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
                     return Promise.resolve(responseJson);
                 } else {
                     return Promise.reject(`Something went wrong`);

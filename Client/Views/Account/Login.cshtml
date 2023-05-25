@@ -5,7 +5,7 @@
 }
 
 <!-- Page Title -->
-<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50">
     <div class="container">
         <div class="row position-relative">
             <div class="col-lg-6">
@@ -31,15 +31,20 @@
                     <div class="sub-title"> <span> Enter Your Email To Sign In or Log in.</span></div>
                 </div>
                 <div class="border border-radius mt-4 p-sm-5 p-4">
-                    <form class="row t-sm-4 mt-2 align-items-center">
+                    <form method="POST" action="Login" class="row t-sm-4 mt-2 align-items-center">
                         <div class="mb-3 col-sm-12">
-                            <input type="text" class="form-control" placeholder="Email">
+                            <div class="alert alert-danger" role="alert" id="alert" asp-validation-summary="ModelOnly"></div>
                         </div>
                         <div class="mb-3 col-sm-12">
-                            <input type="Password" class="form-control" placeholder="Password">
+                            <input asp-for="Email" id="email" type="email" class="form-control" name="email" tabindex="1" placeholder="Email" required autofocus>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-sm-12">
+                            <input asp-for="Password" id="password" type="password" class="form-control" name="password" tabindex="2" placeholder="Password" required>
+                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="col-sm-6 d-grid">
-                            <button type="submit" class="btn btn-primary">Sign up</button>
+                            <button type="submit" value="Login" class="btn btn-primary" tabindex="4" id="submit-btn">Sign In</button>
                         </div>
                         <div class="col-sm-6">
                             <ul class="list-unstyled d-flex mb-1 mt-sm-0 mt-3">

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Client.Repositories;
+using Client.Repositories.Contracts;
+using Client.Repositories.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text;
@@ -9,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
+builder.Services.AddScoped(typeof(IGeneralRepository<,>), typeof(GeneralRepository<,>));
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

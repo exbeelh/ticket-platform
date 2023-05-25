@@ -2,7 +2,10 @@ const getEvent = async (slug) => {
     try {
         const result = await DataSource.getEventBySlug(slug);
 
-        if(result.code === 404) window.location.href = '/notfound';
+        if(result.code === 404) {
+            window.location.href = '/notfound';
+            return;
+        }
 
         renderDetail(result);
     } catch (message) {
@@ -47,6 +50,7 @@ const buyTickets = async (order) => {
 
 const renderDetail = (result) => {
     let event = result.data;
+    let now = new Date();
     let eventType = event.type === 1 ? 'Online' : 'Offline';
     let eventDateStart = new Date(event.startDate);
     let eventMonthStart = eventDateStart.toLocaleString('default', { weekday: "long", month: "long", year: "numeric", day: "numeric" });
@@ -57,6 +61,12 @@ const renderDetail = (result) => {
     $('#event_type').text(eventType);
     $('#event_datetime').text(eventMonthStart + ', ' + event.startTime + ' - ' + eventMonthEnd + ', ' + event.endTime);
     $('#event_description').text(event.description);
+    $('#event_image').attr('src', `${BASE_URL_API}/images/${event.image}`);
+
+    if(eventDateStart < now) {
+        // hide buy ticket button
+        $('#buy_ticket').hide();
+    }
 
     getOrganizer(event.organizerId).then((organizer) => {
         $('#organizer_name').text(organizer.name);
@@ -102,10 +112,10 @@ const renderDetail = (result) => {
         });
 
         const prices = tickets.map(ticket => ticket.price);
-        const lowestPrice = Math.min(...prices) === 0 ? 'Free' : Math.min(...prices);
+        const lowestPrice = Math.min(...prices) === 0 ? 'Free' : formatRupiah(Math.min(...prices));
         const highestPrice = Math.max(...prices);
 
-        $('#event_ticket').text(lowestPrice + ' - ' + highestPrice);
+        $('#event_ticket').text(lowestPrice + ' - ' + formatRupiah(highestPrice));
     });
 };
 

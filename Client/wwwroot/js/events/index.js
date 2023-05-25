@@ -28,10 +28,10 @@ const renderResult = (result) => {
             <div class="col-lg-6 mb-4">
                 <div class="listing-item">
                     <div class="listing-image bg-overlay-half-top">
-                        <img class="img-fluid" src="dist/images/listing/grid/01.jpg" alt="">
+                        <img class="img-fluid" src="${BASE_URL_API}/images/${event.image}" alt="">
                         <div class="listing-quick-box">
                             <a class="category" href="#">Cafe</a>
-                            <a class="popup popup-single" href="dist/images/listing/grid/01.jpg" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
+                            <a class="popup popup-single" href="${BASE_URL_API}/images/${event.image}" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
                             <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
                         </div>
                     </div>

@@ -3,17 +3,10 @@
 }
 
 <!-- Page Title -->
-<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style="background: url(../dist/images/bg/02.jpg);">
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50">
     <div class="container">
         <div class="row position-relative">
-            <div class="col-lg-6">
-                <h1 class="text-white">Nama Event</h1>
-                <span class="d-inline-block text-white">Location : Rajkot, Gujarat, India</span>
-                <span class="d-inline-block text-white">Thu, June 8, 2023, 08:00 PM To Fri, June 9, 2023, 11:30 AM</span>
-                <div>
-                    <a class="btn btn-light mt-4 btn-sm" href="#"><i class="far fa-edit"></i> Edit </a>
-                    <a class="btn btn-light mt-4 btn-sm" asp-area="" asp-controller="Event" asp-action="Detail"><i class="far fa-eye"></i>View </a>
-                </div>
+            <div class="col-lg-6" id="event">
             </div>
         </div>
     </div>
@@ -48,20 +41,7 @@
                                             <th> Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td> #2W51I1C62M</td>
-                                            <td> Demo User</td>
-                                            <td> 1</td>
-                                            <td> $11.00</td>
-                                            <td> May, 09 2023</td>
-                                            <td>
-                                                <a data-bs-toggle="modal" data-bs-target="#loginModal" href=""><i class="fa fa-eye"></i> View Order</a>
-                                            </td>
-                                            <td>
-                                                <span class="badge bg-success p-2">Completed</span>
-                                            </td>
-                                        </tr>
+                                    <tbody id="ticket_sales_list">
                                     </tbody>
                                 </table>
                             </div>
@@ -73,6 +53,48 @@
     </div>
 </section>
 
+<!-- Modal -->
+<div class="modal login fade" id="detailOrderModal" tabindex="-1" role="dialog" aria-labelledby="detailOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="detailOrderModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="order_detail"></p>
+                <span class="badge bg-success p-2">Completed</span>
+                <hr>
+                <table class="table">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-right">Ticket Price</th>
+                            <th class="text-right">Total Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticket_list">
+                    </tbody>
+                    <tfoot class="table-dark">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="text-center" id="sum_quantity"></td>
+                            <td></td>
+                            <td class="text-right" id="sum_total"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/events/order.js"></script>
+	<script src="~/js/sidebar.js"></script>
 }
