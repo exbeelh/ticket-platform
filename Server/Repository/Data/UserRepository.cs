@@ -14,7 +14,9 @@ namespace Server.Repository.Data
 
         public async Task<UserDataVM> GetUserDataByEmailAsync(string email)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+            var getUsers = await GetAllAsync();
+
+            var user = getUsers.FirstOrDefault(user => user.Email == email);
             return new UserDataVM
             {
                 Id = user!.Id,

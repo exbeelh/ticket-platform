@@ -11,10 +11,11 @@ namespace Server.Repository.Data
         {
         }
 
-        public Task<Organizer> GetByUserId(int id)
+        public async Task<Organizer> GetByUserId(int id)
         {
-            var data = _context.Organizers.Where(x => x.UserId == id).FirstOrDefaultAsync();
-            return data;
+            var getOrganizers = await GetAllAsync();
+            var data = getOrganizers.Where(x => x.UserId == id).FirstOrDefault();
+            return data!;
         }
     }
 }

@@ -8,8 +8,17 @@ namespace Server.Repository.Data
 {
     public class TicketRepository : GeneralRepository<Ticket, int, MyContext>, ITicketRepository
     {
-        public TicketRepository(MyContext context) : base(context)
+
+        private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IOrderItemRepository _orderRepository;
+
+        public TicketRepository(
+            MyContext context, 
+            IOrderItemRepository orderItemRepository,
+            IOrderItemRepository orderRepository) : base(context)
         {
+            _orderItemRepository = orderItemRepository;
+            _orderRepository = orderRepository;
         }
 
         public Task<int> Sales(int id)
@@ -19,13 +28,17 @@ namespace Server.Repository.Data
 
         public async Task<int> Total(int id)
         {
-            var totalTicketsSold = await (from ticket in _context.Tickets
-                                          join orderItem in _context.OrderItems on ticket.Id equals orderItem.Id
-                                          join order in _context.Orders on orderItem.OrderId equals order.Id
-                                          where order.EventId == id
-                                          select orderItem.Quantity).SumAsync();
+            var getTickets = await GetAllAsync();
+            var getOrderItems = await _orderItemRepository.GetAllAsync();
+            var getOrders = await _orderRepository.GetAllAsync();
 
-            return (int)totalTicketsSold;
+            var totalTicketsSold = (from ticket in getTickets
+                                    join orderItem in getOrderItems on ticket.Id equals orderItem.Id
+                                    join order in _context.Orders on orderItem.OrderId equals order.Id
+                                    where order.EventId == id
+                                    select orderItem.Quantity).Sum();
+
+            return (int)totalTicketsSold!;
         }
     }
 }

@@ -24,8 +24,11 @@ namespace Server.Repository.Data
 
         public async Task<IEnumerable<EventVM>> Aprove()
         {
-            var filteredEvents = from events in _context.Events
-                                 join category in _context.Categories on events.CategoryId equals category.Id
+            var getEvents = await GetAllAsync();
+            var getCategories = await _categoryRepository.GetAllAsync();
+
+            var filteredEvents = from events in getEvents
+                                 join category in getCategories on events.CategoryId equals category.Id
                                  where events.StatusId == 1
                                  select new EventVM
                                  {
@@ -42,13 +45,16 @@ namespace Server.Repository.Data
                                      Address = events.Address
                                  };
 
-            return await filteredEvents.ToListAsync();
+            return filteredEvents.ToList();
         }
 
         public async Task<IEnumerable<EventVM>> Ban()
         {
-            var filteredEvents = from events in _context.Events
-                                 join category in _context.Categories on events.CategoryId equals category.Id
+            var getEvents = await GetAllAsync();
+            var getCategories = await _categoryRepository.GetAllAsync();
+
+            var filteredEvents = from events in getEvents
+                                 join category in getCategories on events.CategoryId equals category.Id
                                  where events.StatusId == 2
                                  select new EventVM
                                  {
@@ -65,7 +71,7 @@ namespace Server.Repository.Data
                                      Address = events.Address
                                  };
 
-            return await filteredEvents.ToListAsync();
+            return filteredEvents.ToList();
         }
 
         public async Task<IEnumerable<Ticket?>> Ticket(int id)
@@ -73,15 +79,18 @@ namespace Server.Repository.Data
             var getTickets = await _ticketRepository.GetAllAsync();
             var getEvent = await GetByIdAsync(id);
 
-            var filteredTickets = getTickets.Where(t => t.EventId == getEvent.Id).ToList();
+            var filteredTickets = getTickets.Where(t => t.EventId == getEvent!.Id).ToList();
 
             return filteredTickets;
         }
 
         public async Task<IEnumerable<EventVM>> Category(int id)
         {
-            var filteredEvents = from events in _context.Events
-                                 join category in _context.Categories on events.CategoryId equals category.Id
+            var getEvents = await GetAllAsync();
+            var getCategories = await _categoryRepository.GetAllAsync();
+
+            var filteredEvents = from events in getEvents
+                                 join category in getCategories on events.CategoryId equals category.Id
                                  where events.CategoryId == id
                                  select new EventVM
                                  {
@@ -98,14 +107,17 @@ namespace Server.Repository.Data
                                      Address = events.Address
                                  };
 
-            return await filteredEvents.ToListAsync();
+            return filteredEvents.ToList();
         }
 
         public async Task<IEnumerable<EventVM>> Search(string query)
         {
-            var filteredEvents = from events in _context.Events
-                                 join category in _context.Categories on events.CategoryId equals category.Id
-                                 where events.Title.Contains(query) || events.Description!.Contains(query)
+            var getEvents = await GetAllAsync();
+            var getCategories = await _categoryRepository.GetAllAsync();
+
+            var filteredEvents = from events in getEvents
+                                 join category in getCategories on events.CategoryId equals category.Id
+                                 where events.Title.Contains(query, StringComparison.OrdinalIgnoreCase)
                                  select new EventVM
                                  {
                                      Title = events.Title,
@@ -121,16 +133,19 @@ namespace Server.Repository.Data
                                      Address = events.Address
                                  };
 
-            return await filteredEvents.ToListAsync();
+            return filteredEvents.ToList();
 
         }
 
         public async Task<IEnumerable<EventVM>> Upcoming()
         {
+            var getEvents = await GetAllAsync();
+            var getCategories = await _categoryRepository.GetAllAsync();
+
             var dateNow = DateTime.Now;
 
-            var filteredEvents = from events in _context.Events
-                                 join category in _context.Categories on events.CategoryId equals category.Id
+            var filteredEvents = from events in getEvents
+                                 join category in getCategories on events.CategoryId equals category.Id
                                  where events.StartDate > DateTime.Now && events.StatusId == 1
                                  select new EventVM
                                  {
@@ -147,14 +162,42 @@ namespace Server.Repository.Data
                                      Address = events.Address
                                  };
 
-            return await filteredEvents.ToListAsync();
+            return filteredEvents.ToList();
+        }
+
+        public async Task<IEnumerable<EventVM>> Featured()
+        {
+            var getEvents = await GetAllAsync();
+            var getCategories = await _categoryRepository.GetAllAsync();
+
+            var filteredEvents = from events in getEvents
+                                 join category in getCategories on events.CategoryId equals category.Id
+                                 where events.Views > getEvents.Average(e => e.Views)
+                                 select new EventVM
+                                 {
+                                     Title = events.Title,
+                                     Type = events.Type,
+                                     Slug = events.Slug,
+                                     Category = category.Name,
+                                     StartDate = events.StartDate,
+                                     EndDate = events.EndDate,
+                                     StartTime = events.StartTime.ToString(),
+                                     EndTime = events.EndTime.ToString(),
+                                     Image = events.Image,
+                                     Description = events.Description,
+                                     Address = events.Address
+                                 };
+
+            return filteredEvents.ToList();
         }
 
         public async Task<Event> Detail(string slug)
         {
-            var data = await (from events in _context.Events
-                              where events.Slug == slug
-                              select events).FirstOrDefaultAsync();
+            var getEvents = await GetAllAsync();
+
+            var data = (from events in getEvents
+                        where events.Slug == slug
+                        select events).FirstOrDefault();
 
             return data!;
 
@@ -176,7 +219,7 @@ namespace Server.Repository.Data
                     EndDate = requestEventVM.EndDate,
                     StartTime = requestEventVM.StartTime,
                     EndTime = requestEventVM.EndTime,
-                    Image = await _fileRepository.SaveImageAsync(requestEventVM.ImageFile),
+                    Image = await _fileRepository.SaveImageAsync(requestEventVM.ImageFile!),
                     Description = requestEventVM.Description,
                     Address = requestEventVM.Address,
                     CategoryId = requestEventVM.CategoryId,
@@ -212,5 +255,6 @@ namespace Server.Repository.Data
                 return 0;
             }
         }
+
     }
 }

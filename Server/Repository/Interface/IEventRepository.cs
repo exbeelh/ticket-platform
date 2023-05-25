@@ -8,6 +8,7 @@ namespace Server.Repository.Interface
         Task<IEnumerable<EventVM>> Upcoming();
         Task<IEnumerable<EventVM>> Aprove();
         Task<IEnumerable<EventVM>> Ban();
+        Task<IEnumerable<EventVM>> Featured();
         Task<IEnumerable<EventVM>> Category(int id);
         Task<IEnumerable<EventVM>> Search(string query);
         Task<Event> Detail(string slug);

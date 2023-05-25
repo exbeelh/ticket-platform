@@ -17,6 +17,34 @@ namespace Server.Controllers
         {
         }
 
+        [HttpGet("{id}")]
+        public override async Task<IActionResult> GetByIdAsync(int id)
+        {
+            var entity = await _repository.GetByIdAsync(id);
+            if (entity == null)
+            {
+                return NotFound(new
+                {
+                    code = StatusCodes.Status404NotFound,
+                    status = HttpStatusCode.NotFound.ToString(),
+                    data = new
+                    {
+                        message = "Data Not Found!"
+                    }
+                });
+            }
+
+            entity.Views++;
+            await _repository.UpdateAsync(entity);
+
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = entity
+            });
+        }
+
         [HttpGet("Search")]
         public async Task<IActionResult> GetAsync([FromQuery] string searchQuery)
         {
@@ -40,6 +68,19 @@ namespace Server.Controllers
                 status = HttpStatusCode.OK.ToString(),
                 data = entity
             });
+        }
+
+        [HttpGet("Featured")]
+        public async Task<ActionResult<IEnumerable<EventVM>>> Featured()
+        {
+            var entity = await _repository.Featured();
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = entity
+            });
+
         }
 
         [HttpGet("Detail/{slug}")]

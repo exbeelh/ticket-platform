@@ -9,16 +9,36 @@ namespace Server.Repository.Data
 {
     public class AttendeeRepository : GeneralRepository<Attendee, int, MyContext>, IAttendeeRepository
     {
-        public AttendeeRepository(MyContext context) : base(context)
+
+        private readonly IOrderRepository _orderRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IEventRepository _eventRepository;
+        private readonly ITicketRepository _ticketRepository;
+
+        public AttendeeRepository(
+            MyContext context,
+            IOrderRepository orderRepository,
+            IUserRepository userRepository,
+            IEventRepository eventRepository,
+            ITicketRepository ticketRepository) : base(context)
         {
+            _orderRepository = orderRepository;
+            _userRepository = userRepository;
+            _eventRepository = eventRepository;
+            _ticketRepository = ticketRepository;
         }
 
         public async Task<IEnumerable<AttendeeVM>> OrderTickets(int id)
         {
-            var result = from order in _context.Orders
-                         join user in _context.Users on order.UserId equals user.Id
-                         join events in _context.Events on order.EventId equals events.Id
-                         join ticket in _context.Tickets on events.Id equals ticket.EventId
+            var getOrders = await _orderRepository.GetAllAsync();
+            var getUsers = await _userRepository.GetAllAsync();
+            var getEvents = await _eventRepository.GetAllAsync();
+            var getTickets = await _ticketRepository.GetAllAsync();
+
+            var result = from order in getOrders
+                         join user in getUsers on order.UserId equals user.Id
+                         join events in getEvents on order.EventId equals events.Id
+                         join ticket in getTickets on events.Id equals ticket.EventId
                          where events.Id == id && order.OrderStatusId == 1
                          select new AttendeeVM
                          {
@@ -28,7 +48,7 @@ namespace Server.Repository.Data
                              quantity = ticket.QuantityAvailable
                          };
 
-            return await result.ToListAsync();
+            return result.ToList();
         }
     }
 }

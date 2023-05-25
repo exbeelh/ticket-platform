@@ -8,34 +8,17 @@ namespace Server.Repository.Data
     public class OrderRepository : GeneralRepository<Order, int, MyContext>, IOrderRepository
     {
         private readonly IUserRepository _userRepository;
-        private readonly IOrderStatusRepository _orderStatusRepository;
         private readonly ITicketOrderRepository _ticketOrderRepository;
         private readonly IOrderItemRepository _orderItemRepository;
         private readonly IEventRepository _eventRepository;
 
 
-        public OrderRepository(MyContext context, IUserRepository userRepository, IOrderStatusRepository orderStatusRepository, ITicketOrderRepository ticketOrderRepository, IOrderItemRepository orderItemRepository, IEventRepository eventRepository) : base(context)
+        public OrderRepository(MyContext context, IUserRepository userRepository, ITicketOrderRepository ticketOrderRepository, IOrderItemRepository orderItemRepository, IEventRepository eventRepository) : base(context)
         {
             _userRepository = userRepository;
-            _orderStatusRepository = orderStatusRepository;
             _ticketOrderRepository = ticketOrderRepository;
             _orderItemRepository = orderItemRepository;
             _eventRepository = eventRepository;
-        }
-
-        public Task<Order> Details(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<EventVM>> Revenue(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<RevenueVM> TicketSales(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Order> BuyTickets(OrderTicketVM orderTicketVM)
@@ -60,7 +43,7 @@ namespace Server.Repository.Data
                 {
                     await _ticketOrderRepository.InsertAsync(new TicketOrder()
                     {
-                        OrderId = order.Id,
+                        OrderId = order!.Id,
                         TicketId = ticketOrder.TicketId,
                     });
                 }
@@ -70,7 +53,7 @@ namespace Server.Repository.Data
                     await _orderItemRepository.InsertAsync(new OrderItem()
                     {
                         Name = orderItem.Name,
-                        OrderId = order.Id,
+                        OrderId = order!.Id,
                         Quantity = orderItem.Quantity,
                         UnitPrice = orderItem.UnitPrice,
                         UnitBookingFee = orderItem.UnitBookingFee,
@@ -78,19 +61,20 @@ namespace Server.Repository.Data
                 }
 
                 await transaction.CommitAsync();
-                return order;
+                return order!;
             }
             catch (Exception e)
             {
+                await Console.Out.WriteLineAsync(e.Message);
                 await transaction.RollbackAsync();
-                return null;
+                return null!;
             }
         }
 
         public async Task<string> GenerateTransactionId()
         {
             string uniqueId = Guid.NewGuid().ToString("N");
-            string transactionId = uniqueId.Substring(0, 20).ToUpper();
+            string transactionId = uniqueId[..20].ToUpper();
             return transactionId;
         }
 
@@ -160,6 +144,7 @@ namespace Server.Repository.Data
             }
             catch (Exception e)
             {
+                await Console.Out.WriteLineAsync(e.Message);
                 await transaction.RollbackAsync();
                 return 0;
             }

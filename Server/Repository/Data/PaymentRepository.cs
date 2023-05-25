@@ -2,7 +2,6 @@
 using Server.Models;
 using Server.ViewModels;
 using Server.Repository.Interface;
-using Server.ViewModels;
 
 namespace Server.Repository.Data
 {
@@ -28,7 +27,7 @@ namespace Server.Repository.Data
             var payment = new Payment()
             {
                 OrderId = uploadProofVM.OrderId,
-                FileImg = await _fileRepository.SaveImageAsync(uploadProofVM.ImageFile),
+                FileImg = await _fileRepository.SaveImageAsync(uploadProofVM.ImageFile!),
                 Status = 0,
                 PaymentAt = DateTime.Now,
                 UserId = uploadProofVM.UserId
