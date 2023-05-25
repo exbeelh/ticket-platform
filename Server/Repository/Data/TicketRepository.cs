@@ -14,7 +14,7 @@ namespace Server.Repository.Data
         private readonly IOrderItemRepository _orderRepository;
 
         public TicketRepository(
-            MyContext context, 
+            MyContext context,
             IOrderItemRepository orderItemRepository,
             IOrderItemRepository orderRepository) : base(context)
         {
@@ -24,7 +24,6 @@ namespace Server.Repository.Data
 
         public async Task<TotalVM> Total(int eventId)
         {
-            // get total all tickets quantityAvailable + quantitySold
             var totalAllTickets = await (from ticket in _context.Tickets
                                          where ticket.EventId == eventId
                                          select ticket.QuantityAvailable + ticket.QuantitySold).SumAsync();
@@ -32,7 +31,7 @@ namespace Server.Repository.Data
             var totalTicketsSold = await (from ticket in _context.Tickets
                                           join orderItem in _context.OrderItems on ticket.Id equals orderItem.Id
                                           join order in _context.Orders on orderItem.OrderId equals order.Id
-                                          where order.EventId == eventId
+                                          where order.EventId == eventId && order.OrderStatusId == 3
                                           select orderItem.Quantity).SumAsync();
 
             var totalTicketsRemaining = totalAllTickets - totalTicketsSold;
