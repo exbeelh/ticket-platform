@@ -24,8 +24,9 @@ namespace Server.Controllers
         }
 
         [HttpPost("Register")]
+        [Consumes("multipart/form-data")]
         [AllowAnonymous]
-        public async Task<ActionResult> Register(RegisterVM registerVM)
+        public async Task<ActionResult> Register([FromForm] RegisterVM registerVM)
         {
             try
             {

@@ -11,17 +11,24 @@ namespace Server.Repository.Data
         private readonly IUserRepository _userRepository;
         private readonly IAccountRoleRepository _accountRoleRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IOrganizerRepository _organizerRepository;
+        private readonly IFileRepository _fileRepository;
+
 
         public AccountRepository(
-            MyContext context, 
-            IAccountRoleRepository accountRoleRepository, 
+            MyContext context,
+            IAccountRoleRepository accountRoleRepository,
             IUserRepository userRepository,
-            IRoleRepository roleRepository
+            IRoleRepository roleRepository,
+            IOrganizerRepository organizerRepository,
+            IFileRepository fileRepository
             ) : base(context)
         {
             _accountRoleRepository = accountRoleRepository;
             _roleRepository = roleRepository;
             _userRepository = userRepository;
+            _organizerRepository = organizerRepository;
+            _fileRepository = fileRepository;
         }
 
         public async Task<IEnumerable<string>> GetRoleByEmailAsync(string email)
@@ -86,7 +93,8 @@ namespace Server.Repository.Data
                     City = registerVM.City,
                     PostalCode = registerVM.PostalCode,
                     State = registerVM.State,
-                    CountryId = registerVM.CountryId
+                    CountryId = registerVM.CountryId,
+                    IsActive = 1
                 });
 
                 var account = await InsertAsync(new Account
@@ -100,6 +108,17 @@ namespace Server.Repository.Data
                     AccountId = user!.Id,
                     RoleId = registerVM.Role
                 });
+
+                if (registerVM.Role == 3)  // Event Organizer
+                {
+                    var organizer = await _organizerRepository.InsertAsync(new Organizer
+                    {
+                        Name = registerVM.OrganizerName,
+                        Description = registerVM.OrganizerDescription,
+                        Image = await _fileRepository.SaveImageAsync(registerVM.OrganizerImageFile!),
+                        UserId = user.Id
+                    });
+                }
 
                 await transaction.CommitAsync();
                 return 1;

@@ -201,6 +201,12 @@ namespace Server.Repository.Data
                         where events.Slug == slug
                         select events).FirstOrDefault();
 
+            if (data != null)
+            {
+                data.Views += 1;
+                await UpdateAsync(data);
+            }
+
             return data!;
 
         }

@@ -87,6 +87,17 @@ namespace Server.Controllers
         public async Task<ActionResult> Details(string slug)
         {
             var entity = await _repository.Detail(slug);
+
+            if (entity == null)
+            {
+                return NotFound(new
+                {
+                    code = StatusCodes.Status404NotFound,
+                    status = HttpStatusCode.NotFound.ToString(),
+                    message = "Data Not Found!"
+                });
+            }
+
             return Ok(new
             {
                 code = StatusCodes.Status200OK,
