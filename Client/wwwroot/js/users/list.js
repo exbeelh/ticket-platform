@@ -46,7 +46,7 @@ const renderResult = (results) => {
         data: results.data,
         columns: [
             {
-                data: 'image',
+                data: 'picture',
                 render: function (data, type, row) {
                     return `<img src="${BASE_URL_API}/images/${data}" alt="${row['name']}" class="rounded-circle">`;
                 }
@@ -55,7 +55,7 @@ const renderResult = (results) => {
                 data: '',
                 render: function (data, type, row) {
                     return `
-                        ${row['firstname']} ${row['lastname']}<br>
+                        ${row['firstname']} ${row['lastname'] ?? ''}<br>
                     `;
                 }
             },
