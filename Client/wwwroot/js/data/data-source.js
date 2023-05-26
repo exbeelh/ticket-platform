@@ -1079,4 +1079,25 @@ class DataSource {
             });
         })
     }
+
+    // Account
+    static register(user) {
+        return fetch(`${BASE_URL_API}/api/accounts/register`, {
+            method: 'POST',
+            body: user,
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
 }
