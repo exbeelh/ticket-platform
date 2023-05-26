@@ -692,6 +692,52 @@ class DataSource {
             });
     }
 
+    static updateOrganizer(organizer) {
+        return fetch(`${BASE_URL_API}/api/categories/${organizer.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(organizer),
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 204) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static insertOrganizer(organizer) {
+        return fetch(`${BASE_URL_API}/api/Organizers`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(organizer),
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     // Tickets
     static getMyTicket(id) {
         return fetch(`${BASE_URL_API}/api/orders/mytickets/${id}`, {
@@ -1008,5 +1054,29 @@ class DataSource {
             .catch((error) => {
                 return Promise.reject(error);
             });
+    }
+
+    static updateUsers(users) {
+        return fetch(`${BASE_URL_API}/api/users${users.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(users),
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 204) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+        })
     }
 }
