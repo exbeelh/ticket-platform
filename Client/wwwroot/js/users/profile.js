@@ -20,7 +20,7 @@ const userProfile = async () => {
         const state = $('#state').val();
         // Create an object with the form data
         const formData = {
-            id: 0, // userID
+            id: 2, // userID
             firstname: firstName,
             lastname: lastName,
             email: email,
@@ -36,7 +36,7 @@ const userProfile = async () => {
         };
 
         try {
-            DataSource.insertOrganizer(formData);
+            DataSource.updateUsers(formData)
 
             Swal.fire({
                 icon: 'success',
@@ -46,7 +46,7 @@ const userProfile = async () => {
                 confirmButtonText: 'OK',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/organizer/manage';
+                    window.location.href = '/user/profile';
                 }
             });
         } catch (message) {

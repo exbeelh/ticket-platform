@@ -1057,7 +1057,7 @@ class DataSource {
     }
 
     static updateUsers(users) {
-        return fetch(`${BASE_URL_API}/api/users${users.id}`, {
+        return fetch(`${BASE_URL_API}/api/users/${users.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

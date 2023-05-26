@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="form-group mb-3 col-md-6 select-border">
                                     <label class="form-label">Country</label>
-                                    <select class="form-control basic-select" id="country">
+                                    <select class="form-control basic-select">
                                         <option value="value 01" selected="selected">Select Country</option>
                                         <option value="IDN">Indonesia</option>
                                         <option value="MAL">Malaysia</option>
@@ -114,4 +114,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/dist/js/select2/select2.full.js"></script>
+    <script src="~/dist/js/dropzone/dropzone.js"></script>
+    <script src="~/js/users/profile.js"></script>
 }
