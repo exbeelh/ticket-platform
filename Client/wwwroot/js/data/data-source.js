@@ -1077,7 +1077,6 @@ class DataSource {
             .catch((error) => {
                 return Promise.reject(error);
             });
-        })
     }
 
     // Account
