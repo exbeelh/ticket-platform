@@ -51,7 +51,8 @@ namespace Server.Repository.Data
                                                 {
                                                     Id = u.Id,
                                                     FullName = u.Firstname + " " + u.Lastname,
-                                                    Email = u.Email
+                                                    Email = u.Email,
+                                                    Picture = u.Picture
                                                 })
                                           .FirstOrDefault(ud => ud.Email == email);
 
@@ -86,15 +87,14 @@ namespace Server.Repository.Data
                     Firstname = registerVM.FirstName,
                     Lastname = registerVM.LastName,
                     Email = registerVM.Email,
-                    Picture = registerVM.Picture,
+                    Picture = "default.jpg",
                     PhoneNumber = registerVM.PhoneNumber,
                     Website = registerVM.Website,
                     Address = registerVM.Address,
-                    City = registerVM.City,
+                    City = registerVM.City!,
                     PostalCode = registerVM.PostalCode,
                     State = registerVM.State,
                     CountryId = registerVM.CountryId,
-                    IsActive = 1
                 });
 
                 var account = await InsertAsync(new Account

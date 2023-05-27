@@ -85,7 +85,8 @@ namespace Server.Controllers
                     new Claim(ClaimTypes.Email, userData.Email),
                     new Claim(ClaimTypes.Name, userData.Email),
                     new Claim(ClaimTypes.NameIdentifier, userData.FullName),
-                    new Claim("ID", userData.Id.ToString())
+                    new Claim("ID", userData.Id.ToString()),
+                    new Claim("Picture", userData.Picture)
                 };
 
                 var getRoles = await _repository.GetRoleByEmailAsync(loginVM.Email);
