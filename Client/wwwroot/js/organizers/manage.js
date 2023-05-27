@@ -1,117 +1,94 @@
-﻿const manage = async () => {
-    // Get form element
-    const form = document.querySelector('form');
+﻿const getOrganizerProfile = async (id) => {
+    try {
+        const result = await DataSource.getOrganizerByUserId(id);
 
-    // Add event listener to form submission
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+        renderDetail(result);
+    } catch (message) {
+        fallbackResult(message);
+    }
+};
 
-        // Get form data
-        const name = $('#name').val();
-        const description = $('textarea').val();
-        const isChecked = form.querySelector('#customCheck1').checked;
-        const website = $('#website').val();
-        const image = $('#image').val();
-        const organizerStatus = form.querySelector('#button-status').checked ? 1 : 0;
-        const facebook = $('#facebook-url').val();
-        const twitter = $('#twitter-url').val();
-
-        // Create an object with the form data
-        const formData = {
-            name: name,
-            description: description,
-            descriptionStatus: isChecked ? 1 : 0,
-            link: website,
-            status: organizerStatus,
-            facebook: facebook,
-            twitter: twitter,
-            image: image,
-            userId: 1
-        };
-
-        try {
-            DataSource.insertOrganizer(formData);
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Event has been added, please wait for admin approval',
-                showConfirmButton: true,
-                confirmButtonText: 'OK',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/organizer/manage';
-                }
-            });
-        } catch (message) {
-            alert(message);
-        }
-
-    });
-}
-
-/*const insertEvent = async () => {
-    let tickets = [];
-    $('input[name="ticket_name[]"]').each((index, element) => {
-        const name = $(element).val();
-        const qty = $('input[name="ticket_qty[]"]').eq(index).val();
-        const price = $('input[name="ticket_price[]"]').eq(index).val() == 'FREE' ? 0 : $('input[name="ticket_price[]"]').eq(index).val();
-        const type = price === 'FREE' ? 0 : 1;
-
-        tickets.push({
-            name: name,
-            type: type,
-            quantityAvailable: qty,
-            quantitySold: 0,
-            price: price,
-            userId: JWTUserID,
-        });
-    });
+const updateOrganizer = async () => {
+    const isChecked = document.getElementById('descriptionStatus').checked ? 1 : 0;
+    const organizerStatus = document.querySelector('#button-status').checked ? 1 : 0;
 
     var formData = new FormData();
-    formData.append('title', $('#title').val());
-    formData.append('slug', $('#title').val().toLowerCase().replace(/ /g, '-'));
-    formData.append('type', parseInt($('#type').val()));
-    formData.append('address', $('#address').val());
-    formData.append('link', $('#link').val());
-    formData.append('note', $('#note').val());
-    formData.append('startDate', $('#start_date').val());
-    formData.append('endDate', $('#end_date').val());
-    formData.append('startTime', $('#start_time').val() + ':00');
-    formData.append('endTime', $('#end_time').val() + ':00');
-    formData.append('image', 'default.jpg');
-    formData.append('imageFile', $('#customFile')[0].files[0]);
-    formData.append('categoryId', parseInt($('#category_id').val()));
-    formData.append('description', $('#description').val());
-    formData.append('isPublish', $('#is_publish').is(':checked') ? 1 : 0);
-    formData.append('userId', JWTUserID);
-
-    tickets.forEach((ticket, index) => {
-        formData.append(`tickets[${index}].name`, ticket.name);
-        formData.append(`tickets[${index}].type`, ticket.type);
-        formData.append(`tickets[${index}].quantityAvailable`, ticket.quantityAvailable);
-        formData.append(`tickets[${index}].quantitySold`, ticket.quantitySold);
-        formData.append(`tickets[${index}].price`, ticket.price);
-        formData.append(`tickets[${index}].userId`, ticket.userId);
-    });
+    formData.append('Id', JWTUserID);
+    formData.append('Name', $('#name').val());
+    formData.append('Description', $('textarea').val());
+    formData.append('DescriptionStatus', isChecked);
+    formData.append('Link', $('#website').val());
+    formData.append('Status', organizerStatus);
+    formData.append('Facebook', $('#facebook-url').val());
+    formData.append('Twitter', $('#twitter-url').val());
+    formData.append('ImageFile', $('#image')[0].files[0]);
 
     try {
-        await DataSource.insertEvent(formData);
+        DataSource.updateOrganizer(JWTUserID, formData);
 
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: 'Event has been added, please wait for admin approval',
+            text: 'Organizer has been updated',
             showConfirmButton: true,
             confirmButtonText: 'OK',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '/event/create';
+                window.location.href = '/organizer/manage';
             }
         });
     } catch (message) {
         alert(message);
     }
-};*/
+}
 
-manage();
+const renderDetail = (result) => {
+    const profile = result.data;
+
+    $('#name').val(profile.name);
+    $('textarea').val(profile.description);
+    $('#website').val(profile.link);
+    $('#facebook-url').val(profile.facebook);
+    $('#twitter-url').val(profile.twitter);
+
+    if (profile.descriptionStatus == 1) {
+        $('#descriptionStatus').prop('checked', true);
+    }
+
+    if (profile.status == 1) {
+        $('#button-status').prop('checked', true);
+    }
+};
+
+const fallbackResult = (message) => {
+    alert(message);
+};
+
+const events = () => {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener(
+            'submit',
+            async function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (form.checkValidity() === true) {
+                    await updateOrganizer();
+                }
+
+                form.classList.add('was-validated');
+            },
+            false
+        );
+    });
+};
+
+const main = () => {
+    events();
+    getOrganizerProfile(JWTUserID);
+};
+
+main();

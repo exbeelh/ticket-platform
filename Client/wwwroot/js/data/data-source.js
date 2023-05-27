@@ -671,6 +671,27 @@ class DataSource {
             });
     }
 
+    static getOrganizerByUserId(id) {
+        return fetch(`${BASE_URL_API}/api/organizers/getbyuserid/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     static getOrganizers() {
         return fetch(`${BASE_URL_API}/api/organizers`, {
             headers: {
@@ -692,13 +713,10 @@ class DataSource {
             });
     }
 
-    static updateOrganizer(organizer) {
-        return fetch(`${BASE_URL_API}/api/categories/${organizer.id}`, {
+    static updateOrganizer(id, organizer) {
+        return fetch(`${BASE_URL_API}/api/organizers/updateorganizer/${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(organizer),
+            body: organizer,
         })
             .then((response) => {
                 return response;
