@@ -50,10 +50,10 @@
                     </ul>
                 </div>
                 <div class="d-block d-md-flex align-items-center">
-                    <div class="login d-inline-block me-4">
-                        <a class="text-white" asp-area="" asp-controller="User" asp-action="Profile"><i class="fa fa-user me-2 text-primary"></i>Hello sign in</a>
+                    <div class="login d-inline-block me-4 d-none" id="user_authenticated">
+                        <a class="text-white" asp-area="" asp-controller="User" asp-action="Profile" id="user_auth_name"></a>
                     </div>
-                    <div class="add-listing d-none d-sm-block">
+                    <div class="add-listing d-none d-sm-block" id="user_not_authenticated">
                         <a class="btn btn-primary btn-md" asp-area="" asp-controller="Account" asp-action="Login"> <i class="fa fa-user"></i>Sign In</a>
                     </div>
                 </div>
@@ -135,14 +135,33 @@
         <a href="#"> <i class="fas fa-angle-up"></i></a>
     </div>
 
-    <script>
-        const BASE_URL = "https://localhost:7003";
-        const JWTUserID = 1;
-    </script>
-
     <!-- Main JS -->
     <script src="~/js/data/data-source.js"></script>
     <script src="~/js/helpers/helper.js"></script>
+    <script src="~/js/auth.js"></script>
+
+    <script>
+        const BASE_URL = "https://localhost:7003";
+        const TOKEN = '@Context.Session.GetString("JWToken")';
+        let JWTUserID = '';
+        let JWTName = '';
+        let JWTEmail = '';
+        let JWTRole = '';
+        let JWTPicture = '';
+
+        const auth = new Auth();
+        auth.setToken(TOKEN);
+
+        if (auth.isAuthenticated()) {
+            const payload = auth.decodeToken();
+
+            JWTUserID = payload['ID'];
+            JWTName = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            JWTEmail = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+            JWTRole = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+            JWTPicture = payload['Picture'];
+        }
+    </script>
 
     <!-- JS Global Compulsory (Do not remove)-->
     <script src="~/dist/js/jquery-3.6.0.min.js"></script>

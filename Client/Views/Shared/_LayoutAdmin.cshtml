@@ -46,7 +46,7 @@
 
             <!-- Logo -->
             <div class="dsh-logo dsh-d-block-lg">
-                <a class="d-block text-center" href="index.html"> <img src="/dist/images/logo.svg" alt="logo" style="width: 40%; margin-top: 20px"> </a>
+                <a class="d-block text-center" href="index.html"> <img src="http://via.placeholder.com/406x109" alt="logo"> </a>
             </div>
 
             <!-- Navigation -->
@@ -315,6 +315,30 @@
     <!-- Main JS -->
     <script src="~/js/data/data-source.js"></script>
     <script src="~/js/helpers/helper.js"></script>
+    <script src="~/js/auth.js"></script>
+
+    <script>
+        const BASE_URL = "https://localhost:7003";
+        const TOKEN = '@Context.Session.GetString("JWToken")';
+        let JWTUserID = '';
+        let JWTName = '';
+        let JWTEmail = '';
+        let JWTRole = '';
+        let JWTPicture = '';
+
+        const auth = new Auth();
+        auth.setToken(TOKEN);
+
+        if (auth.isAuthenticated()) {
+            const payload = auth.decodeToken();
+
+            JWTUserID = payload['ID'];
+            JWTName = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            JWTEmail = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+            JWTRole = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+            JWTPicture = payload['Picture'];
+        }
+    </script>
 
     <!-- Plugins -->
     <script src="~/admin/vendor/dist/libs.bundle.js"></script>
