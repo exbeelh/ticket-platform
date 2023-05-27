@@ -11,8 +11,8 @@ using System.Security.Claims;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     [Authorize(Roles = "Admin")]
     public class AccountsController : BaseController<IAccountRepository, Account, int>
     {

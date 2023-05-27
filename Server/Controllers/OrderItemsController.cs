@@ -6,8 +6,8 @@ using Server.Repository.Interface;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class OrderItemsController : BaseController<IOrderItemRepository, OrderItem, int>
     {
         public OrderItemsController(IOrderItemRepository repository) : base(repository)

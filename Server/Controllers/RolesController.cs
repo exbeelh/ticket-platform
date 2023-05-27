@@ -6,8 +6,8 @@ using Server.Repository.Interface;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class RolesController : BaseController<IRoleRepository, Role, int>
     {
         public RolesController(IRoleRepository repository) : base(repository)

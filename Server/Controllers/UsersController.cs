@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Base;
@@ -8,8 +9,9 @@ using Server.ViewModels;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,User,Event Organizer")]
     public class UsersController : BaseController<IUserRepository, User, int>
     {
         public UsersController(IUserRepository repository) : base(repository)

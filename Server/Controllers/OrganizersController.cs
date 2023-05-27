@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +10,8 @@ using Server.ViewModels;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class OrganizersController : BaseController<IOrganizerRepository, Organizer, int>
     {
         public OrganizersController(IOrganizerRepository repository) : base(repository)
@@ -18,6 +19,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("GetByUserId/{id}")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<IActionResult> GetByUserId(int id)
         {
             var result = await _repository.GetByUserId(id);
@@ -42,6 +44,7 @@ namespace Server.Controllers
 
         [HttpPut("UpdateOrganizer/{id}")]
         [Consumes("multipart/form-data")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<IActionResult> UpdateOrganizer(int id, [FromForm] OrganizerVM organizer)
         {
             try

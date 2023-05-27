@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Base;
 using Server.Models;
@@ -8,8 +9,9 @@ using System.Net;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "User, Event Organizer")]
     public class PaymentsController : BaseController<IPaymentRepository, Payment, int>
     {
         public PaymentsController(IPaymentRepository repository) : base(repository)
@@ -17,6 +19,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("Approve/{id}")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> Approved(int id)
         {
             var entity = await _repository.Approve(id);
@@ -42,6 +45,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("Reject/{id}")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> Reject(int id)
         {
             var entity = await _repository.Reject(id);
@@ -68,6 +72,7 @@ namespace Server.Controllers
 
         [HttpPost("Upload")]
         [Consumes("multipart/form-data")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> UploadProof([FromForm] UploadProofVM uploadProofVM)
         {
             var entity = await _repository.UploadProof(uploadProofVM);
@@ -93,6 +98,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("ListPendingPayment")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> GetByUserOrganizerId(int id)
         {
             var entity = await _repository.GetByUserOrganizerId(id);

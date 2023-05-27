@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Base;
@@ -8,8 +9,9 @@ using Server.ViewModels;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "User,Event Organizer")]
     public class OrdersController : BaseController<IOrderRepository, Order, int>
     {
         public OrdersController(IOrderRepository repository) : base(repository)
@@ -17,6 +19,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("BuyTickets")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> BuyTickets(OrderTicketVM orderTicketVM)
         {
             var result = await _repository.BuyTickets(orderTicketVM);
@@ -40,6 +43,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Booking/{transactionId}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> Booking(string transactionId)
         {
             var result = await _repository.GetOrderDetailsByTransactionId(transactionId);
@@ -63,6 +67,7 @@ namespace Server.Controllers
         }
 
         [HttpPost("Booking")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> Booking(SaveBookingVM saveBookingVM)
         {
             var result = await _repository.saveBooking(saveBookingVM);
@@ -86,6 +91,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("MyTickets/{userId}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> MyTickets(int userId)
         {
             var result = await _repository.MyTickets(userId);
@@ -109,6 +115,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Detail/{transactionId}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Detail(string transactionId)
         {
             var result = await _repository.GetOrderDetail(transactionId);
@@ -132,6 +139,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("TicketSales/{eventId}")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> TicketSales(int eventId)
         {
             var result = await _repository.TicketSales(eventId);
@@ -155,6 +163,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Revenue/{eventId}")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> Revenue(int eventId)
         {
             var result = await _repository.Revenue(eventId);

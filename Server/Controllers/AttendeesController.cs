@@ -4,11 +4,13 @@ using Server.Base;
 using Server.Models;
 using Server.Repository.Interface;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "Event Organizer")]
     public class AttendeesController : BaseController<IAttendeeRepository, Attendee, int>
     {
         public AttendeesController(IAttendeeRepository repository) : base(repository)

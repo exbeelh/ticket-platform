@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Base;
@@ -7,8 +8,9 @@ using Server.Repository.Interface;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "Event Organizer")]
     public class TicketsController : BaseController<ITicketRepository, Ticket, int>
     {
         public TicketsController(ITicketRepository repository) : base(repository)

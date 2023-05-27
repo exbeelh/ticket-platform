@@ -475,7 +475,7 @@ public partial class MyContext : DbContext
         modelBuilder.Entity<Role>().HasData(
             new Role { Id = 1, Name = "Admin" },
             new Role { Id = 2, Name = "User" },
-            new Role { Id = 2, Name = "Event Organizer" }
+            new Role { Id = 3, Name = "Event Organizer" }
         );
 
         modelBuilder.Entity<Category>().HasData(
@@ -496,7 +496,7 @@ public partial class MyContext : DbContext
         );
 
         modelBuilder.Entity<User>().HasData(
-            new User { Id = 1, Firstname = "Admin", Lastname = "Admin", Email = "admin@gmail.com", Picture = "default.png", PhoneNumber = "08123456789", Website = "https://www.google.com", IsActive = 0, Address = "Jl. Admin", City = "Palembang", State = "DKI Jakarta", PostalCode = "12345", CountryId = "IDN" }
+            new User { Id = 1, Firstname = "Admin", Lastname = "Admin", Email = "admin@gmail.com", Picture = "default.jpg", PhoneNumber = "08123456789", Website = "https://www.google.com", IsActive = 0, Address = "Jl. Admin", City = "Palembang", State = "DKI Jakarta", PostalCode = "12345", CountryId = "IDN" }
         );
 
         modelBuilder.Entity<Account>().HasData(

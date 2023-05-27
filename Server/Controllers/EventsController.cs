@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Base;
 using Server.Models;
@@ -9,8 +10,9 @@ using System.Net;
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,Event Organizer")]
     public class EventsController : BaseController<IEventRepository, Event, int>
     {
         public EventsController(IEventRepository repository) : base(repository)
@@ -18,6 +20,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public override async Task<IActionResult> GetByIdAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
@@ -46,6 +49,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Search")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAsync([FromQuery] string searchQuery)
         {
             var filteredEvents = await _repository.Search(searchQuery);
@@ -59,6 +63,7 @@ namespace Server.Controllers
 
 
         [HttpGet("Upcoming")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<EventVM>>> Upcoming()
         {
             var entity = await _repository.Upcoming();
@@ -71,6 +76,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Featured")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<EventVM>>> Featured()
         {
             var entity = await _repository.Featured();
@@ -84,6 +90,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Detail/{slug}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Details(string slug)
         {
             var entity = await _repository.Detail(slug);
@@ -107,6 +114,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Category/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Category(int id)
         {
             var entity = await _repository.Category(id);
@@ -119,6 +127,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Tickets/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Ticket(int id)
         {
             var entity = await _repository.Ticket(id);
@@ -131,6 +140,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("Approve/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Aprove(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
@@ -156,6 +166,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("Banned/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Banned(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
@@ -181,6 +192,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Approve")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<EventVM>> GetAllAprove()
         {
             var entity = await _repository.Aprove();
@@ -194,6 +206,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("Banned")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<EventVM>> GetAllBanned()
         {
             var entity = await _repository.Ban();
@@ -208,6 +221,7 @@ namespace Server.Controllers
 
         [HttpPost("Request")]
         [Consumes("multipart/form-data")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> RequestEvent([FromForm] RequestEventVM requestEventVM)
         {
             var entity = await _repository.RequestEvent(requestEventVM);
@@ -232,6 +246,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("ListEventOrganizer/{userId}")]
+        [Authorize(Roles = "Event Organizer")]
         public async Task<ActionResult> ListEventOrganizer(int userId)
         {
             var entity = await _repository.GetByUserOrganizerId(userId);
