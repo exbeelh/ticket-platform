@@ -1,61 +1,114 @@
-const userProfile = async () => {
-    // Get form element
-    const form = document.querySelector('form');
+const getUserProfile = async (id) => {
+    try {
+        const result = await DataSource.getUserById(id);
 
-    // Add event listener to form submission
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+        renderDetail(result);
+    } catch (message) {
+        fallbackResult(message);
+    }
+};
 
-        // Get form data
-        const email = $('#email').val();
-        const firstName = $('#first-name').val();
-        const lastName = $('#last-name').val();
-        const phoneNumber = $('#phone-number').val();
-        const website = $('#website').val();
-        const profilePicture = $('#profile-picture').val();
-        const address = $('textarea').val();
-        const city = $('#city').val();
-        const postalCode = $('#postal-code').val();
-        const country = $('#country').val();
-        const state = $('#state').val();
-        // Create an object with the form data
-        const formData = {
-            id: 2, // userID
-            firstname: firstName,
-            lastname: lastName,
-            email: email,
-            picture: profilePicture,
-            phoneNumber: phoneNumber,
-            website: website,
-            isActive: 1,
-            address: address,
-            city: city,
-            postalCode: postalCode,
-            state: state,
-            countryId: country
-        };
+const updateUserProfile = async () => {
+    var formData = new FormData();
+    formData.append('Id', JWTUserID);
+    formData.append('Firstname', $('#first-name').val());
+    formData.append('Lastname', $('#last-name').val());
+    formData.append('PhoneNumber', $('#phone-number').val());
+    formData.append('Website', $('#website').val());
+    formData.append('Address', $('textarea#address').val());
+    formData.append('City', $('#city').val());
+    formData.append('PostalCode', $('#postal-code').val());
+    formData.append('State', $('#state').val());
+    formData.append('CountryId', $('#country_id').val());
+    formData.append('PictureFile', $('#profilePicture')[0].files[0]);
 
-        try {
-            DataSource.updateUsers(formData)
+    try {
+        DataSource.updateUsers(JWTUserID, formData);
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Organizer has been added',
-                showConfirmButton: true,
-                confirmButtonText: 'OK',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/user/profile';
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Organizer has been added',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/user/profile';
+            }
+        });
+    } catch (message) {
+        alert(message);
+    }
+};
+
+const renderDetail = (result) => {
+    const profile = result.data;
+
+    $('#email').val(profile.email);
+    $('#first-name').val(profile.firstname);
+    $('#last-name').val(profile.lastname);
+    $('#phone-number').val(profile.phoneNumber);
+    $('#website').val(profile.website);
+    $('textarea#address').val(profile.address);
+    $('#city').val(profile.city);
+    $('#postal-code').val(profile.postalCode);
+    $('#country_id').val(profile.countryId).trigger('change');
+    $('#state').val(profile.state);
+};
+
+const fallbackResult = (message) => {
+    alert(message);
+};
+
+const events = () => {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener(
+            'submit',
+            async function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (form.checkValidity() === true) {
+                    await updateUserProfile();
                 }
-            });
-        } catch (message) {
-            alert(message);
-        }
 
-        // Log the form data to the console
-        console.log(formData);
+                form.classList.add('was-validated');
+            },
+            false
+        );
     });
-}
 
-userProfile();
+    $('.basic-select-country').select2({
+        placeholder: 'Select Country',
+        ajax: {
+            url: `${BASE_URL_API}/api/countries`,
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    search: params.term,
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.data.map((country) => {
+                        return {
+                            id: country.id,
+                            text: country.name,
+                        };
+                    }),
+                };
+            },
+            cache: true,
+        },
+    });
+};
+
+const main = () => {
+    events();
+    getUserProfile(JWTUserID);
+};
+
+main();

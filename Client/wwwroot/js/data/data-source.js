@@ -1056,19 +1056,37 @@ class DataSource {
             });
     }
 
-    static updateUsers(users) {
-        return fetch(`${BASE_URL_API}/api/users/${users.id}`, {
+    static updateUsers(id, users) {
+        return fetch(`${BASE_URL_API}/api/users/updateuser/${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(users),
+            body: users,
         })
             .then((response) => {
                 return response;
             })
             .then((responseJson) => {
                 if (responseJson && responseJson.status === 204) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getUserById(id) {
+        return fetch(`${BASE_URL_API}/api/users/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
                     return Promise.resolve(responseJson);
                 } else {
                     return Promise.reject(`Something went wrong`);
