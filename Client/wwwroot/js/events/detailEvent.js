@@ -186,6 +186,8 @@ const events = () => {
 };
 
 const main = () => {
+    if (!auth.isAuthenticated()) $('#buy_ticket').hide();
+
     events();
 
     // get event id from url

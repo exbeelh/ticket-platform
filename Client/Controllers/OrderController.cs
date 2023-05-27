@@ -11,6 +11,8 @@ public class OrderController : Controller
 	{
 	}
 
+    [Route("/Order/Invoice/{transactionId}")]
+    [Authorize(Roles = "User")]
     public IActionResult Index()
     {
         return View();

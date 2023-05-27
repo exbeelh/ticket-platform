@@ -33,7 +33,7 @@ const renderResult = (result) => {
                     ${statusOrder(item.orderStatusId, item.orderStatusName)}
                 </td>
                 <td>
-                    <a class="btn btn-light btn-sm" asp-area="" asp-controller="Order" asp-action="Index"> <i class="fa fa-eye"></i>Detail</a>
+                    <a class="btn btn-light btn-sm" href="${BASE_URL}/order/invoice/${item.transactionId}"> <i class="fa fa-eye"></i>Detail</a>
                 </td>
             </tr>
         `;

@@ -20,6 +20,7 @@ const renderResult = (result) => {
     });
 
     $('#total_ticket').text(totalTickets);
+    $('#go_to_ticket').attr('href', '/order/invoice/' + data.transactionId);
 };
 
 const fallbackResult = (message) => {
