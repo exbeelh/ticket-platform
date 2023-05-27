@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>@ViewData["Title"] - Client</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- partial:partial/_globalStyles.html -->
+    <!-- Iconic Fonts -->
+    <link rel="stylesheet" href="~/admin/vendor/fonts/line-icons/LineIcons.min.css">
+    <link rel="stylesheet" href="~/admin/vendor/fonts/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="~/admin/vendor/fonts/bootstrap-icons/font/bootstrap-icons.css">
+
+    <!-- Plugins -->
+    <link href="~/admin/vendor/dist/libs.bundle.css" rel="stylesheet">
+
+    <!-- Gnarly styles -->
+    <!-- <link href="~/admin/vendor/dist/style.bundle.css" rel="stylesheet"> -->
+    <link href="~/admin/assets/css/style.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="~/admin/assets/img/favicon.ico">
+</head>
+<body class="dsh-body dsh-aside-left-open">
+
+    <!-- Preloader -->
+    <div class="dsh-preloader bg-white">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- /Preloader -->
+   
+    <!-- Body Content Wrapper -->
+    <div class="dsh-body dsh-auth login-1">
+        @RenderBody()
+    </div>
+
+    <!-- Main JS -->
+    <script src="~/js/data/data-source.js"></script>
+    <script src="~/js/helpers/helper.js"></script>
+
+    <!-- Plugins -->
+    <script src="~/admin/vendor/dist/libs.bundle.js"></script>
+
+    <!-- Gnarly core JavaScript -->
+    <!-- <script src="~/admin/vendor/dist/script.bundle.js"></script> -->
+    <script src="~/admin/assets/js/helpers.js"></script>
+    <script src="~/admin/assets/js/sidenav.js"></script>
+    <script src="~/admin/assets/js/app.js"></script>
+
+    <!-- Page Specific Scripts -->
+    <script src="~/admin/vendor/js/apexcharts.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
