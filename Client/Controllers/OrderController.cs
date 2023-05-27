@@ -1,43 +1,50 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers;
 
+[Authorize(Roles = "User")]
 public class OrderController : Controller
 {
 	public OrderController()
 	{
 	}
 
-    public IActionResult Index() // Order ID
+    public IActionResult Index()
     {
         return View();
     }
 
     [Route("/Booking/{transactionId}")]
-	public IActionResult Booking()
+    [Authorize(Roles = "User")]
+    public IActionResult Booking()
 	{
 		return View();
 	}
 
     [Route("/Pay/{transactionId}")]
-	public IActionResult Payment()
+    [Authorize(Roles = "User")]
+    public IActionResult Payment()
 	{
 		return View();
 	}
 
-	public IActionResult Cancel() // Order ID
+    [Authorize(Roles = "User")]
+    public IActionResult Cancel()
 	{
 		return View();
 	}
 
     [Route("/Order/Success/{transactionId}")]
-	public IActionResult Success() // Order ID
+    [Authorize(Roles = "User")]
+    public IActionResult Success()
 	{
 		return View();
 	}
 
-	public IActionResult MyTicket() // Order ID
+    [Authorize(Roles = "User")]
+    public IActionResult MyTicket()
 	{
 		return View();
 	}

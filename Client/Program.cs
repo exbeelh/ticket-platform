@@ -1,4 +1,4 @@
-﻿using Client.Repositories;
+using Client.Repositories;
 using Client.Repositories.Contracts;
 using Client.Repositories.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +14,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddScoped(typeof(IGeneralRepository<,>), typeof(GeneralRepository<,>));
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 // Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -66,6 +69,19 @@ app.UseStatusCodePages(async context => {
 });
 
 app.UseSession();
+
+// Add JWToken to all incoming HTTP Request Header
+app.Use(async (context, next) =>
+{
+    var JWToken = context.Session.GetString("JWToken");
+
+    if (!string.IsNullOrEmpty(JWToken))
+    {
+        context.Request.Headers.Add("Authorization", "Bearer " + JWToken);
+    }
+
+    await next();
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
