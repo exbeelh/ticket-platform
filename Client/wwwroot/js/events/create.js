@@ -182,7 +182,24 @@ const events = () => {
 };
 
 const main = () => {
+    if (!auth.isAuthenticated()) {
+        window.location.href = '/account/login';
+    }
 
+    if (JWTRole !== 'Event Organizer') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Sorry...',
+            text: 'You are not allowed to make event because you are not an event organizer',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/';
+            }
+        });
+    }
 
     events();
 };

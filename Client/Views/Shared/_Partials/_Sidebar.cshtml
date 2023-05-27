@@ -4,7 +4,7 @@
     </div>
     <div class="widget-content dashboard-nav">
         <ul class="list-unstyled">
-            <li><a href="dashboard.html"> <i class="fas fa-home me-2"></i> Dashboard</a></li>
+            <!-- <li><a href="dashboard.html"> <i class="fas fa-home me-2"></i> Dashboard</a></li> -->
             <li><a class="" is-active-route asp-area="" asp-controller="User" asp-action="Profile"> <i class="fas fa-user me-2"></i> My Profile</a></li>
             <li><a class="" is-active-route asp-area="" asp-controller="User" asp-action="ChangePassword"> <i class="fas fa-key me-2"></i> Password</a></li>
         </ul>
@@ -15,6 +15,6 @@
             <li><a class="d-none event_organizer_menu" is-active-route asp-area="" asp-controller="Event" asp-action="Manage"> <i class="fas fa-clock me-2"></i> Manage Events</a></li>
             <li><a class="d-none event_organizer_menu" is-active-route asp-area="" asp-controller="Organizer" asp-action="Manage"> <i class="far fa-building me-2"></i> Manage Organizer</a></li>
         </ul>
-        <a class="btn btn-secondary btn-sm mt-2" href="#">Logout</a>
+        <a class="btn btn-secondary btn-sm mt-2"  asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
     </div>
 </div>
