@@ -42,7 +42,7 @@ namespace Server.Repository.Data
             getUser.PostalCode = profile.PostalCode;
             getUser.State = profile.State;
             getUser.CountryId = profile.CountryId;
-
+            _context.Entry(getUser).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
     }

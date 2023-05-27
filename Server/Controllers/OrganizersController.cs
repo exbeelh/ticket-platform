@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Net;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Server.Base;
 using Server.Models;
 using Server.Repository.Interface;
+using Server.ViewModels;
 
 namespace Server.Controllers
 {
@@ -12,6 +15,72 @@ namespace Server.Controllers
     {
         public OrganizersController(IOrganizerRepository repository) : base(repository)
         {
+        }
+
+        [HttpGet("GetByUserId/{id}")]
+        public async Task<IActionResult> GetByUserId(int id)
+        {
+            var result = await _repository.GetByUserId(id);
+
+            if (result == null)
+            {
+                return NotFound(new
+                {
+                    code = StatusCodes.Status404NotFound,
+                    status = HttpStatusCode.NotFound.ToString(),
+                    message = "Data not found!"
+                });
+            }
+
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = result
+            });
+        }
+
+        [HttpPut("UpdateOrganizer/{id}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateOrganizer(int id, [FromForm] OrganizerVM organizer)
+        {
+            try
+            {
+                var check = await _repository.GetByUserId(id);
+
+                if (check == null)
+                {
+                    return NotFound(new
+                    {
+                        code = StatusCodes.Status404NotFound,
+                        status = HttpStatusCode.NotFound.ToString(),
+                        message = "Data not found!"
+                    });
+                }
+
+                var result = await _repository.UpdateOrganizer(organizer);
+
+                if (result == 0)
+                {
+                    return Conflict(new
+                    {
+                        code = StatusCodes.Status409Conflict,
+                        status = HttpStatusCode.Conflict.ToString(),
+                        message = "Data fail to update!"
+                    });
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound(new
+                {
+                    code = StatusCodes.Status404NotFound,
+                    status = HttpStatusCode.NotFound.ToString(),
+                    message = "Internal server error"
+                });
+            }
+
+            return NoContent();
         }
     }
 }

@@ -32,7 +32,17 @@ namespace Server.Controllers
                     });
                 }
 
-                await _repository.UpdateUser(profile);
+                var result = await _repository.UpdateUser(profile);
+
+                if (result == 0)
+                {
+                    return Conflict(new
+                    {
+                        code = StatusCodes.Status409Conflict,
+                        status = HttpStatusCode.Conflict.ToString(),
+                        message = "Data fail to update!"
+                    });
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
