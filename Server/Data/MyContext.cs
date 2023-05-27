@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Server.Handlers;
 using Server.Models;
 
 namespace Server.Data;
@@ -464,6 +465,47 @@ public partial class MyContext : DbContext
                 .HasForeignKey(d => d.CountryId)
                 .HasConstraintName("FK__Users__country_i__534D60F1");
         });
+
+        modelBuilder.Entity<Country>().HasData(
+            new Country { Id = "IDN", Name = "Indonesia" },
+            new Country { Id = "MYS", Name = "Malaysia" },
+            new Country { Id = "SGP", Name = "Singapore" }
+        );
+
+        modelBuilder.Entity<Role>().HasData(
+            new Role { Id = 1, Name = "Admin" },
+            new Role { Id = 2, Name = "User" },
+            new Role { Id = 2, Name = "Event Organizer" }
+        );
+
+        modelBuilder.Entity<Category>().HasData(
+            new Category { Id = 1, Name = "Music" , Slug = "music"},
+            new Category { Id = 2, Name = "Concert", Slug = "concert" },
+            new Category { Id = 3, Name = "Festival", Slug = "festival" },
+            new Category { Id = 4, Name = "Sport", Slug = "sport" },
+            new Category { Id = 5, Name = "Conference", Slug = "conference" },
+            new Category { Id = 6, Name = "Performing Art", Slug = "performing-art" }
+        );
+
+        modelBuilder.Entity<OrderStatus>().HasData(
+            new OrderStatus { Id = 1, Name = "Waiting Payment" },
+            new OrderStatus { Id = 2, Name = "Waiting Approve Payment" },
+            new OrderStatus { Id = 3, Name = "Payment Approve" },
+            new OrderStatus { Id = 4, Name = "Payment Reject" },
+            new OrderStatus { Id = 5, Name = "Cancel" }
+        );
+
+        modelBuilder.Entity<User>().HasData(
+            new User { Id = 1, Firstname = "Admin", Lastname = "Admin", Email = "admin@gmail.com", Picture = "default.png", PhoneNumber = "08123456789", Website = "https://www.google.com", IsActive = 0, Address = "Jl. Admin", City = "Palembang", State = "DKI Jakarta", PostalCode = "12345", CountryId = "IDN" }
+        );
+
+        modelBuilder.Entity<Account>().HasData(
+            new Account { UserId = 1, Password = Hashing.HashPassword("password") }
+        );
+
+        modelBuilder.Entity<AccountRole>().HasData(
+            new AccountRole { Id = 1, AccountId = 1, RoleId = 1 }
+        );
 
         OnModelCreatingPartial(modelBuilder);
     }
