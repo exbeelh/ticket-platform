@@ -450,6 +450,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/events`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -572,6 +573,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/events/category/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -588,6 +590,9 @@ class DataSource {
     static insertEvent(event) {
         return fetch(`${BASE_URL_API}/api/events/request`, {
             method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+            },
             body: event,
         })
             .then((response) => {
@@ -610,6 +615,7 @@ class DataSource {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -632,6 +638,7 @@ class DataSource {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -675,6 +682,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/organizers/getbyuserid/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -716,6 +724,9 @@ class DataSource {
     static updateOrganizer(id, organizer) {
         return fetch(`${BASE_URL_API}/api/organizers/updateorganizer/${id}`, {
             method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+            },
             body: organizer,
         })
             .then((response) => {
@@ -761,6 +772,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/orders/mytickets/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -778,6 +790,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/events/listeventorganizer/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -795,6 +808,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/tickets/total/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -812,6 +826,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/tickets/event/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -831,6 +846,7 @@ class DataSource {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
             body: JSON.stringify(order),
         })
@@ -853,6 +869,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/orders/booking/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -875,6 +892,7 @@ class DataSource {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
             body: JSON.stringify(booking),
         })
@@ -897,6 +915,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/orders/ticketsales/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -914,6 +933,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/orders/revenue/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -931,6 +951,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/orders/detail/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -952,6 +973,9 @@ class DataSource {
     static uploadPayment(payment) {
         return fetch(`${BASE_URL_API}/api/payments/upload`, {
             method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+            },
             body: payment,
         })
             .then((response) => {
@@ -973,6 +997,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/payments/listpendingpayment?id=${userId}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -995,6 +1020,7 @@ class DataSource {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -1017,6 +1043,7 @@ class DataSource {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -1039,6 +1066,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/attendees/ordertickets/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -1057,6 +1085,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/users`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {
@@ -1077,6 +1106,9 @@ class DataSource {
     static updateUsers(id, users) {
         return fetch(`${BASE_URL_API}/api/users/updateuser/${id}`, {
             method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${TOKEN}`,
+            },
             body: users,
         })
             .then((response) => {
@@ -1098,6 +1130,7 @@ class DataSource {
         return fetch(`${BASE_URL_API}/api/users/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${TOKEN}`,
             },
         })
             .then((response) => {

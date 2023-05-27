@@ -44,7 +44,7 @@ const renderResult = (result) => {
                                 <h6 class="mt-0">${item.user.firstname}</h6>
                                 <div class="d-flex ms-auto mb-3">
                                     <a href="javascript:void(0)" class="bg-success-soft text-success border-radius px-3 py-1 font-sm me-2" onclick="approvePayment(${item.id})"> Approved </a>
-                                    <href="javascript:void(0)" class="bg-danger-soft text-danger border-radius px-3 py-1 font-sm" onclick="rejectPayment(${item.id})"> Rejected </href=>
+                                    <a href="javascript:void(0)" class="bg-danger-soft text-danger border-radius px-3 py-1 font-sm" onclick="rejectPayment(${item.id})"> Rejected </a>
                                 </div>
                             </div>
                             <div class="booking-item d-flex mb-3">

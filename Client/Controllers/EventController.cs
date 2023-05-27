@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Client.Controllers;
 
-[Authorize(Roles = "Event Organizer")]
+[Authorize(Roles = "Admin,Event Organizer")]
 public class EventController : Controller
 {
     public EventController()
@@ -60,7 +60,7 @@ public class EventController : Controller
         return View();
     }
 
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public IActionResult List()
     {
         return View();
