@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $.ajax({
         url: "https://localhost:7292/api/Events",
+        headers: {
+            'Authorization': 'Bearer ' + TOKEN
+        },
         success: function (response) {
             let cardsHtml = response.data.map((card, index) => {
                 // Define Bootstrap classes for different types and statuses
@@ -24,6 +27,9 @@ $(document).ready(function () {
 
     $.ajax({
         url: "https://localhost:7292/api/Organizers",
+        headers: {
+            'Authorization': 'Bearer ' + TOKEN
+        },
         success: function (response) {
             // Limit the number of items to display
             const numberOfItemsToShow = 4; // Change this value to the desired number of items
@@ -45,6 +51,9 @@ $(document).ready(function () {
 
     $.ajax({
         url: "https://localhost:7292/api/Events",
+        headers: {
+            'Authorization': 'Bearer ' + TOKEN
+        },
         success: function (response) {
             // Limit the number of items to display
             const numberOfItemsToShow = 8; // Change this value to the desired number of items
@@ -66,6 +75,9 @@ $(document).ready(function () {
 
     $.ajax({
         url: "https://localhost:7292/api/Users",
+        headers: {
+            'Authorization': 'Bearer ' + TOKEN
+        },
         success: function (response) {
             // Limit the number of items to display
             const numberOfItemsToShow = 8; // Change this value to the desired number of items
