@@ -24,3 +24,20 @@ if (auth.isAuthenticated()) {
     $('#user_not_authenticated').removeClass('d-none');
     $('#user_not_authenticated').addClass('d-sm-block');
 }
+
+const getCategoriesFooter = async () => {
+    const result = await DataSource.getCategories();
+
+    let categoriesHTML = '';
+    result.data.map((category, index) => {
+        if (index < 5) {
+            categoriesHTML += `
+                <li><a href="${BASE_URL}/event" data-categoryId="${category.id}">${category.name}</a></li>
+            `;
+        }
+    });
+
+    $('#categories_footer_list').html(categoriesHTML);
+}
+
+getCategoriesFooter();

@@ -76,23 +76,12 @@
                         <div class="footer-logo mb-3">
                             <a href="index.html"><img class="img-fluid footer-logo" src="~/dist/images/logo.svg" alt="logo"></a>
                         </div>
-                        <p class="mb-0 d-inline-block">Success isn’t really that difficult. There is a significant portion of the population here in North America, that actually want and need success</p>
-                        <ul class="list-unstyled mb-0 mt-4  social-icon">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-github"></i></a></li>
-                        </ul>
+                        <p class="mb-0 d-inline-block">Achieving success in the ticket booking application is not as challenging as it may seem. There is a considerable number of individuals who are eager and require the convenience and benefits that come with successful ticket booking.</p>
                     </div>
                     <div class="col-xl-2 col-lg-3 col-md-6 mb-4 mb-lg-0">
                         <h5 class="mb-2 mb-sm-4 text-white">Categories</h5>
                         <div class="footer-link">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#">Restaurant</a></li>
-                                <li><a href="#">Night life</a></li>
-                                <li><a href="#">Hotels</a></li>
-                                <li><a href="#">Cafe</a></li>
-                                <li><a href="#">Club & Bars</a></li>
+                            <ul class="list-unstyled mb-0" id="categories_footer_list">
                             </ul>
                         </div>
                     </div>
@@ -100,11 +89,10 @@
                         <h5 class="mb-2 mb-sm-4 text-white">Quick Links</h5>
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#">Forum Support</a></li>
-                                <li><a href="#">Help fAQs</a></li>
-                                <li><a href="#">Contact us</a></li>
-                                <li><a href="#">Pricing and plans</a></li>
-                                <li><a href="#">Cookies policy</a></li>
+                                <li><a asp-area="" asp-controller="Event" asp-action="Index">Browse Event</a></li>
+                                <li><a asp-area="" asp-controller="Event" asp-action="Create">Create Event</a></li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                                <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -123,7 +111,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 text-center">
-                        <p class="mb-0">©Copyright 2022 <a href="index.html">Placy</a> All Rights Reserved</p>
+                        <p class="mb-0">©Copyright 2023 <a href="index.html">Placy</a> All Rights Reserved</p>
                     </div>
                 </div>
             </div>
