@@ -29,34 +29,98 @@
     </div>
 </section>
 
-<!-- Events -->
-<section class="space-ptb">
+<!-- Why Choose -->
+<section class="space-pt">
     <div class="container">
-        <div class="row d-flex align-items-center mb-4 mb-lg-5">
-            <div class="col-md-12 col-lg-8 col-xl-6">
-                <div class="section-title mb-0">
-                    <h2>Upcoming Concerts & Events</h2>
-                    <div class="sub-title"> <span>
-                        Make yout concerts & events unforgettable moments with us
-                    </span></div>
+        <div class="row align-items-center">
+            <div class="col-lg-6 pe-lg-5">
+                <div class="section-title mb-4">
+                    <h2>
+                        Great Events <br> Unforgettable Moments
+                    </h2>
+                    <div class="sub-title bg-transparent">
+                        <span> Get ready to embark on unforgettable experiences! Book your tickets effortlessly and be part of extraordinary events with our user-friendly ticket booking app. Don't miss out on the excitement!</span>
+                    </div>
+                    <p class="pt-3">Seize Every Moment of Fun and Entertainment – Get Your Tickets Swiftly on Our Cutting-Edge Booking App.</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled mt-0 mt-lg-4 mb-4 mb-lg-5">
+                            <li class="d-flex text-dark align-items-center">
+                                <i class="fa-solid fa-check me-3 font-xl text-primary"></i>
+                                <span> Limitless Possibilities. </span>
+                            </li>
+                            <li class="d-flex text-dark align-items-center mt-3">
+                                <i class="fa-solid fa-check me-3 font-xl text-primary"></i>
+                                <span> Seamless Booking Experience. </span>
+                            </li>
+                            <li class="d-flex text-dark align-items-center mt-3">
+                                <i class="fa-solid fa-check me-3 font-xl text-primary"></i>
+                                <span> Access Exclusive Events! </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled mt-0 mt-lg-4 mb-4 mb-lg-5">
+                            <li class="d-flex text-dark align-items-center">
+                                <i class="fa-solid fa-check me-3 font-xl text-primary"></i>
+                                <span> Stay Ahead of the Crowd </span>
+                            </li>
+                            <li class="d-flex text-dark align-items-center mt-3">
+                                <i class="fa-solid fa-check me-3 font-xl text-primary"></i>
+                                <span> Convenience Redefined! </span>
+                            </li>
+                            <li class="d-flex text-dark align-items-center mt-3">
+                                <i class="fa-solid fa-check me-3 font-xl text-primary"></i>
+                                <span> Unforgettable Memories Guaranteed. </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a class="btn btn-primary mb-4" asp-area="" asp-controller="Event" asp-action="Create">Discover More</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-image-wrap">
+                    <div class="position-relative d-flex align-items-center">
+                        <img class="img-fluid" src="~/dist/images/about/01.jpg" alt="">
+                        <img class="img-fluid ps-2 about-img-02 d-none d-xl-block" src="~/dist/images/about/02.jpg" alt="">
+                    </div>
+                    <div class="about-shape-2">
+                        <img src="~/dist/images/pattern-1.png" alt="">
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mt-4 mt-lg-0">
-                <a class="btn btn-primary" asp-area="" asp-controller="Event" asp-action="Index"><span>View All</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Event -->
+<section class="space-ptb popup-gallery overflowx-h places-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h2>Featured Event</h2>
+                    <div class="sub-title"> <span> Make a list of your favorite events so you can buy tickets faster!</span></div>
+                </div>
             </div>
         </div>
-        <div class="row" id="upcoming-events">
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel testimonial-center" data-nav-dots="true" data-nav-arrow="false" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="2" data-xx-items="1" data-space="20" data-autoheight="false">
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- Category -->
-<section class="space-pb">
+<section class="space-ptb category-section">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h2>Search By Category!</h2>
+                    <h2>Search By Category</h2>
                     <div class="sub-title"> <span>Make searching easy for your customers to find the perfect concert or event!</span></div>
                 </div>
             </div>
@@ -93,34 +157,30 @@
                         <h2 class="text-white mb-0">Create an event</h2>
                     </div>
                     <p class="text-white mb-4">Give Yourself the Power of Creating Memorable Events. Remind Yourself That Your Vision Can Become a Reality.</p>
-                    <a class="btn btn-light mb-4" asp-area="" asp-controller="Event" asp-action="Index">Create your event</a>
+                    <a class="btn btn-light mb-4" asp-area="" asp-controller="Event" asp-action="Create">Create your event</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Featured Event -->
-<section class="space-ptb popup-gallery overflowx-h bg-light places-blog">
+<!-- Events -->
+<section class="space-ptb bg-light">
     <div class="container">
         <div class="row d-flex align-items-center mb-4 mb-lg-5">
             <div class="col-md-12 col-lg-8 col-xl-6">
                 <div class="section-title mb-0">
-                    <h2>Featured Event</h2>
-                    <div class="sub-title">
-                        <span> Make a list of your favorite events so you can buy tickets faster!</span>
-                    </div>
+                    <h2>Upcoming Concerts & Events</h2>
+                    <div class="sub-title"> <span>
+                        Make yout concerts & events unforgettable moments with us
+                    </span></div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-4 col-xl-6 text-lg-end text-start mt-4 mt-lg-0">
                 <a class="btn btn-primary" asp-area="" asp-controller="Event" asp-action="Index"><span>View All</span></a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="owl-carousel testimonial-center" data-nav-dots="true" data-nav-arrow="false" data-items="3" data-md-items="3" data-sm-items="2" data-xs-items="2" data-xx-items="1" data-space="20" data-autoheight="false">
-                </div>
-            </div>
+        <div class="row" id="upcoming-events">
         </div>
     </div>
 </section>
