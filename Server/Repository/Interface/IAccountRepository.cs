@@ -9,5 +9,6 @@ namespace Server.Repository.Interface
         Task<int> Register(RegisterVM registerVM);
         Task<UserDataVM> GetUserDataAsync(string email);
         Task<IEnumerable<string>> GetRoleByEmailAsync(string email);
+        Task<int> ChangePasswordAsync(ChangePasswordVM changePasswordVM);
     }
 }

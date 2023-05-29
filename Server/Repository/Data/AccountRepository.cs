@@ -130,5 +130,20 @@ namespace Server.Repository.Data
                 return 0;
             }
         }
+
+        public async Task<int> ChangePasswordAsync(ChangePasswordVM changePasswordVM)
+        {
+            var getUser = await _userRepository.GetByIdAsync(changePasswordVM.UserId);
+            var getAccount = await GetByIdAsync(changePasswordVM.UserId);
+
+            if (Hashing.ValidatePassword(changePasswordVM.OldPassword, getAccount.Password))
+            {
+                getAccount.Password = Hashing.HashPassword(changePasswordVM.NewPassword);
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+
+            return 0;
+        }
     }
 }

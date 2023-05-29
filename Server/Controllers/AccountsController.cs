@@ -13,7 +13,6 @@ namespace Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin")]
     public class AccountsController : BaseController<IAccountRepository, Account, int>
     {
         private readonly ITokenService _tokenService;
@@ -117,6 +116,42 @@ namespace Server.Controllers
             {
                 Console.WriteLine(ex);
 
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    message = "Something Wrong!"
+                });
+            }
+        }
+
+        [HttpPut("ChangePassword")]
+        [Authorize(Roles = "Admin,User,Event Organizer")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordVM changePasswordVM)
+        {
+            try
+            {
+                var result = await _repository.ChangePasswordAsync(changePasswordVM);
+
+                if (result == 0)
+                {
+                    return BadRequest(new
+                    {
+                        code = StatusCodes.Status400BadRequest,
+                        status = HttpStatusCode.BadRequest.ToString(),
+                        message = "Old Password Does not Match!"
+                    });
+                }
+
+                return Ok(new
+                {
+                    code = StatusCodes.Status200OK,
+                    status = HttpStatusCode.OK.ToString(),
+                    message = "Change Password Succesfully!"
+                });
+            }
+            catch
+            {
                 return BadRequest(new
                 {
                     code = StatusCodes.Status400BadRequest,
