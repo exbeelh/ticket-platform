@@ -489,6 +489,27 @@ class DataSource {
             });
     }
 
+    static getFeaturedEvents() {
+        return fetch(`${BASE_URL_API}/api/events/featured`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     static getEventById(id) {
         return fetch(`${BASE_URL_API}/api/events/${id}`, {
             headers: {
