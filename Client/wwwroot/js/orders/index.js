@@ -37,6 +37,19 @@ const getDetails = async (id) => {
 
         $('#ticket_details').html(html);
         $('#order_total').html(formatRupiah(total));
+
+        if(data.orderStatusId !== 3) {
+            $('#print_ticket').hide();
+        }
+
+        $('#print_ticket').on('click', () => {
+            let print = window.open(`${BASE_URL}/order/invoice/print/${data.transactionId}`, '_blank');
+            print.onload = () => {
+                setTimeout(() => {
+                    print.print();
+                }, 2000);
+            }
+        });
     } catch (message) {
         alert(message);
     }

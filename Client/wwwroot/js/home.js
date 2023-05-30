@@ -32,13 +32,14 @@ const getCategories = async () => {
         const result = await DataSource.getCategories();
 
         const categoryElement = document.querySelector('#categories');
+        let $no = 1;
         let categories = '';
         result.data.forEach((category) => {
             categories += `
                 <li class="category-item-01">
                     <a href="${BASE_URL}/event" data-categoryId="${category.id}">
                         <div class="category-icon">
-                            <img class="img-fluid" src="dist/images/category/01.jpg" alt="">
+                            <img class="img-fluid" src="dist/images/category/0${$no++}.jpg" alt="">
                         </div>
                         <div class="category-content">
                             <h6>${category.name}</h6>
@@ -80,7 +81,7 @@ const renderResult = (result) => {
                     <div class="listing-image bg-overlay-half-top">
                         <img class="img-fluid" src="${BASE_URL_API}/images/${event.image}" alt="">
                         <div class="listing-quick-box">
-                            <a class="category" href="#">Cafe</a>
+                            <a class="category" href="#">${event.category}</a>
                             <a class="popup popup-single" href="${BASE_URL_API}/images/${event.image}" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
                             <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Bookmark"> <i class="far fa-bookmark"></i> </a>
                         </div>
@@ -133,7 +134,7 @@ const renderResultFeatured = (result) => {
                     <div class="listing-image bg-overlay-half-top">
                         <img class="img-fluid" src="${BASE_URL_API}/images/${event.image}" alt="">
                         <div class="listing-quick-box">
-                            <a class="category" href="#">Cafe</a>
+                            <a class="category" href="#">${event.category}</a>
                             <a class="popup popup-single" href="${BASE_URL_API}/images/${event.image}" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
                             <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Bookmark"> <i class="far fa-bookmark"></i> </a>
                         </div>

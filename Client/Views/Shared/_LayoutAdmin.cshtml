@@ -46,7 +46,7 @@
 
             <!-- Logo -->
             <div class="dsh-logo dsh-d-block-lg">
-                <a class="d-block text-center" href="index.html"> <img src="http://via.placeholder.com/406x109" alt="logo"> </a>
+                <a class="d-block text-center" href="index.html"> <img src="~/dist/images/logo.svg" alt="logo"> </a>
             </div>
 
             <!-- Navigation -->
@@ -160,7 +160,7 @@
                 <!-- User Maangement -->
                 <li class="menu-item-section">User Management</li>
                 <li class="menu-item">
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#masterData" aria-expanded="false" aria-controls="masterData">
+                    <a class="" is-active-route asp-area="" asp-controller="User" asp-action="List">
                         <span class="dsh-svg-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.996 511.996" xml:space="preserve">
                                 <path d="M256.004,159.996c-17.641,0-32,14.359-32,32v32h64v-32C288.004,174.355,273.645,159.996,256.004,159.996z"></path>
@@ -174,13 +174,8 @@
               C272.004,279.16,264.84,271.996,256.004,271.996z"></path>
                             </svg>
                             Users
-                            <i class="fas fa-chevron-down ms-auto"></i>
                         </span>
                     </a>
-                    <ul id="masterData" class="collapse" aria-labelledby="masterData" data-parent="#side-nav-accordion">
-                        <li> <a class="" is-active-route asp-area="" asp-controller="User" asp-action="List"> <span>User List</span> </a> </li>
-                        <li> <a class="" is-active-route asp-area="" asp-controller="User" asp-action="Create"> <span>Create User</span> </a> </li>
-                    </ul>
                 </li>
                 <li class="menu-item">
                     <a class="" is-active-route asp-area="" asp-controller="Role" asp-action="Index">

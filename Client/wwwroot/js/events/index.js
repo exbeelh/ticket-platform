@@ -30,7 +30,7 @@ const renderResult = (result) => {
                     <div class="listing-image bg-overlay-half-top">
                         <img class="img-fluid" src="${BASE_URL_API}/images/${event.image}" alt="">
                         <div class="listing-quick-box">
-                            <a class="category" href="#">Cafe</a>
+                            <a class="category" href="#">${event.category}</a>
                             <a class="popup popup-single" href="${BASE_URL_API}/images/${event.image}" data-bs-toggle="tooltip" data-placement="top" title="Zoom"> <i class="fas fa-search-plus"></i> </a>
                             <a class="like" href="#" data-bs-toggle="tooltip" data-placement="top" title="Like"> <i class="far fa-bookmark"></i> </a>
                         </div>

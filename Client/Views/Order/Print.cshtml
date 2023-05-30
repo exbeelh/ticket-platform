@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "Print Tickets";
+    Layout = "~/Views/Shared/_LayoutPrint.cshtml";
+}
+
+<div id="detail"></div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/orders/print.js"></script>
+}

@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Attendees Event";
+    Layout = "~/Views/Shared/_LayoutPrint.cshtml";
+}
+
+<p class="mb-3 text-center" style="text-align: center; font-size: 16px; font-weight: bold; color: #FF2222">
+    Attendee List Of <span id="event_title"></span>
+</p>
+
+<table class="table table1">
+    <tr class="table-red">
+        <th> No</th>
+        <th> Order ID</th>
+        <th> Ticket Code</th>
+        <th> Ticket Title</th>
+        <th> Username</th>
+        <th> Email</th>
+    </tr>
+    <tbody id="order_ticket">
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/events/attendee.js"></script>
+}

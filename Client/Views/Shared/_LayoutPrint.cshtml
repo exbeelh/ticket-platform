@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print</title>
+    <link rel="shortcut icon" href="~/dist/images/favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Global Compulsory (Do not remove)-->
+    <link rel="stylesheet" href="~/dist/css/fontawesome/all.min.css">
+    <link rel="stylesheet" href="~/dist/css/flaticon/flaticon.css">
+    <link rel="stylesheet" href="~/dist/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="~/dist/css/style.css">
+
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid #dee2e6;
+            font-size: 8px;
+            width: 100%;
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+        .table1 {
+            font-size: 10px !important;
+        }
+
+        .table.table1 tbody,
+        .table.table1 thead,
+        .table.table1 tr,
+        .table.table1 td {
+            border: 0 !important;
+        }
+
+        .table.cfont {
+            margin-bottom: 0;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.50rem;
+            vertical-align: top;
+        }
+
+        .table th {
+            vertical-align: bottom;
+            color: white;
+            text-align: left;
+        }
+
+        .table-sm th,
+        .table-sm td {
+            padding: 8px;
+        }
+
+        .table tr.table-grey {
+            background-color: #f8f9fa !important;
+        }
+
+        .table tr.table-red {
+            background-color: #FF2222 !important;
+        }
+
+        .table.table2 th {
+            text-align: center;
+        }
+
+        .table.table2 thead th {
+            vertical-align: bottom;
+            border-bottom: 1px solid #FF2222;
+        }
+
+        .table.table2 tbody+tbody {
+            border-top: 1px solid #FF2222;
+        }
+
+        .table2-bordered {
+            border: 1px solid #FF2222;
+        }
+
+        .table2-bordered th,
+        .table2-bordered td {
+            border: 1px solid #FF2222;
+        }
+
+        .table2-bordered thead th,
+        .table2-bordered thead td {
+            border-bottom-width: 1px;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- Main JS -->
+    <script src="~/js/data/data-source.js"></script>
+    <script src="~/js/helpers/helper.js"></script>
+    <script src="~/js/auth.js"></script>
+
+    <script>
+        const BASE_URL = "https://localhost:7003";
+        const TOKEN = '@Context.Session.GetString("JWToken")';
+        let JWTUserID = '';
+        let JWTName = '';
+        let JWTEmail = '';
+        let JWTRole = '';
+        let JWTPicture = '';
+
+        const auth = new Auth();
+        auth.setToken(TOKEN);
+
+        if (auth.isAuthenticated()) {
+            const payload = auth.decodeToken();
+
+            JWTUserID = payload['ID'];
+            JWTName = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            JWTEmail = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+            JWTRole = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+            JWTPicture = payload['Picture'];
+        }
+    </script>
+
+    <!-- JS Global Compulsory (Do not remove)-->
+    <script src="~/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="~/dist/js/popper/popper.min.js"></script>
+    <script src="~/dist/js/bootstrap/bootstrap.min.js"></script>
+    <script src="~/dist/plugins/sweetalert/sweetalert2.all.min.js"></script>
+
+    <!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
+    <script src="~/dist/js/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/dist/js/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Template Scripts (Do not remove)-->
+    <script src="~/dist/js/custom.js"></script>
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

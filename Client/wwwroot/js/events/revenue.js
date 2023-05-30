@@ -73,6 +73,15 @@ const main = () => {
     let id = url.substring(url.lastIndexOf('/') + 1);
     getEvent(id);
     getRevenueByEventId(id);
+
+    $('#print_attendees').on('click', () => {
+        let print = window.open(`${BASE_URL}/event/attendees/${id}`, '_blank');
+        print.onload = () => {
+            setTimeout(() => {
+                print.print();
+            }, 2000);
+        }
+    });
 };
 
 main();

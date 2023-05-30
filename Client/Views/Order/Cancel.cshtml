@@ -25,13 +25,13 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="bg-white p-4 shadow-sm border-radius">
-                    <h4 class="mb-4">Nama Event</h4>
+                    <h4 class="mb-4" id="event_title"></h4>
                     <h6 class="mb-4">Your order has been cancelled by some reason</h6>
                     <h6 class="mb-4">Please try again</h6>
                     <div class="mb-4">
-                        <a href="">Order Id : 5RL97D15P9</a> 2 Tickets
+                        <a href="">Order Id : <span id="transaction_id"></span></a> <span id="total_ticket"></span> Tickets
                     </div>
-                    <a href="" class="btn btn-secondary">GO TO EVENT</a>
+                    <a href="" class="btn btn-secondary" id="go_to_event">GO TO EVENT</a>
                 </div>
             </div>
         </div>
@@ -40,4 +40,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/orders/cancel.js"></script>
 }

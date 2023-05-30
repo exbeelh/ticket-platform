@@ -35,7 +35,7 @@ const renderResult = (result) => {
                 <div class="row">
                     <div class="col-xl-1 col-lg-2">
                         <div class="avatar avatar-lg">
-                            <img src="../dist/images/avatar/01.jpg" class="img-fluid rounded-circle" alt="...">
+                            <img src="${BASE_URL_API}/images/${item.user.picture}" class="img-fluid rounded-circle" alt="...">
                         </div>
                     </div>
                     <div class="col-xl-11 col-lg-10">

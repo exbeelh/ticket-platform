@@ -71,6 +71,7 @@ const renderDetail = (result) => {
     getOrganizer(event.organizerId).then((organizer) => {
         $('#organizer_name').text(organizer.name);
         $('#organizer_description').text(organizer.description);
+        $('#organizer_image').attr('src', `${BASE_URL_API}/images/${organizer.image}`);
     });
 
     getTickets(event.id).then((tickets) => {

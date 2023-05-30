@@ -864,6 +864,27 @@ class DataSource {
             });
     }
 
+    static getTicketById(id) {
+        return fetch(`${BASE_URL_API}/api/tickets/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                if (responseJson) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     // Orders
     static buyTickets(order) {
         return fetch(`${BASE_URL_API}/api/orders/buytickets`, {
@@ -993,6 +1014,29 @@ class DataSource {
             });
     }
 
+    static cancelOrder(id) {
+        return fetch(`${BASE_URL_API}/api/orders/cancel/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${TOKEN}`,
+            },
+        })
+            .then((response) => {
+                return response;
+            })
+            .then((responseJson) => {
+                if (responseJson && responseJson.status === 200) {
+                    return Promise.resolve(responseJson);
+                } else {
+                    return Promise.reject(`Something went wrong`);
+                }
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
     // Payment
     static uploadPayment(payment) {
         return fetch(`${BASE_URL_API}/api/payments/upload`, {
@@ -1091,6 +1135,24 @@ class DataSource {
     // Attendees
     static getOrderTicketsByEventId(id) {
         return fetch(`${BASE_URL_API}/api/attendees/ordertickets/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${TOKEN}`,
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseJson) => {
+                return Promise.resolve(responseJson);
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+    }
+
+    static getAttendeesByOrderId(id) {
+        return fetch(`${BASE_URL_API}/api/attendees/list/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${TOKEN}`,

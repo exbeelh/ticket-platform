@@ -32,6 +32,30 @@ const saveBooking = async (attendees) => {
     }
 };
 
+const cancelOrder = async (id, transactionId) => {
+    try {
+        const result = await DataSource.cancelOrder(id);
+
+        if(result.code === 400) {
+            alert(result.message);
+            return;
+        }
+
+        Swal.fire({
+            title: 'Success',
+            text: 'Order has been cancelled',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/order/cancel/' + transactionId;
+            }
+        });
+    } catch (message) {
+        alert(message);
+    }
+};
+
 const renderResult = (result) => {
     let data = result.data;
 
@@ -59,6 +83,11 @@ const renderResult = (result) => {
         $('#organizer_name').text(organizer.name);
         $('#organizer_facebook').attr('href', organizer.facebook);
         $('#organizer_twitter').attr('href', organizer.twitter);
+    });
+
+    // Cancel Button
+    $('#cancel').on('click', () => {
+        cancelOrder(data.id, data.transactionId);
     });
 
     // Summary

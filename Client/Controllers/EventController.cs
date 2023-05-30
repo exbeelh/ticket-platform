@@ -71,4 +71,10 @@ public class EventController : Controller
     {
         return View();
     }
+
+    [Route("/Event/Attendees/{id}")]
+    public IActionResult Attendee()
+	{
+		return View();
+	}
 }

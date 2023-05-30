@@ -50,4 +50,11 @@ public class OrderController : Controller
 	{
 		return View();
 	}
+
+    [Route("/Order/Invoice/Print/{transactionId}")]
+    [Authorize(Roles = "User")]
+    public IActionResult Print()
+    {
+        return View();
+    }
 }

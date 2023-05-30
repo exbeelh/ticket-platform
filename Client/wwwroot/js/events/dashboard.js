@@ -120,6 +120,15 @@ const main = () => {
     getEvent(id);
     getTicketEventByEventId(id);
     getTotalByEventId(id);
+
+    $('#print_attendees').on('click', () => {
+        let print = window.open(`${BASE_URL}/event/attendees/${id}`, '_blank');
+        print.onload = () => {
+            setTimeout(() => {
+                print.print();
+            }, 2000);
+        }
+    });
 };
 
 main();
