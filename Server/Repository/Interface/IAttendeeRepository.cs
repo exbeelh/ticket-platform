@@ -7,5 +7,6 @@ namespace Server.Repository.Interface
     {
         Task<IEnumerable<AttendeeVM>> OrderTickets(int eventId);
         Task<IEnumerable<Attendee>> GetByOrderId(int orderId);
+        Task<AttendeeVM> GetAttendeeByOrderId(int orderId);
     }
 }

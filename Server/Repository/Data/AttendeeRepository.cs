@@ -42,20 +42,20 @@ namespace Server.Repository.Data
                              FullName = user.Firstname + " " + user.Lastname,
                              Email = user.Email,
                              Attendees = (from attendee in _context.Attendees
-                                         join ticket in _context.Tickets on attendee.TicketId equals ticket.Id
-                                         where attendee.OrderId == order.Id
-                                         select new AttendeeListVM
-                                         {
-                                             TransactionId = order.TransactionId,
-                                             TicketId = ticket.Id,
-                                             TicketName = ticket!.Name,
-                                             FirstName = attendee.FirstName,
-                                             LastName = attendee.LastName,
-                                             Email = attendee.Email,
-                                             Code = attendee.Code
-                                         }).ToList()
+                                          join ticket in _context.Tickets on attendee.TicketId equals ticket.Id
+                                          where attendee.OrderId == order.Id
+                                          select new AttendeeListVM
+                                          {
+                                              TransactionId = order.TransactionId,
+                                              TicketId = ticket.Id,
+                                              TicketName = ticket!.Name,
+                                              FirstName = attendee.FirstName,
+                                              LastName = attendee.LastName,
+                                              Email = attendee.Email,
+                                              Code = attendee.Code
+                                          }).ToList()
                          };
-            
+
             return result.ToList();
         }
 
@@ -63,6 +63,40 @@ namespace Server.Repository.Data
         {
             var result = await _context.Attendees.Where(x => x.OrderId == orderId).ToListAsync();
             return result;
+        }
+
+        public async Task<AttendeeVM> GetAttendeeByOrderId(int orderId)
+        {
+            var getOrders = await _orderRepository.GetAllAsync();
+            var getUsers = await _userRepository.GetAllAsync();
+            var getEvents = await _eventRepository.GetAllAsync();
+
+            var result = from order in getOrders
+                         join user in getUsers on order.UserId equals user.Id
+                         join events in getEvents on order.EventId equals events.Id
+                         where order.Id == orderId
+                         select new AttendeeVM
+                         {
+                             OrderId = order.Id,
+                             TransactionId = order.TransactionId,
+                             FullName = user.Firstname + " " + user.Lastname,
+                             Email = user.Email,
+                             Attendees = (from attendee in _context.Attendees
+                                          join ticket in _context.Tickets on attendee.TicketId equals ticket.Id
+                                          where attendee.OrderId == order.Id
+                                          select new AttendeeListVM
+                                          {
+                                              TransactionId = order.TransactionId,
+                                              TicketId = ticket.Id,
+                                              TicketName = ticket!.Name,
+                                              FirstName = attendee.FirstName,
+                                              LastName = attendee.LastName,
+                                              Email = attendee.Email,
+                                              Code = attendee.Code
+                                          }).ToList()
+                         };
+
+            return result.FirstOrDefault();
         }
     }
 }
