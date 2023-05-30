@@ -185,5 +185,29 @@ namespace Server.Controllers
                 data = result
             });
         }
+
+        [HttpPut("Cancel/{id}")]
+        [Authorize(Roles = "User")]
+        public async Task<ActionResult> Cancel(int id)
+        {
+            var result = await _repository.CancelOrder(id);
+
+            if (result == 0)
+            {
+                return BadRequest(new
+                {
+                    code = StatusCodes.Status400BadRequest,
+                    status = HttpStatusCode.BadRequest.ToString(),
+                    data = "Failed to cancel order"
+                });
+            }
+
+            return Ok(new
+            {
+                code = StatusCodes.Status200OK,
+                status = HttpStatusCode.OK.ToString(),
+                data = "Order canceled"
+            });
+        }
     }
 }

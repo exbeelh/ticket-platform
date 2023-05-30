@@ -29,7 +29,7 @@ namespace Server.Repository.Data
 
             var data = from orderItem in orderItems
                        join order in getOrders on orderItem.OrderId equals order.Id
-                       where order.EventId == id
+                       where order.EventId == id && order.OrderStatusId == 3
                        select new RevenueVM()
                        {
                            TicketName = orderItem.Name!,
@@ -253,6 +253,31 @@ namespace Server.Repository.Data
                           }).FirstOrDefault();
 
             return result!;
+        }
+
+        public async Task<int> CancelOrder(int orderId)
+        {
+            await using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var checkOrder = await GetByIdAsync(orderId);
+                if (checkOrder == null)
+                {
+                    return 0;
+                }
+
+                checkOrder.IsCanceled = 1;
+                checkOrder.OrderStatusId = 5;
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                await Console.Out.WriteLineAsync(e.Message);
+                await transaction.RollbackAsync();
+                return 0;
+            }
         }
     }
 }
